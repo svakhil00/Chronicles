@@ -13,7 +13,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEventSubscriber {
-	// This is another test comment.
+	
 	public static final Item CAPTAIN_AMERICA_SHIELD = new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Block VIBRANIUM_ORE_BLOCK = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F));
 	public static final BlockItem VIBRANIUM_ORE_BLOCKITEM = new BlockItem(VIBRANIUM_ORE_BLOCK, new BlockItem.Properties().group(ModItemGroups.MOD_ITEM_GROUP2));
