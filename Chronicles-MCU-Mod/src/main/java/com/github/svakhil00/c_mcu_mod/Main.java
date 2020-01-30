@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 
 public class Main
 {
-    // This is a test commit update.
     public static final String MODID = "c_mcu_mod";
     private static final Logger LOGGER = LogManager.getLogger();
     public static Main instance;
