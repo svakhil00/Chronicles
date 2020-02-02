@@ -11,5 +11,5 @@ public class ModItems {
 	public static final Item CAPTAIN_AMERICA_SHIELD = null;
 	public static final BlockItem VIBRANIUM_ORE = null;
 	public static final Item VIBRANIUM_INGOT = null;
-	
+	public static final Item MJOLNIR = null;
 }

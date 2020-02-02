@@ -9,8 +9,6 @@ import net.minecraft.item.ItemStack;
 
 public class ModItemGroups {
 	public static final ItemGroup MOD_ITEM_GROUP = new ModItemGroup(Main.MODID, () -> new ItemStack(ModItems.CAPTAIN_AMERICA_SHIELD));
-	public static final ItemGroup MOD_ITEM_GROUP2 = new ModItemGroup(Main.MODID, () -> new ItemStack(ModItems.VIBRANIUM_ORE));
-	public static final ItemGroup MOD_ITEM_GROUP3 = new ModItemGroup(Main.MODID, () -> new ItemStack(ModItems.VIBRANIUM_INGOT));
 }
 
 class ModItemGroup extends ItemGroup{

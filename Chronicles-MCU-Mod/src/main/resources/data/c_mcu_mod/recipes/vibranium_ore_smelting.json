@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient":{
+		"tag": "c_mcu_mod:vibranium_ore"
+	},
+	"result": {
+		"item":"c_mcu_mod:vibranium_ingot"
+	},
+	"experience": 1000,
+	"cookingtime": 1600
+}
