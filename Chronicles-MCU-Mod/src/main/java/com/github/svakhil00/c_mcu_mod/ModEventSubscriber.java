@@ -3,9 +3,12 @@ package com.github.svakhil00.c_mcu_mod;
 import com.github.svakhil00.c_mcu_mod.lists.BlockList;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
 import net.minecraft.block.Block;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -16,8 +19,7 @@ public class ModEventSubscriber {
 		
 	@SubscribeEvent
 	public static void onRegisterItems(RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(
-				setup(ItemList.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"), 
+		event.getRegistry().registerAll(setup(ItemList.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"), 
 				setup(ItemList.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
 				setup(ItemList.VIBRANIUM_INGOT, "vibranium_ingot"),
 				setup(ItemList.MJOLNIR, "mjolnir")
@@ -30,9 +32,6 @@ public class ModEventSubscriber {
 				setup(BlockList.VIBRANIUM_ORE_BLOCK, "vibranium_ore")
 				);
 	}
-	
-	
-	
 	
 	
 	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {

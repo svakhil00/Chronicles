@@ -9,14 +9,20 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TieredItem;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class MjolnirItem extends TieredItem {
 	private final float ATTACKDAMAGE, ATTACKSPEED;
@@ -52,6 +58,18 @@ public class MjolnirItem extends TieredItem {
 	      });
 	      return true;
 	   }
+	
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+			ItemStack item = playerIn.getHeldItem(handIn);
+			Vec3d look = playerIn.getLookVec();
+			
+			LightningBoltEntity lightning = new LightningBoltEntity(worldIn, 1D, 1D, 1D, false);
+			lightning.setPosition(playerIn.lastTickPosX + look.x * 1.5D, playerIn.lastTickPosY + look.y * 1.5D, playerIn.lastTickPosZ + look.z * 1.5D);
+			lightning.setGlowing(true);
+			
+			((ServerWorld) worldIn).addLightningBolt(lightning);
+			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
+	   } 
 
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
 	      if (state.getBlockHardness(worldIn, pos) != 0.0F) {
