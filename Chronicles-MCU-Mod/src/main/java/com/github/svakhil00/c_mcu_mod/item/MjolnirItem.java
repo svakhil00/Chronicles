@@ -71,7 +71,7 @@ public class MjolnirItem extends TieredItem {
 
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack item = playerIn.getHeldItem(handIn);
-		if (playerIn.isCrouching()) {
+		if (playerIn.isShiftKeyDown()) {
 			Vec3d look = new Vec3d(0, 0, 0);
 			boolean block = false;
 			if (!playerIn.pick(100.0D, 1.0F, false).getType().equals(Type.MISS)) {
@@ -88,7 +88,7 @@ public class MjolnirItem extends TieredItem {
 			}
 			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
 		} else {
-			if (!playerIn.isAirBorne) {
+			if (playerIn.onGround || playerIn.isInWaterOrBubbleColumn()) {
 				float yaw = playerIn.rotationYaw;
 				float pitch = playerIn.rotationPitch;
 
