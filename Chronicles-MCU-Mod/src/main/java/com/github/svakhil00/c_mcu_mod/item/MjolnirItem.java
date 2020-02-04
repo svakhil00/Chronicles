@@ -88,27 +88,31 @@ public class MjolnirItem extends TieredItem {
 			}
 			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
 		} else {
-			float yaw = playerIn.rotationYaw;
-			float pitch = playerIn.rotationPitch;
+			if (!playerIn.isAirBorne) {
+				float yaw = playerIn.rotationYaw;
+				float pitch = playerIn.rotationPitch;
 
-			int launchFactor = 3;
+				int launchFactor = 3;
 
-			float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
-					* MathHelper.cos(pitch * ((float) Math.PI / 180F));
-			float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
-			;
-			float f3 = MathHelper.cos(yaw * ((float) Math.PI / 180F))
-					* MathHelper.cos(pitch * ((float) Math.PI / 180F));
-			float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
-			float f5 = 3.0F * ((1.0F + (float) launchFactor) / 4.0F);
+				float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
+						* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+				float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
+				;
+				float f3 = MathHelper.cos(yaw * ((float) Math.PI / 180F))
+						* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+				float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+				float f5 = 3.0F * ((1.0F + (float) launchFactor) / 4.0F);
 
-			f1 = f1 * (f5 / f4);
-			f2 = f2 * (f5 / f4);
-			f3 = f3 * (f5 / f4);
+				f1 = f1 * (f5 / f4);
+				f2 = f2 * (f5 / f4);
+				f3 = f3 * (f5 / f4);
 
-			playerIn.addVelocity((double) f1, (double) f2, (double) f3);
-			playerIn.startSpinAttack(20);
-			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
+				playerIn.addVelocity((double) f1, (double) f2, (double) f3);
+				playerIn.startSpinAttack(20);
+				return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
+			}else {
+				return new ActionResult<ItemStack>(ActionResultType.FAIL, item);
+			}
 		}
 	}
 
