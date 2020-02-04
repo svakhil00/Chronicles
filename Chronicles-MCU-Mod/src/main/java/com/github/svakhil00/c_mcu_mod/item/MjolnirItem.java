@@ -108,7 +108,7 @@ public class MjolnirItem extends TieredItem {
 				f3 = f3 * (f5 / f4);
 
 				playerIn.addVelocity((double) f1, (double) f2, (double) f3);
-				playerIn.startSpinAttack(20);
+				//playerIn.startSpinAttack(20);
 				return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
 			}else {
 				return new ActionResult<ItemStack>(ActionResultType.FAIL, item);
