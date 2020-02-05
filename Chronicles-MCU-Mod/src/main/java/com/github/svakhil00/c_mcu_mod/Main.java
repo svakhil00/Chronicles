@@ -3,6 +3,7 @@ package com.github.svakhil00.c_mcu_mod;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,9 +19,14 @@ public class Main
     public static final String MODID = "c_mcu_mod";
     public static final Logger LOGGER = LogManager.getLogger();
     public static Main instance;
-
+    
+    
+   // public static void init(FMLCommonSetupEvent event) {
+   // 	ModEventSubscriber.initRegistries();
+   // }
+    
     public Main() {
-    	instance = this;
+    	//instance = this;
     	ModLoadingContext.get().registerConfig(Type.SERVER, Config.SERVER_CONFIG, "c_mcu_mod-server.toml");
     	ModLoadingContext.get().registerConfig(Type.CLIENT, Config.CLIENT_CONFIG, "c_mcu_mod-client.toml");
     	
