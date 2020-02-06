@@ -2,14 +2,14 @@
 	"parent": "c_mcu_mod",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "c_mcu_mod:item/iron",
-		"1": "c_mcu_mod:item/leather",
-		"2": "c_mcu_mod:item/handle",
-		"3": "c_mcu_mod:item/light_grey",
-		"4": "c_mcu_mod:item/hammer_design",
-		"5": "c_mcu_mod:item/hammer_writing",
-		"6": "c_mcu_mod:item/mjolnir_symbol",
-		"7": "c_mcu_mod:item/faded_mjolnir_symbol"
+		"0": "c_mcu_mod:item/mjolnir/iron",
+		"1": "c_mcu_mod:item/mjolnir/leather",
+		"2": "c_mcu_mod:item/mjolnir/handle",
+		"3": "c_mcu_mod:item/mjolnir/light_grey",
+		"4": "c_mcu_mod:item/mjolnir/hammer_design",
+		"5": "c_mcu_mod:item/mjolnir/hammer_writing",
+		"6": "c_mcu_mod:item/mjolnir/mjolnir_symbol",
+		"7": "c_mcu_mod:item/mjolnir/faded_mjolnir_symbol"
 	},
 	"elements": [
 		{

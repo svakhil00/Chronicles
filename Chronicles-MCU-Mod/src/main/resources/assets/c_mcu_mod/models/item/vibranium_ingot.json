@@ -1,11 +1,11 @@
 {
 	"textures": {
-		"1": "c_mcu_mod:item/outermetal",
-		"2": "c_mcu_mod:item/cyanlight",
-		"3": "c_mcu_mod:item/glass",
-		"4": "c_mcu_mod:item/vibranium",
-		"5": "c_mcu_mod:item/violet2",
-		"6": "c_mcu_mod:item/glass2"
+		"1": "c_mcu_mod:item/vibranium/outermetal",
+		"2": "c_mcu_mod:item/vibranium/cyanlight",
+		"3": "c_mcu_mod:item/vibranium/glass",
+		"4": "c_mcu_mod:item/vibranium/vibranium",
+		"5": "c_mcu_mod:item/vibranium/violet2",
+		"6": "c_mcu_mod:item/vibranium/glass2"
 	},
 	"elements": [
 		{

@@ -2,8 +2,8 @@
 	"parent": "c_mcu_mod",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "c_mcu_mod:item/red",
-		"2": "c_mcu_mod:item/white",
+		"1": "c_mcu_mod:item/captain_america_shield/red",
+		"2": "c_mcu_mod:item/captain_america_shield/white",
 		"3": "c_mcu_mod:item/blue",
 		"4": "c_mcu_mod:item/silver",
 		"5": "c_mcu_mod:item/strap",
