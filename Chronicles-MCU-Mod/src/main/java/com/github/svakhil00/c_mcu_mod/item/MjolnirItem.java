@@ -60,6 +60,7 @@ public class MjolnirItem extends TieredItem {
 
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack item = playerIn.getHeldItem(handIn);
+		playerIn.setActiveHand(handIn);
 		if (playerIn.isShiftKeyDown()) {
 
 			Vec3d look = new Vec3d(0, 0, 0);
