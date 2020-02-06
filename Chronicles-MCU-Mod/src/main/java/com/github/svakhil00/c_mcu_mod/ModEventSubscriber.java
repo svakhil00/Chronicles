@@ -21,7 +21,8 @@ public class ModEventSubscriber {
 		event.getRegistry().registerAll(setup(ItemList.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"), 
 				setup(ItemList.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
 				setup(ItemList.VIBRANIUM_INGOT, "vibranium_ingot"),
-				setup(ItemList.MJOLNIR, "mjolnir")
+				setup(ItemList.MJOLNIR, "mjolnir"),
+				setup(ItemList.PURE_VIBRANIUM, "pure_vibranium")
 				);
 	}
 	

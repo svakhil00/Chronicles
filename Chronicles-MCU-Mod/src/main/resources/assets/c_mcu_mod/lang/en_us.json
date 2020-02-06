@@ -3,5 +3,6 @@
 	"itemGroup.c_mcu_mod": "Chronicle's MCU Mod",
 	"block.c_mcu_mod.vibranium_ore": "Vibranium Ore",
 	"item.c_mcu_mod.vibranium_ingot": "Vibranium Ingot",
-	"item.c_mcu_mod.mjolnir": "Mjolnir"
+	"item.c_mcu_mod.mjolnir": "Mjolnir",
+	"item.c_mcu_mod.pure_vibranium": "Pure Vibranium"
 }

@@ -4,7 +4,7 @@
 		"tag": "c_mcu_mod:vibranium_ore"
 	},
 	"result": {
-		"item":"c_mcu_mod:vibranium_ingot"
+		"item":"c_mcu_mod:pure_vibranium"
 	},
 	"experience": 1000,
 	"cookingtime": 1600

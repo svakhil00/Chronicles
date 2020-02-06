@@ -22,5 +22,8 @@ public class ModEventBusSubscriberForge {
 		if(event.getLeft().getItem().equals(ItemList.VIBRANIUM_ORE_BLOCKITEM)) {
 			event.setCanceled(true);
 		}
+		if(event.getLeft().getItem().equals(ItemList.PURE_VIBRANIUM	)) {
+			event.setCanceled(true);
+		}
 	}
 }
