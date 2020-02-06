@@ -3,10 +3,8 @@ package com.github.svakhil00.c_mcu_mod.lists;
 import com.github.svakhil00.c_mcu_mod.init.ModItemGroups;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem;
-
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.SwordItem;
 
 public class ItemList {
 	public static final Item CAPTAIN_AMERICA_SHIELD = new CaptainShieldItem(ItemTierMaterialList.shield,11, -3.0f, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP).maxStackSize(1));

@@ -2,7 +2,6 @@ package com.github.svakhil00.c_mcu_mod.item;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.google.common.collect.Multimap;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
