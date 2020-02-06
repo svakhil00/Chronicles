@@ -2,9 +2,8 @@ package com.github.svakhil00.c_mcu_mod.item;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Block;
+
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -45,14 +44,9 @@ public class MjolnirItem extends TieredItem {
 	}
 
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
-		Block block = state.getBlock();
-		if (block == Blocks.COBWEB) {
-			return 15.0F;
-		} else {
 			Material material = state.getMaterial();
 			return material != Material.PLANTS && material != Material.TALL_PLANTS && material != Material.CORAL
 					&& !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
-		}
 	}
 
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
