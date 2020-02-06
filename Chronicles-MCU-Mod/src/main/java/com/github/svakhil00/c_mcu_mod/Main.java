@@ -21,9 +21,7 @@ public class Main
     public static Main instance;
     
     
-   // public static void init(FMLCommonSetupEvent event) {
-   // 	ModEventSubscriber.initRegistries();
-   // }
+   
     
     public Main() {
     	//instance = this;
