@@ -5,8 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.Ingredient;
 
 public enum ItemTierMaterialList implements IItemTier{
-	shield(12.0f, 9.0f, 10000, 3, 50, ItemList.VIBRANIUM_INGOT),
-	mjolnir(15.0f, 9.0f, 10000, 3, 50, ItemList.VIBRANIUM_INGOT);
+	shield(12.0f, 9.0f, 10000, 3, 0, ItemList.VIBRANIUM_INGOT),
+	mjolnir(15.0f, 9.0f, 10000, 3, -1, ItemList.VIBRANIUM_INGOT);
 	
 	
 	private float attackDamage, efficiency;
