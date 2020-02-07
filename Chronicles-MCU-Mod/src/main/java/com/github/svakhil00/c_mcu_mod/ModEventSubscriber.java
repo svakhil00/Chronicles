@@ -22,7 +22,19 @@ public class ModEventSubscriber {
 				setup(ItemList.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
 				setup(ItemList.VIBRANIUM_INGOT, "vibranium_ingot"),
 				setup(ItemList.MJOLNIR, "mjolnir"),
-				setup(ItemList.PURE_VIBRANIUM, "pure_vibranium")
+				setup(ItemList.PURE_VIBRANIUM, "pure_vibranium"),
+				setup(ItemList.IRON_MAN_HELMET, "iron_man_helmet"),
+				setup(ItemList.IRON_MAN_CHESTPLATE, "iron_man_chestplate"),
+				setup(ItemList.IRON_MAN_LEGGINGS, "iron_man_leggings"),
+				setup(ItemList.IRON_MAN_BOOTS, "iron_man_boots"),
+				setup(ItemList.THOR_HELMET, "thor_helmet"),
+				setup(ItemList.THOR_CHESTPLATE, "thor_chestplate"),
+				setup(ItemList.THOR_LEGGINGS, "thor_leggings"),
+				setup(ItemList.THOR_BOOTS, "thor_boots"),
+				setup(ItemList.CAPTAIN_AMERICA_HELMET, "captain_america_helmet"),
+				setup(ItemList.CAPTAIN_AMERICA_CHESTPLATE, "captain_america_chestplate"),
+				setup(ItemList.CAPTAIN_AMERICA_LEGGINGS, "captain_america_leggings"),
+				setup(ItemList.CAPTAIN_AMERICA_BOOTS, "captain_america_boots")
 				);
 	}
 	
