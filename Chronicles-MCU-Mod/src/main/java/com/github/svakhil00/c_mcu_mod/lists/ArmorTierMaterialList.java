@@ -16,7 +16,7 @@ public enum ArmorTierMaterialList implements IArmorMaterial{
 	captain_america_suit("captain_america_suit", 400, new int[] {5, 10, 8, 5}, 30, ItemList.VIBRANIUM_INGOT, null, 4.0F);
 
 	
-	private static final int[] max_damage_array = new int[] {13, 15, 16, 11};
+	
 	private String name, equipSound;
 	private int durability, enchantability;
 	private Item repairItem;
