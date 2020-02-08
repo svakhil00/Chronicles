@@ -3906,13 +3906,5 @@
 				}
 			]
 		}
-	],
-	"overrides": [
-        {
-            "predicate": {
-                "throwing": 1
-            },
-            "model": "c_mcu_mod:item/mjolnir_throwing"
-        }
-    ]
+	]
 }

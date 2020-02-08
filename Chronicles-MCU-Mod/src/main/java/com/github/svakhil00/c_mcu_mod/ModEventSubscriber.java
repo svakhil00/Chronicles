@@ -2,7 +2,10 @@ package com.github.svakhil00.c_mcu_mod;
 
 import com.github.svakhil00.c_mcu_mod.lists.BlockList;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -37,6 +40,8 @@ public class ModEventSubscriber {
 				setup(ItemList.CAPTAIN_AMERICA_BOOTS, "captain_america_boots")
 				);
 	}
+	
+	
 	
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {

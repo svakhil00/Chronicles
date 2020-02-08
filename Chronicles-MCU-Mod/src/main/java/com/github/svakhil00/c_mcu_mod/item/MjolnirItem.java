@@ -1,7 +1,9 @@
 package com.github.svakhil00.c_mcu_mod.item;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
+import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 import com.google.common.collect.Multimap;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
@@ -9,7 +11,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -29,12 +31,17 @@ import net.minecraft.world.server.ServerWorld;
 
 public class MjolnirItem extends TieredItem {
 	private final float ATTACKDAMAGE, ATTACKSPEED;
-	private boolean shift = false, lightning = true, flight = false, projectile = false;
+	private boolean shift = new Boolean(false), lightning = new Boolean(true), flight = new Boolean(false), projectile = new Boolean(false);
 
 	public MjolnirItem(IItemTier tierIn, int attackDamageIn, float attackSpeedIn, Properties builder) {
 		super(tierIn, builder);
 		ATTACKDAMAGE = (float) attackDamageIn + tierIn.getAttackDamage();
 		ATTACKSPEED = attackSpeedIn;
+		this.addPropertyOverride(new ResourceLocation("throwing"), (p_210315_0_, p_210315_1_, p_210315_2_) -> {
+			return p_210315_2_ != null && p_210315_2_.isHandActive() && p_210315_2_.getActiveItemStack() == p_210315_0_
+					? 1.0F
+					: 0.0F;
+		});
 	}
 
 	public float getAttackDamage() {
@@ -68,14 +75,14 @@ public class MjolnirItem extends TieredItem {
 	public UseAction getUseAction(ItemStack stack) {
 		if (shift) {
 			return UseAction.NONE;
-		}
-
-		if (lightning) {
+		} else if (lightning) {
 			return UseAction.NONE;
 		} else if (flight) {
-			return null;
+			return UseAction.SPEAR;
+		} else if (projectile) {
+			return UseAction.SPEAR;
 		}
-		return UseAction.SPEAR;
+		return null;
 	}
 
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
@@ -87,8 +94,8 @@ public class MjolnirItem extends TieredItem {
 		}
 		if (flight) {
 			if (!playerIn.isInWaterOrBubbleColumn()) {
-				worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(),
-						ModEventSubscriber.ITEM_MJOLNIR_JUMP, SoundCategory.PLAYERS, 4.0F, 1.0F);
+				worldIn.playMovingSound((PlayerEntity)null, playerIn,
+						ModEventSubscriber.ITEM_MJOLNIR_JUMP, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			}
 			float yaw = playerIn.rotationYaw;
 			float pitch = playerIn.rotationPitch;
@@ -105,16 +112,17 @@ public class MjolnirItem extends TieredItem {
 			f1 = f1 * (f5 / f4);
 			f2 = f2 * (f5 / f4);
 			f3 = f3 * (f5 / f4);
-			playerIn.setVelocity(0, 0, 0);
-			playerIn.addVelocity((double) f1, (double) f2, (double) f3);
+			
+			playerIn.setVelocity((double) f1, (double) f2, (double) f3);
 			// playerIn.setActiveHand(handIn);
-			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
+			return new ActionResult<ItemStack>(ActionResultType.FAIL, item);
 		} else if (lightning) {
 			Vec3d look = new Vec3d(0, 0, 0);
 			boolean block = false;
 			if (!playerIn.pick(100.0D, 1.0F, false).getType().equals(Type.MISS)) {
-				worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(),
-						ModEventSubscriber.ITEM_MJOLNIR_LIGHTNING, SoundCategory.PLAYERS, 2.0F, 1.0F);
+				// worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(),
+				// playerIn.getPosZ(),ModEventSubscriber.ITEM_MJOLNIR_LIGHTNING,
+				// SoundCategory.PLAYERS, 2.0F, 1.0F);
 				look = playerIn.pick(100.D, 1.0F, false).getHitVec();
 				block = true;
 			}
@@ -123,10 +131,11 @@ public class MjolnirItem extends TieredItem {
 				lightning.setGlowing(true);
 				if (!worldIn.isRemote) {
 					((ServerWorld) worldIn).addLightningBolt(lightning);
+					playerIn.getCooldownTracker().setCooldown(this, 20);
 				}
 			}
 			playerIn.setActiveHand(handIn);
-			playerIn.getCooldownTracker().setCooldown(this, 20);
+
 			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
 		} else if (projectile) {
 			playerIn.setActiveHand(handIn);
@@ -160,12 +169,13 @@ public class MjolnirItem extends TieredItem {
 							p_220047_1_.sendBreakAnimation(entityLiving.getActiveHand());
 						});
 
-						TridentEntity tridententity = new TridentEntity(worldIn, playerentity, stack);
-						tridententity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F,
+						MjolnirEntity mjolnirentity = new MjolnirEntity(worldIn, playerentity, stack);
+						mjolnirentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F,
 								2.5F, 1.0F);
 
-						worldIn.addEntity(tridententity);
-						worldIn.playMovingSound((PlayerEntity) null, tridententity,
+						worldIn.addEntity(mjolnirentity);
+						playerentity.inventory.deleteStack(stack);
+						worldIn.playMovingSound((PlayerEntity) null, mjolnirentity,
 								ModEventSubscriber.ITEM_MJOLNIR_LIGHTNING, SoundCategory.PLAYERS, 2.0F, 1.0F);
 
 					}
