@@ -2,9 +2,14 @@ package com.github.svakhil00.c_mcu_mod;
 
 import com.github.svakhil00.c_mcu_mod.lists.BlockList;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
+import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +17,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -50,9 +58,16 @@ public class ModEventSubscriber {
 				);
 	}
 	
+	
+	@SubscribeEvent
+	public static void registerModels(FMLClientSetupEvent event) {
+			RenderingRegistry.registerEntityRenderingHandler(CustomEntityType.MJOLNIR.get(), manager -> new MjolnirRenderer(manager));
+
+	}
+	
 	private static SoundEvent register(String key) {
 		return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
-	}
+	}	
 	
 	public static final SoundEvent ITEM_MJOLNIR_JUMP = register("c_mcu_mod:item.mjolnir.jump");
 	public static final SoundEvent ITEM_MJOLNIR_HIT = register("c_mcu_mod:item.mjolnir.hit");

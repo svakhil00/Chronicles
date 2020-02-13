@@ -1,5 +1,9 @@
 package com.github.svakhil00.c_mcu_mod.item;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 import com.google.common.collect.Multimap;
@@ -16,6 +20,7 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TieredItem;
 import net.minecraft.item.UseAction;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
@@ -31,7 +36,6 @@ import net.minecraft.world.server.ServerWorld;
 
 public class MjolnirItem extends TieredItem {
 	private final float ATTACKDAMAGE, ATTACKSPEED;
-	private boolean shift = new Boolean(false), lightning = new Boolean(true), flight = new Boolean(false), projectile = new Boolean(false);
 
 	public MjolnirItem(IItemTier tierIn, int attackDamageIn, float attackSpeedIn, Properties builder) {
 		super(tierIn, builder);
@@ -43,21 +47,20 @@ public class MjolnirItem extends TieredItem {
 					: 0.0F;
 		});
 	}
-
 	public float getAttackDamage() {
 		return ATTACKDAMAGE;
 	}
-
+	@Override
 	public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		return !player.isCreative();
 	}
-
+	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		Material material = state.getMaterial();
 		return material != Material.PLANTS && material != Material.TALL_PLANTS && material != Material.CORAL
 				&& !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
 	}
-
+	@Override
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		World world = attacker.world;
 		world.playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(),
@@ -67,35 +70,39 @@ public class MjolnirItem extends TieredItem {
 		});
 		return true;
 	}
-
+	@Override
 	public int getUseDuration(ItemStack stack) {
 		return 72000;
 	}
-
+	@Override
 	public UseAction getUseAction(ItemStack stack) {
-		if (shift) {
+		CompoundNBT tag = stack.getOrCreateTag();
+		Mode mode = Mode.byName(tag.getString("mode"));
+		if (mode == Mode.LIGHTNING) {
 			return UseAction.NONE;
-		} else if (lightning) {
-			return UseAction.NONE;
-		} else if (flight) {
+		} else if (mode == Mode.FLIGHT) {
 			return UseAction.SPEAR;
-		} else if (projectile) {
+		} else if (mode == Mode.PROJECTILE) {
 			return UseAction.SPEAR;
 		}
-		return null;
+		return UseAction.NONE;
 	}
-
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack item = playerIn.getHeldItem(handIn);
+		ItemStack itemStack = playerIn.getHeldItem(handIn);
+		CompoundNBT tag = itemStack.getOrCreateTag();
+		Mode mode = Mode.byName(tag.getString("mode"));
+
 		if (playerIn.isShiftKeyDown()) {
-			shift = true;
-			playerIn.setActiveHand(handIn);
-			return new ActionResult<ItemStack>(ActionResultType.FAIL, item);
+			tag.putString("mode", mode.cycle().getName());
+			//playerIn.setActiveHand(handIn);
+			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		}
-		if (flight) {
+		tag.putString("mode", mode.getName());
+		if (mode == Mode.FLIGHT) {
 			if (!playerIn.isInWaterOrBubbleColumn()) {
-				worldIn.playMovingSound((PlayerEntity)null, playerIn,
-						ModEventSubscriber.ITEM_MJOLNIR_JUMP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+				worldIn.playMovingSound((PlayerEntity) null, playerIn, ModEventSubscriber.ITEM_MJOLNIR_JUMP,
+						SoundCategory.PLAYERS, 1.0F, 1.0F);
 			}
 			float yaw = playerIn.rotationYaw;
 			float pitch = playerIn.rotationPitch;
@@ -112,11 +119,11 @@ public class MjolnirItem extends TieredItem {
 			f1 = f1 * (f5 / f4);
 			f2 = f2 * (f5 / f4);
 			f3 = f3 * (f5 / f4);
-			
+
 			playerIn.setVelocity((double) f1, (double) f2, (double) f3);
 			// playerIn.setActiveHand(handIn);
-			return new ActionResult<ItemStack>(ActionResultType.FAIL, item);
-		} else if (lightning) {
+			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
+		} else if (mode == Mode.LIGHTNING) {
 			Vec3d look = new Vec3d(0, 0, 0);
 			boolean block = false;
 			if (!playerIn.pick(100.0D, 1.0F, false).getType().equals(Type.MISS)) {
@@ -136,30 +143,20 @@ public class MjolnirItem extends TieredItem {
 			}
 			playerIn.setActiveHand(handIn);
 
-			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
-		} else if (projectile) {
+			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, itemStack);
+		} else if (mode == Mode.PROJECTILE) {
 			playerIn.setActiveHand(handIn);
-			return new ActionResult<ItemStack>(ActionResultType.CONSUME, item);
+			return new ActionResult<ItemStack>(ActionResultType.CONSUME, itemStack);
 		}
-		return new ActionResult<ItemStack>(ActionResultType.FAIL, item);
+		return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 
 	}
-
+	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
-		if (shift) {
-			shift = false;
-			if (lightning) {
-				lightning = false;
-				flight = true;
-			} else if (flight) {
-				flight = false;
-				projectile = true;
-			} else if (projectile) {
-				projectile = false;
-				lightning = true;
-			}
-		}
-		if (projectile) {
+		CompoundNBT tag = stack.getOrCreateTag();
+		Mode mode = Mode.byName(tag.getString("mode"));
+
+		if (mode == Mode.PROJECTILE) {
 			if (entityLiving instanceof PlayerEntity) {
 				PlayerEntity playerentity = (PlayerEntity) entityLiving;
 				int duration = this.getUseDuration(stack) - timeLeft;
@@ -183,7 +180,7 @@ public class MjolnirItem extends TieredItem {
 			}
 		}
 	}
-
+	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos,
 			LivingEntity entityLiving) {
 		if (state.getBlockHardness(worldIn, pos) != 0.0F) {
@@ -194,7 +191,7 @@ public class MjolnirItem extends TieredItem {
 
 		return true;
 	}
-
+	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
 		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(equipmentSlot);
 		if (equipmentSlot == EquipmentSlotType.MAINHAND) {
@@ -205,5 +202,32 @@ public class MjolnirItem extends TieredItem {
 		}
 
 		return multimap;
+	}
+	
+	public enum Mode{
+		LIGHTNING("lightning"),
+		FLIGHT("flight"),
+		PROJECTILE("projectile");
+		private static final Map<String, Mode> NAMED = Arrays.stream(values()).collect(Collectors.toMap(Mode::getName,  v->v));
+	
+		private final String name;
+		
+		Mode(String name){
+			this.name = name;
+		}
+		public String getName() {
+			return this.name;
+		}
+		public static Mode byName(String name) {
+			return NAMED.getOrDefault(name,  Mode.LIGHTNING);
+		}
+		public Mode cycle() {
+			switch(this){
+				case LIGHTNING: return FLIGHT;
+				case FLIGHT: return PROJECTILE;
+				case PROJECTILE: return LIGHTNING;
+				default: throw new IllegalStateException(this.getName());
+			}
+		}
 	}
 }

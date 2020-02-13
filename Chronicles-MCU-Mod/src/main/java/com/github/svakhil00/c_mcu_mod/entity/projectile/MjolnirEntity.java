@@ -14,6 +14,7 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -24,9 +25,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class MjolnirEntity extends AbstractArrowEntity {
-	private static final DataParameter<Boolean> field_226571_aq_ = EntityDataManager.createKey(TridentEntity.class,
+	private static final DataParameter<Boolean> field_226571_aq_ = EntityDataManager.createKey(MjolnirEntity.class,
 			DataSerializers.BOOLEAN);
 	private ItemStack thrownStack = new ItemStack(ItemList.MJOLNIR);
 	private boolean dealtDamage;
@@ -70,7 +73,7 @@ public class MjolnirEntity extends AbstractArrowEntity {
 
 				this.remove();
 			} else {
-				int comeBackSpeed = 3;
+				int comeBackSpeed = 1;
 				this.setNoClip(true);
 				Vec3d vec3d = new Vec3d(entity.getPosX() - this.getPosX(), entity.getPosYEye() - this.getPosY(),
 						entity.getPosZ() - this.getPosZ());
@@ -116,13 +119,13 @@ public class MjolnirEntity extends AbstractArrowEntity {
 
 	protected void onEntityHit(EntityRayTraceResult result) {
 		Entity entity = result.getEntity();
-		float f = 10.0F;
+		float damage = 10.0F;
 
 		Entity entity1 = this.getShooter();
 		DamageSource damagesource = DamageSource.causeTridentDamage(this, (Entity) (entity1 == null ? this : entity1));
 		this.dealtDamage = true;
 		SoundEvent soundevent = ModEventSubscriber.ITEM_MJOLNIR_HIT;
-		if (entity.attackEntityFrom(damagesource, f)) {
+		if (entity.attackEntityFrom(damagesource, damage)) {
 			if (entity.getType() == EntityType.ENDERMAN) {
 				return;
 			}
@@ -173,5 +176,15 @@ public class MjolnirEntity extends AbstractArrowEntity {
 	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return true;
 	}
+	
+	@Override
+    public IPacket<?> createSpawnPacket()
+    {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    public static MjolnirEntity spawnOnClient(FMLPlayMessages.SpawnEntity spawnPacket, World world) {
+        return new MjolnirEntity(world);
+    }
 
 }

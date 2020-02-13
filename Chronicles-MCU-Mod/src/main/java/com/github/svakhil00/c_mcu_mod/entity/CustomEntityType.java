@@ -16,9 +16,9 @@ public class CustomEntityType {
 	
 	public static final RegistryObject<EntityType<MjolnirEntity>> MJOLNIR = REG.register("mjolnir", () ->
 		EntityType.Builder.<MjolnirEntity>create(MjolnirEntity::new, EntityClassification.MISC)
-			.size(1.0F, 1.0F)
+			.size(20.0F, 20.0F)
 			.setTrackingRange(10)
-			.setUpdateInterval(Integer.MAX_VALUE)
+			.setUpdateInterval(1)
 			.setShouldReceiveVelocityUpdates(true)
 			.setCustomClientFactory((message, world) -> new MjolnirEntity(world))
 			.build(Main.MODID + ":mjolnir")	
