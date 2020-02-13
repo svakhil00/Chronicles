@@ -15,7 +15,7 @@ public class MjolnirModel extends Model {
 
 	public MjolnirModel() {
 		super(RenderType::entitySolid);
-		this.modelRenderer.addBox(10.0F, 10.0F, 10.0F, 10.0F, 10.0F, 10.0F);
+		this.modelRenderer.addBox(-.5F, 10.0F, 10.0F, 10.0F, 10.0F, 10.0F);
 		/*
 		this.modelRenderer.addBox(-.5F, 2.0F, -0.5F, 1.0F, 25.0F, 1.0F, 0.0F);
 		ModelRenderer modelrenderer = new ModelRenderer(32, 32, 4, 0);
