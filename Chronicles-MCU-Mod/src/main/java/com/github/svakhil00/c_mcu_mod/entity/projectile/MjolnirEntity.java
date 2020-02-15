@@ -73,7 +73,7 @@ public class MjolnirEntity extends AbstractArrowEntity {
 
 				this.remove();
 			} else {
-				int comeBackSpeed = 1;
+				int comeBackSpeed = 3;
 				this.setNoClip(true);
 				Vec3d vec3d = new Vec3d(entity.getPosX() - this.getPosX(), entity.getPosYEye() - this.getPosY(),
 						entity.getPosZ() - this.getPosZ());
@@ -175,6 +175,10 @@ public class MjolnirEntity extends AbstractArrowEntity {
 	@OnlyIn(Dist.CLIENT)
 	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return true;
+	}
+	
+	public ItemStack getItemStack() {
+		return thrownStack;
 	}
 	
 	@Override
