@@ -81,9 +81,9 @@ public class ModEventSubscriber {
 		return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
 	}
 
-	public static final SoundEvent ITEM_MJOLNIR_JUMP = register("c_mcu_mod:item.mjolnir.jump");
+	public static final SoundEvent ITEM_MJOLNIR_FLIGHT = register("c_mcu_mod:item.mjolnir.flight");
 	public static final SoundEvent ITEM_MJOLNIR_HIT = register("c_mcu_mod:item.mjolnir.hit");
-	public static final SoundEvent ITEM_MJOLNIR_LIGHTNING = register("c_mcu_mod:item.mjolnir.lightning");
+	public static final SoundEvent ITEM_MJOLNIR_THROW = register("c_mcu_mod:item.mjolnir.throw");
 
 	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {
 		return setup(entry, new ResourceLocation(Main.MODID, name));

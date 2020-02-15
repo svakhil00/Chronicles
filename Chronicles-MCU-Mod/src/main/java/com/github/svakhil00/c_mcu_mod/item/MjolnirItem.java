@@ -101,7 +101,7 @@ public class MjolnirItem extends TieredItem {
 		tag.putString("mode", mode.getName());
 		if (mode == Mode.FLIGHT) {
 			if (!playerIn.isInWaterOrBubbleColumn()) {
-				worldIn.playMovingSound((PlayerEntity) null, playerIn, ModEventSubscriber.ITEM_MJOLNIR_JUMP,
+				worldIn.playMovingSound((PlayerEntity) null, playerIn, ModEventSubscriber.ITEM_MJOLNIR_FLIGHT,
 						SoundCategory.PLAYERS, 1.0F, 1.0F);
 			}
 			float yaw = playerIn.rotationYaw;
@@ -173,7 +173,7 @@ public class MjolnirItem extends TieredItem {
 						worldIn.addEntity(mjolnirentity);
 						playerentity.inventory.deleteStack(stack);
 						worldIn.playMovingSound((PlayerEntity) null, mjolnirentity,
-								ModEventSubscriber.ITEM_MJOLNIR_LIGHTNING, SoundCategory.PLAYERS, 2.0F, 1.0F);
+								ModEventSubscriber.ITEM_MJOLNIR_THROW, SoundCategory.PLAYERS, 2.0F, 1.0F);
 
 					}
 				}

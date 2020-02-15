@@ -1,8 +1,8 @@
 {
 	"item.mjolnir.jump":{
 		"category": "item",
-		"subtitle": "item.mjolnir.jump",
-		"sounds":[{"name":"c_mcu_mod:item/mjolnir/item_mjolnir_jump", "stream": true}]
+		"subtitle": "item.mjolnir.flight",
+		"sounds":[{"name":"c_mcu_mod:item/mjolnir/item_mjolnir_flight", "stream": true}]
 	},
 	"item.mjolnir.hit":{
 		"category": "item",
@@ -11,7 +11,7 @@
 	},
 	"item.mjolnir.lightning":{
 		"category": "item",
-		"subtitle": "item.mjolnir.lightning",
-		"sounds":[{"name":"c_mcu_mod:item/mjolnir/item_mjolnir_lightning", "stream": true}]
+		"subtitle": "item.mjolnir.throw",
+		"sounds":[{"name":"c_mcu_mod:item/mjolnir/item_mjolnir_throw", "stream": true}]
 	}
 }
