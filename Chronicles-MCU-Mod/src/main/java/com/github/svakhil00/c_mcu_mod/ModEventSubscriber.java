@@ -56,20 +56,7 @@ public class ModEventSubscriber {
 		event.getRegistry().registerAll(setup(BlockList.VIBRANIUM_ORE_BLOCK, "vibranium_ore"));
 	}
 
-	/*
-	 * /@SubscribeEvent public static void registerBakedModels(ModelBakeEvent event)
-	 * { IUnbakedModel mjolnirModel = event.getModelLoader().getModelOrMissing(new
-	 * ResourceLocation(Main.MODID, "models/mjolnir.json"));
-	 * Function<ResourceLocation, TextureAtlasSprite> textureGetter = new
-	 * Function<ResourceLocation, TextureAtlasSprite>(){ public TextureAtlasSprite
-	 * apply(ResourceLocation location){ return
-	 * Minecraft.getInstance().getTextureMapBlocks().getAtlasSprite(location.
-	 * toString()); } } IBakedModel mjolnirBaked =
-	 * mjolnirModel.bakeModel(mjolnirModel, DefaultVertexFormats.ITEM,
-	 * textureGetter);
-	 * 
-	 * }
-	 */
+	
 	@SubscribeEvent
 	public static void registerModels(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(CustomEntityType.MJOLNIR.get(),
@@ -77,6 +64,7 @@ public class ModEventSubscriber {
 
 	}
 
+	
 	private static SoundEvent register(String key) {
 		return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
 	}
