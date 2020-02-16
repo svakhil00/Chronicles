@@ -46,7 +46,7 @@ public class CaptainAmericaShieldRenderer<T extends Entity & IRendersAsItem> ext
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F));
 		matrixStackIn.rotate(Vector3f.ZN.rotationDegrees(30));
 		this.itemRenderer.renderItem(new ItemStack(ItemList.CAPTAIN_AMERICA_SHIELD), ItemCameraTransforms.TransformType.GROUND,
-				packedLightIn, OverlayTexture.DEFAULT_LIGHT, matrixStackIn, bufferIn);
+				packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
 		matrixStackIn.pop();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 		

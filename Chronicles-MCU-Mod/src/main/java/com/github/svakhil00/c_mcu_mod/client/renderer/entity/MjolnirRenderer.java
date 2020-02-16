@@ -48,7 +48,7 @@ public class MjolnirRenderer<T extends Entity & IRendersAsItem> extends EntityRe
 		matrixStackIn.rotate(Vector3f.ZN.rotationDegrees(90.0F));
 		matrixStackIn.rotate(Vector3f.XN.rotationDegrees(270.0F));
 		this.itemRenderer.renderItem(new ItemStack(ItemList.MJOLNIR), ItemCameraTransforms.TransformType.GROUND,
-				packedLightIn, OverlayTexture.DEFAULT_LIGHT, matrixStackIn, bufferIn);
+				packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
 		matrixStackIn.pop();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 		
