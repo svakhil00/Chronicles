@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
+import com.github.svakhil00.c_mcu_mod.entity.player.CustomPlayerEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 import com.google.common.collect.Multimap;
 
@@ -47,19 +48,23 @@ public class MjolnirItem extends TieredItem {
 					: 0.0F;
 		});
 	}
+
 	public float getAttackDamage() {
 		return ATTACKDAMAGE;
 	}
+
 	@Override
 	public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		return !player.isCreative();
 	}
+
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
 		Material material = state.getMaterial();
 		return material != Material.PLANTS && material != Material.TALL_PLANTS && material != Material.CORAL
 				&& !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
 	}
+
 	@Override
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		World world = attacker.world;
@@ -70,10 +75,12 @@ public class MjolnirItem extends TieredItem {
 		});
 		return true;
 	}
+
 	@Override
 	public int getUseDuration(ItemStack stack) {
 		return 72000;
 	}
+
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
 		CompoundNBT tag = stack.getOrCreateTag();
@@ -87,15 +94,17 @@ public class MjolnirItem extends TieredItem {
 		}
 		return UseAction.NONE;
 	}
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		CustomPlayerEntity playerTest = new CustomPlayerEntity(playerIn.world, playerIn.getGameProfile());
 		ItemStack itemStack = playerIn.getHeldItem(handIn);
 		CompoundNBT tag = itemStack.getOrCreateTag();
 		Mode mode = Mode.byName(tag.getString("mode"));
 
 		if (playerIn.isShiftKeyDown()) {
 			tag.putString("mode", mode.cycle().getName());
-			//playerIn.setActiveHand(handIn);
+			// playerIn.setActiveHand(handIn);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		}
 		tag.putString("mode", mode.getName());
@@ -119,9 +128,8 @@ public class MjolnirItem extends TieredItem {
 			f1 = f1 * (f5 / f4);
 			f2 = f2 * (f5 / f4);
 			f3 = f3 * (f5 / f4);
-
+			playerIn.startSpinAttack(20);
 			playerIn.setVelocity((double) f1, (double) f2, (double) f3);
-			// playerIn.setActiveHand(handIn);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		} else if (mode == Mode.LIGHTNING) {
 			Vec3d look = new Vec3d(0, 0, 0);
@@ -151,35 +159,30 @@ public class MjolnirItem extends TieredItem {
 		return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 
 	}
+
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
 		CompoundNBT tag = stack.getOrCreateTag();
 		Mode mode = Mode.byName(tag.getString("mode"));
-
 		if (mode == Mode.PROJECTILE) {
 			if (entityLiving instanceof PlayerEntity) {
 				PlayerEntity playerentity = (PlayerEntity) entityLiving;
-				int duration = this.getUseDuration(stack) - timeLeft;
-				if (duration >= 10) {
-					if (!worldIn.isRemote) {
-						stack.damageItem(1, playerentity, (p_220047_1_) -> {
-							p_220047_1_.sendBreakAnimation(entityLiving.getActiveHand());
-						});
-
-						MjolnirEntity mjolnirentity = new MjolnirEntity(worldIn, playerentity, stack);
-						mjolnirentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F,
-								2.5F, 1.0F);
-
-						worldIn.addEntity(mjolnirentity);
-						playerentity.inventory.deleteStack(stack);
-						worldIn.playMovingSound((PlayerEntity) null, mjolnirentity,
-								ModEventSubscriber.ITEM_MJOLNIR_THROW, SoundCategory.PLAYERS, 2.0F, 1.0F);
-
-					}
+				if (!worldIn.isRemote) {
+					stack.damageItem(1, playerentity, (p_220047_1_) -> {
+						p_220047_1_.sendBreakAnimation(entityLiving.getActiveHand());
+					});
+					MjolnirEntity mjolnirentity = new MjolnirEntity(worldIn, playerentity, stack);
+					mjolnirentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 2.5F,
+							1.0F);
+					worldIn.addEntity(mjolnirentity);
+					playerentity.inventory.deleteStack(stack);
+					worldIn.playMovingSound((PlayerEntity) null, mjolnirentity, ModEventSubscriber.ITEM_MJOLNIR_THROW,
+							SoundCategory.PLAYERS, 2.0F, 1.0F);
 				}
 			}
 		}
 	}
+
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos,
 			LivingEntity entityLiving) {
@@ -191,6 +194,7 @@ public class MjolnirItem extends TieredItem {
 
 		return true;
 	}
+
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
 		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(equipmentSlot);
@@ -203,30 +207,36 @@ public class MjolnirItem extends TieredItem {
 
 		return multimap;
 	}
-	
-	public enum Mode{
-		LIGHTNING("lightning"),
-		FLIGHT("flight"),
-		PROJECTILE("projectile");
-		private static final Map<String, Mode> NAMED = Arrays.stream(values()).collect(Collectors.toMap(Mode::getName,  v->v));
-	
+
+	public enum Mode {
+		LIGHTNING("lightning"), FLIGHT("flight"), PROJECTILE("projectile");
+		private static final Map<String, Mode> NAMED = Arrays.stream(values())
+				.collect(Collectors.toMap(Mode::getName, v -> v));
+
 		private final String name;
-		
-		Mode(String name){
+
+		Mode(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return this.name;
 		}
+
 		public static Mode byName(String name) {
-			return NAMED.getOrDefault(name,  Mode.LIGHTNING);
+			return NAMED.getOrDefault(name, Mode.LIGHTNING);
 		}
+
 		public Mode cycle() {
-			switch(this){
-				case LIGHTNING: return FLIGHT;
-				case FLIGHT: return PROJECTILE;
-				case PROJECTILE: return LIGHTNING;
-				default: throw new IllegalStateException(this.getName());
+			switch (this) {
+			case LIGHTNING:
+				return FLIGHT;
+			case FLIGHT:
+				return PROJECTILE;
+			case PROJECTILE:
+				return LIGHTNING;
+			default:
+				throw new IllegalStateException(this.getName());
 			}
 		}
 	}

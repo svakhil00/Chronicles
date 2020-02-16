@@ -88,7 +88,6 @@ public class MjolnirEntity extends AbstractArrowEntity {
 				if (this.returningTicks == 0) {
 					this.playSound(ModEventSubscriber.ITEM_MJOLNIR_THROW, 10.0F, 1.0F);
 				}
-
 				++this.returningTicks;
 			}
 		}
@@ -176,19 +175,18 @@ public class MjolnirEntity extends AbstractArrowEntity {
 	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return true;
 	}
-	
+
 	public ItemStack getItemStack() {
 		return thrownStack;
 	}
-	
-	@Override
-    public IPacket<?> createSpawnPacket()
-    {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
 
-    public static MjolnirEntity spawnOnClient(FMLPlayMessages.SpawnEntity spawnPacket, World world) {
-        return new MjolnirEntity(world);
-    }
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+
+	public static MjolnirEntity spawnOnClient(FMLPlayMessages.SpawnEntity spawnPacket, World world) {
+		return new MjolnirEntity(world);
+	}
 
 }
