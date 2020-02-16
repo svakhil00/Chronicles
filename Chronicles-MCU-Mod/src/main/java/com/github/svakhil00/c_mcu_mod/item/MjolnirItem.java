@@ -98,6 +98,7 @@ public class MjolnirItem extends TieredItem {
 		return UseAction.NONE;
 	}
 
+	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		CustomPlayerEntity playerTest = new CustomPlayerEntity(playerIn.world, playerIn.getGameProfile());

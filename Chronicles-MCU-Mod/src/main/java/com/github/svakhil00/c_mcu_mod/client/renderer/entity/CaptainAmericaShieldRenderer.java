@@ -1,7 +1,5 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
-import java.util.Random;
-
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
 import com.mojang.blaze3d.matrix.MatrixStack;

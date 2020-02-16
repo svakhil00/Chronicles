@@ -2,6 +2,7 @@ package com.github.svakhil00.c_mcu_mod;
 
 import com.github.svakhil00.c_mcu_mod.lists.BlockList;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
 import com.google.common.base.Function;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -57,6 +59,10 @@ public class ModEventSubscriber {
 		event.getRegistry().registerAll(setup(BlockList.VIBRANIUM_ORE_BLOCK, "vibranium_ore"));
 	}
 
+	@SubscribeEvent
+	public static void loadCompleteEvent(FMLLoadCompleteEvent event) {
+		OreGen.generateOre();
+	}
 	
 	@SubscribeEvent
 	public static void registerModels(FMLClientSetupEvent event) {
