@@ -1,5 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
+import java.util.Random;
+
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -27,7 +29,6 @@ public class CaptainAmericaShieldRenderer<T extends Entity & IRendersAsItem> ext
 		this.itemRenderer = itemRenderer;
 		this.scale = scale;
 		this.blockLight = blockLight;
-		// TODO Auto-generated constructor stub
 	}
 
 	public CaptainAmericaShieldRenderer(EntityRendererManager renderManagerIn,
@@ -39,12 +40,13 @@ public class CaptainAmericaShieldRenderer<T extends Entity & IRendersAsItem> ext
 	}
 	public void render(CaptainAmericaShieldEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
 			IRenderTypeBuffer bufferIn, int packedLightIn) {
+		
+		
 		matrixStackIn.push();
 		matrixStackIn.scale(this.scale, this.scale, this.scale);
 		matrixStackIn.rotate(this.renderManager.getCameraOrientation());
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F));
-		matrixStackIn.rotate(Vector3f.ZN.rotationDegrees(40.0F));
-		//matrixStackIn.rotate(Vector3f.XN.rotationDegrees(270.0F));
+		matrixStackIn.rotate(Vector3f.ZN.rotationDegrees(30));
 		this.itemRenderer.renderItem(new ItemStack(ItemList.CAPTAIN_AMERICA_SHIELD), ItemCameraTransforms.TransformType.GROUND,
 				packedLightIn, OverlayTexture.DEFAULT_LIGHT, matrixStackIn, bufferIn);
 		matrixStackIn.pop();

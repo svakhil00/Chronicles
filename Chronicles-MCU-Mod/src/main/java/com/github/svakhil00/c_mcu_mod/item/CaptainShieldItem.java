@@ -47,7 +47,6 @@ public class CaptainShieldItem extends TieredItem {
 		});
 		ATTACKDAMAGE = attackDamageIn;
 		ATTACKSPEED = attackSpeedIn;
-
 	}
 
 
@@ -77,6 +76,9 @@ public class CaptainShieldItem extends TieredItem {
 	}
 
 	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		World world = attacker.world;
+		world.playSound(null, attacker.getPosX(), attacker.getPosY(), attacker.getPosZ(),
+				ModEventSubscriber.ITEM_CAPTAIN_AMERICA_SHIELD_HIT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		stack.damageItem(1, attacker, (p_220045_0_) -> {
 			p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
 		});
@@ -144,8 +146,8 @@ public class CaptainShieldItem extends TieredItem {
 							1.0F);
 					worldIn.addEntity(shieldEntity);
 					playerEntity.inventory.deleteStack(stack);
-					worldIn.playMovingSound((PlayerEntity) null, shieldEntity, ModEventSubscriber.ITEM_MJOLNIR_THROW,
-							SoundCategory.PLAYERS, 2.0F, 1.0F);
+					//worldIn.playMovingSound((PlayerEntity) null, shieldEntity, ModEventSubscriber.ITEM_CAPTAIN_AMERICA_SHIELD_HIT,
+					//		SoundCategory.PLAYERS, 2.0F, 1.0F);
 				}
 			}
 		}

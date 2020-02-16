@@ -19,7 +19,7 @@ public class CustomEntityType {
 
 	public static final RegistryObject<EntityType<MjolnirEntity>> MJOLNIR = REG.register("mjolnir", () ->
 		EntityType.Builder.<MjolnirEntity>create(MjolnirEntity::new, EntityClassification.MISC)
-			.size(1.0F, 1.0F)
+			.size(5.0F, 5.0F)
 			.setTrackingRange(10)
 			.setUpdateInterval(1)
 			.setShouldReceiveVelocityUpdates(true)
@@ -30,7 +30,7 @@ public class CustomEntityType {
 	
 	public static final RegistryObject<EntityType<CaptainAmericaShieldEntity>> CAPTAIN_AMERICA_SHIELD = REG.register("captain_america_shield", () ->
 		EntityType.Builder.<CaptainAmericaShieldEntity>create(CaptainAmericaShieldEntity::new, EntityClassification.MISC)
-		.size(1.0F, 1.0F)
+		.size(5.0F, 5.0F)
 		.setTrackingRange(10)
 		.setUpdateInterval(1)
 		.setShouldReceiveVelocityUpdates(true)

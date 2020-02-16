@@ -75,6 +75,8 @@ public class ModEventSubscriber {
 	public static final SoundEvent ITEM_MJOLNIR_FLIGHT = register("c_mcu_mod:item.mjolnir.flight");
 	public static final SoundEvent ITEM_MJOLNIR_HIT = register("c_mcu_mod:item.mjolnir.hit");
 	public static final SoundEvent ITEM_MJOLNIR_THROW = register("c_mcu_mod:item.mjolnir.throw");
+	public static final SoundEvent ITEM_CAPTAIN_AMERICA_SHIELD_HIT = register("c_mcu_mod:item.captain_america_shield.hit");
+	
 
 	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {
 		return setup(entry, new ResourceLocation(Main.MODID, name));

@@ -54,7 +54,7 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 	}
 
 	public void tick() {
-		if (this.timeInGround > 0) {
+		if (this.inGround) {
 			this.dealtDamage = true;
 		}
 
@@ -79,9 +79,7 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 
 				double d0 = 0.05D * (double) comeBackSpeed;
 				this.setMotion(this.getMotion().scale(0.95D).add(vec3d.normalize().scale(d0)));
-				if (this.returningTicks == 0) {
-					this.playSound(ModEventSubscriber.ITEM_MJOLNIR_THROW, 10.0F, 1.0F);
-				}
+				
 				++this.returningTicks;
 			}
 		}
@@ -112,12 +110,12 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 
 	protected void onEntityHit(EntityRayTraceResult result) {
 		Entity entity = result.getEntity();
-		float damage = 10.0F;
+		float damage = 12.0F;
 
 		Entity entity1 = this.getShooter();
 		DamageSource damagesource = DamageSource.causeTridentDamage(this, (Entity) (entity1 == null ? this : entity1));
 		this.dealtDamage = true;
-		SoundEvent soundevent = ModEventSubscriber.ITEM_MJOLNIR_HIT;
+		SoundEvent soundevent = ModEventSubscriber.ITEM_CAPTAIN_AMERICA_SHIELD_HIT;
 		if (entity.attackEntityFrom(damagesource, damage)) {
 			if (entity.getType() == EntityType.ENDERMAN) {
 				return;
@@ -138,7 +136,7 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 	}
 
 	protected SoundEvent getHitEntitySound() {
-		return ModEventSubscriber.ITEM_MJOLNIR_HIT;
+		return ModEventSubscriber.ITEM_CAPTAIN_AMERICA_SHIELD_HIT;
 	}
 
 	public void onCollideWithPlayer(PlayerEntity entityIn) {
@@ -162,7 +160,7 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 	}
 
 	protected float getWaterDrag() {
-		return 0.99F;
+		return 0.8F;
 	}
 
 	@OnlyIn(Dist.CLIENT)

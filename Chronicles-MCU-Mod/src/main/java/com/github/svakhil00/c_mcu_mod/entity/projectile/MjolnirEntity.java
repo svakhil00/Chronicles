@@ -118,7 +118,7 @@ public class MjolnirEntity extends AbstractArrowEntity {
 
 	protected void onEntityHit(EntityRayTraceResult result) {
 		Entity entity = result.getEntity();
-		float damage = 10.0F;
+		float damage = 15.0F;
 
 		Entity entity1 = this.getShooter();
 		DamageSource damagesource = DamageSource.causeTridentDamage(this, (Entity) (entity1 == null ? this : entity1));
