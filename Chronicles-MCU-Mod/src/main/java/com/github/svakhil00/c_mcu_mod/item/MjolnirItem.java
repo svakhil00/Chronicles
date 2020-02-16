@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.github.svakhil00.c_mcu_mod.entity.player.CustomPlayerEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
+import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem.Mode;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.BlockState;
@@ -42,8 +43,10 @@ public class MjolnirItem extends TieredItem {
 		super(tierIn, builder);
 		ATTACKDAMAGE = (float) attackDamageIn + tierIn.getAttackDamage();
 		ATTACKSPEED = attackSpeedIn;
-		this.addPropertyOverride(new ResourceLocation("throwing"), (p_210315_0_, p_210315_1_, p_210315_2_) -> {
-			return p_210315_2_ != null && p_210315_2_.isHandActive() && p_210315_2_.getActiveItemStack() == p_210315_0_
+		this.addPropertyOverride(new ResourceLocation("throwing"), (stack, p_210315_1_, playerIn) -> {
+			CompoundNBT tag = stack.getOrCreateTag();
+			Mode mode = Mode.byName(tag.getString("mode"));
+			return playerIn != null && playerIn.isHandActive() && playerIn.getActiveItemStack() == stack && mode != Mode.PROJECTILE
 					? 1.0F
 					: 0.0F;
 		});
@@ -88,9 +91,9 @@ public class MjolnirItem extends TieredItem {
 		if (mode == Mode.LIGHTNING) {
 			return UseAction.NONE;
 		} else if (mode == Mode.FLIGHT) {
-			return UseAction.SPEAR;
+			return UseAction.NONE;
 		} else if (mode == Mode.PROJECTILE) {
-			return UseAction.SPEAR;
+			return UseAction.NONE;
 		}
 		return UseAction.NONE;
 	}
@@ -104,6 +107,7 @@ public class MjolnirItem extends TieredItem {
 
 		if (playerIn.isShiftKeyDown()) {
 			tag.putString("mode", mode.cycle().getName());
+			
 			// playerIn.setActiveHand(handIn);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		}
@@ -133,12 +137,13 @@ public class MjolnirItem extends TieredItem {
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		} else if (mode == Mode.LIGHTNING) {
 			Vec3d look = new Vec3d(0, 0, 0);
+			double range = 100.0D;
 			boolean block = false;
-			if (!playerIn.pick(100.0D, 1.0F, false).getType().equals(Type.MISS)) {
+			if (!playerIn.pick(range, 1.0F, false).getType().equals(Type.MISS)) {
 				// worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(),
 				// playerIn.getPosZ(),ModEventSubscriber.ITEM_MJOLNIR_LIGHTNING,
 				// SoundCategory.PLAYERS, 2.0F, 1.0F);
-				look = playerIn.pick(100.D, 1.0F, false).getHitVec();
+				look = playerIn.pick(range, 1.0F, false).getHitVec();
 				block = true;
 			}
 			if (block) {
@@ -172,7 +177,7 @@ public class MjolnirItem extends TieredItem {
 						p_220047_1_.sendBreakAnimation(entityLiving.getActiveHand());
 					});
 					MjolnirEntity mjolnirentity = new MjolnirEntity(worldIn, playerentity, stack);
-					mjolnirentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 2.5F,
+					mjolnirentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 3.0F,
 							1.0F);
 					worldIn.addEntity(mjolnirentity);
 					playerentity.inventory.deleteStack(stack);
