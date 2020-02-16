@@ -3,6 +3,7 @@ package com.github.svakhil00.c_mcu_mod;
 import com.github.svakhil00.c_mcu_mod.lists.BlockList;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
 import com.google.common.base.Function;
+import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
@@ -61,6 +62,8 @@ public class ModEventSubscriber {
 	public static void registerModels(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(CustomEntityType.MJOLNIR.get(),
 				manager -> new MjolnirRenderer(manager, Minecraft.getInstance().getItemRenderer()));
+		RenderingRegistry.registerEntityRenderingHandler(CustomEntityType.CAPTAIN_AMERICA_SHIELD.get(),
+				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
 
 	}
 
