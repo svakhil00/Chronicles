@@ -24,7 +24,7 @@ public class OreGen {
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 						Feature.ORE
 								.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-										BlockList.VIBRANIUM_ORE_BLOCK.getDefaultState(), 10))
+										BlockList.VIBRANIUM_ORE_BLOCK.getDefaultState(), 4))
 								.withPlacement(customConfig));
 
 			}
