@@ -20,7 +20,7 @@ public class OreGen {
 					|| biome == Biomes.MODIFIED_JUNGLE || biome == Biomes.MODIFIED_JUNGLE_EDGE) {
 
 				ConfiguredPlacement<CountRangeConfig> customConfig = Placement.COUNT_RANGE
-						.configure(new CountRangeConfig(20, 0, 5, 100));
+						.configure(new CountRangeConfig(20, 0, 0, 64));
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 						Feature.ORE
 								.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
