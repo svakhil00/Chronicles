@@ -1,33 +1,20 @@
 package com.github.svakhil00.c_mcu_mod;
 
-import com.github.svakhil00.c_mcu_mod.lists.BlockList;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
-import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
-import com.google.common.base.Function;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
-import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
+import com.github.svakhil00.c_mcu_mod.lists.BlockList;
+import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.IUnbakedModel;
-import net.minecraft.client.renderer.model.Model;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
-import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
