@@ -85,11 +85,7 @@ public class MjolnirEntity extends AbstractArrowEntity {
 
 				double d0 = 0.05D * (double) comeBackSpeed;
 				this.setMotion(this.getMotion().scale(0.95D).add(vec3d.normalize().scale(d0)));
-				/*
-				if (this.returningTicks == 0) {
-					this.playSound(ModEventSubscriber.ITEM_MJOLNIR_THROW, 10.0F, 1.0F);
-				}
-				*/
+				
 				++this.returningTicks;
 			}
 		}

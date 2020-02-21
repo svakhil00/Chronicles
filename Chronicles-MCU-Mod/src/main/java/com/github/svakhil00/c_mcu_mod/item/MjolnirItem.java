@@ -8,6 +8,7 @@ import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.github.svakhil00.c_mcu_mod.entity.player.CustomPlayerEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem.Mode;
+import com.github.svakhil00.c_mcu_mod.lists.ItemList;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.BlockState;
@@ -66,58 +67,47 @@ public class MjolnirItem extends TieredItem {
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		
-		/*
-		 * if (entityIn instanceof ClientPlayerEntity) { ClientPlayerEntity playerEntity
-		 * = (ClientPlayerEntity) entityIn; if (playerEntity.isAirBorne &&
-		 * playerEntity.movementInput.jump && !playerEntity.abilities.isFlying &&
-		 * !playerEntity.isPassenger() && !playerEntity.isOnLadder()) { ItemStack
-		 * itemStack = playerEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND); if
-		 * (itemStack.getItem() == stack.getItem()) {
-		 * playerEntity.connection.sendPacket(new CEntityActionPacket(playerEntity,
-		 * CEntityActionPacket.Action.START_FALL_FLYING));
-		 * 
-		 * if (playerEntity.isServerWorld() || playerEntity.canPassengerSteer()) {
-		 * 
-		 * double d0 = 0.08D; IAttributeInstance gravity =
-		 * playerEntity.getAttribute(playerEntity.ENTITY_GRAVITY); boolean flag =
-		 * playerEntity.getMotion().y <= 0.0D; if (flag &&
-		 * playerEntity.isPotionActive(Effects.SLOW_FALLING)) { // if
-		 * (!gravity.hasModifier(SLOW_FALLING)) //
-		 * gravity.applyModifier(playerEntity.SLOW_FALLING); playerEntity.fallDistance =
-		 * 0.0F; } // else if (gravity.hasModifier(SLOW_FALLING)) { //
-		 * gravity.removeModifier(SLOW_FALLING); // } d0 = gravity.getValue();
-		 * 
-		 * Vec3d vec3d3 = playerEntity.getMotion(); if (vec3d3.y > -0.5D) {
-		 * playerEntity.fallDistance = 1.0F; } System.out.println("test"); Vec3d vec3d =
-		 * playerEntity.getLookVec(); float f6 = playerEntity.rotationPitch * ((float)
-		 * Math.PI / 180F); double d9 = Math.sqrt(vec3d.x * vec3d.x + vec3d.z *
-		 * vec3d.z); double d11 = Math.sqrt(Entity.horizontalMag(vec3d3)); double d12 =
-		 * vec3d.length(); float f3 = MathHelper.cos(f6); f3 = (float) ((double) f3 *
-		 * (double) f3 * Math.min(1.0D, d12 / 0.4D)); vec3d3 =
-		 * playerEntity.getMotion().add(0.0D, d0 * (-1.0D + (double) f3 * 0.75D), 0.0D);
-		 * if (vec3d3.y < 0.0D && d9 > 0.0D) { double d3 = vec3d3.y * -0.1D * (double)
-		 * f3; vec3d3 = vec3d3.add(vec3d.x * d3 / d9, d3, vec3d.z * d3 / d9); }
-		 * 
-		 * if (f6 < 0.0F && d9 > 0.0D) { double d13 = d11 * (double)
-		 * (-MathHelper.sin(f6)) * 0.04D; vec3d3 = vec3d3.add(-vec3d.x * d13 / d9, d13 *
-		 * 3.2D, -vec3d.z * d13 / d9); }
-		 * 
-		 * if (d9 > 0.0D) { vec3d3 = vec3d3.add((vec3d.x / d9 * d11 - vec3d3.x) * 0.1D,
-		 * 0.0D, (vec3d.z / d9 * d11 - vec3d3.z) * 0.1D); }
-		 * 
-		 * playerEntity.setMotion(vec3d3.mul((double) 0.99F, (double) 0.98F, (double)
-		 * 0.99F)); playerEntity.move(MoverType.SELF, playerEntity.getMotion()); if
-		 * (playerEntity.collidedHorizontally && !playerEntity.world.isRemote) { double
-		 * d14 = Math.sqrt(Entity.horizontalMag(playerEntity.getMotion())); double d4 =
-		 * d11 - d14; float f4 = (float) (d4 * 10.0D - 3.0D); if (f4 > 0.0F) {
-		 * playerEntity.playSound(this.getFallSound((int) f4), 1.0F, 1.0F);
-		 * playerEntity.attackEntityFrom(DamageSource.FLY_INTO_WALL, f4); } }
-		 * 
-		 * } }
-		 * 
-		 * } }
-		 */
+
+		if (entityIn instanceof ClientPlayerEntity) {
+			ClientPlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
+
+			if (playerEntity.getHeldItemMainhand().getItem() == ItemList.MJOLNIR) {
+				CompoundNBT tag = stack.getOrCreateTag();
+				Mode mode = Mode.byName(tag.getString("mode"));
+
+				if (mode == Mode.FLIGHT) {
+					CompoundNBT tag2 = stack.getOrCreateTag();
+
+					if (tag2.getBoolean("flight")) {
+						if (playerEntity.onGround) {
+							tag2.putBoolean("flight", false);
+							return;
+						}
+						// flight stuff
+						
+						playerEntity.limbSwingAmount = 0;
+						float yaw = playerEntity.rotationYaw;
+						float pitch = playerEntity.rotationPitch;
+						int launchFactor = 1;
+						float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
+								* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+						float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
+						float f3 = MathHelper.cos(yaw * ((float) Math.PI / 180F))
+								* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+						float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+						float f5 = 3.0F * ((1.0F + (float) launchFactor) / 4.0F);
+
+						f1 = f1 * (f5 / f4);
+						f2 = f2 * (f5 / f4);
+						f3 = f3 * (f5 / f4);
+						
+						playerEntity.setVelocity((double) f1, (double) f2, (double) f3);
+
+					}
+				}
+			}
+		}
+
 	}
 
 	protected SoundEvent getFallSound(int heightIn) {
@@ -185,14 +175,10 @@ public class MjolnirItem extends TieredItem {
 		}
 		tag.putString("mode", mode.getName());
 		if (mode == Mode.FLIGHT) {
-			//USE START FLIGHT AND CHANGE VELOCITY IN TICKS
-			//WHEN RIGHT CLICK LET GO USE FLIGHT ENDED
-			//ADD COLLISION DAMAGE
+			// ADD COLLISION DAMAGE
 
-			if (!playerIn.isInWaterOrBubbleColumn()) {
-				worldIn.playMovingSound((PlayerEntity) null, playerIn, ModEventSubscriber.ITEM_MJOLNIR_FLIGHT,
-						SoundCategory.PLAYERS, 1.0F, 1.0F);
-			}
+			CompoundNBT tag2 = itemStack.getOrCreateTag();
+			tag2.putBoolean("flight", true);
 			float yaw = playerIn.rotationYaw;
 			float pitch = playerIn.rotationPitch;
 			int launchFactor = 1;
@@ -207,9 +193,14 @@ public class MjolnirItem extends TieredItem {
 			f1 = f1 * (f5 / f4);
 			f2 = f2 * (f5 / f4);
 			f3 = f3 * (f5 / f4);
-			//playerIn.startSpinAttack(20);
 			playerIn.setVelocity((double) f1, (double) f2, (double) f3);
-
+			/*
+			if (!playerIn.isInWaterOrBubbleColumn()) {
+				worldIn.playMovingSound((PlayerEntity) null, playerIn, ModEventSubscriber.ITEM_MJOLNIR_FLIGHT,
+						SoundCategory.PLAYERS, 1.0F, 1.0F);
+			}
+			*/
+			playerIn.setActiveHand(handIn);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		} else if (mode == Mode.LIGHTNING) {
 			Vec3d look = new Vec3d(0, 0, 0);
@@ -261,6 +252,9 @@ public class MjolnirItem extends TieredItem {
 							SoundCategory.PLAYERS, 2.0F, 1.0F);
 				}
 			}
+		}else if(mode == Mode.FLIGHT) {
+			CompoundNBT tag2 = stack.getOrCreateTag();
+			tag2.putBoolean("flight", false);
 		}
 	}
 
