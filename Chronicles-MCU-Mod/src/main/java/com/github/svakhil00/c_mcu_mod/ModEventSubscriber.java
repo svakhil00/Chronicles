@@ -28,17 +28,27 @@ public class ModEventSubscriber {
 	public static void onRegisterItems(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(setup(ItemList.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"),
 				setup(ItemList.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
-				setup(ItemList.VIBRANIUM_INGOT, "vibranium_ingot"), setup(ItemList.MJOLNIR, "mjolnir"),
-				setup(ItemList.PURE_VIBRANIUM, "pure_vibranium"), setup(ItemList.IRON_MAN_HELMET, "iron_man_helmet"),
+				setup(ItemList.VIBRANIUM_INGOT, "vibranium_ingot"), 
+				setup(ItemList.MJOLNIR, "mjolnir"),
+				setup(ItemList.PURE_VIBRANIUM, "pure_vibranium"), 
+				setup(ItemList.IRON_MAN_HELMET, "iron_man_helmet"),
 				setup(ItemList.IRON_MAN_CHESTPLATE, "iron_man_chestplate"),
 				setup(ItemList.IRON_MAN_LEGGINGS, "iron_man_leggings"),
-				setup(ItemList.IRON_MAN_BOOTS, "iron_man_boots"), setup(ItemList.THOR_HELMET, "thor_helmet"),
-				setup(ItemList.THOR_CHESTPLATE, "thor_chestplate"), setup(ItemList.THOR_LEGGINGS, "thor_leggings"),
+				setup(ItemList.IRON_MAN_BOOTS, "iron_man_boots"), 
+				setup(ItemList.THOR_HELMET, "thor_helmet"),
+				setup(ItemList.THOR_CHESTPLATE, "thor_chestplate"), 
+				setup(ItemList.THOR_LEGGINGS, "thor_leggings"),
 				setup(ItemList.THOR_BOOTS, "thor_boots"),
 				setup(ItemList.CAPTAIN_AMERICA_HELMET, "captain_america_helmet"),
 				setup(ItemList.CAPTAIN_AMERICA_CHESTPLATE, "captain_america_chestplate"),
 				setup(ItemList.CAPTAIN_AMERICA_LEGGINGS, "captain_america_leggings"),
-				setup(ItemList.CAPTAIN_AMERICA_BOOTS, "captain_america_boots"));
+				setup(ItemList.CAPTAIN_AMERICA_BOOTS, "captain_america_boots"),
+				setup(ItemList.STEEL, "steel"),
+				setup(ItemList.URU, "uru"),
+				setup(ItemList.HAMMER_HANDLE, "hammer_handle"),
+				setup(ItemList.HAMMER_HEAD, "hammer_head"),
+				setup(ItemList.ASGARDIAN_STEEL, "asgardian_steel")
+				);
 	}
 
 	@SubscribeEvent
@@ -50,7 +60,7 @@ public class ModEventSubscriber {
 	public static void loadCompleteEvent(FMLLoadCompleteEvent event) {
 		OreGen.generateOre();
 	}
-	
+
 	@SubscribeEvent
 	public static void registerModels(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(CustomEntityType.MJOLNIR.get(),
@@ -60,7 +70,6 @@ public class ModEventSubscriber {
 
 	}
 
-	
 	private static SoundEvent register(String key) {
 		return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
 	}
@@ -68,8 +77,8 @@ public class ModEventSubscriber {
 	public static final SoundEvent ITEM_MJOLNIR_FLIGHT = register("c_mcu_mod:item.mjolnir.flight");
 	public static final SoundEvent ITEM_MJOLNIR_HIT = register("c_mcu_mod:item.mjolnir.hit");
 	public static final SoundEvent ITEM_MJOLNIR_THROW = register("c_mcu_mod:item.mjolnir.throw");
-	public static final SoundEvent ITEM_CAPTAIN_AMERICA_SHIELD_HIT = register("c_mcu_mod:item.captain_america_shield.hit");
-	
+	public static final SoundEvent ITEM_CAPTAIN_AMERICA_SHIELD_HIT = register(
+			"c_mcu_mod:item.captain_america_shield.hit");
 
 	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {
 		return setup(entry, new ResourceLocation(Main.MODID, name));

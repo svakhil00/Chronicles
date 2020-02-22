@@ -6,6 +6,5 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
 public class BlockList {
-	public static final Block VIBRANIUM_ORE_BLOCK = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(20.0F, 20.0F).lightValue(6).sound(SoundType.STONE).harvestLevel(3).harvestTool(ToolType.PICKAXE));
-
+	public static final Block VIBRANIUM_ORE_BLOCK = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(30.0F).lightValue(6).sound(SoundType.STONE).harvestLevel(3).harvestTool(ToolType.PICKAXE));
 }
