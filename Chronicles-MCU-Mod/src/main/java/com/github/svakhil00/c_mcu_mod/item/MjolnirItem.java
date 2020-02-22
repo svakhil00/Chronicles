@@ -13,6 +13,8 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ElytraSound;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -51,8 +53,6 @@ import net.minecraft.world.server.ServerWorld;
 
 public class MjolnirItem extends TieredItem {
 	private final float ATTACKDAMAGE, ATTACKSPEED;
-	private MovementInput movementInput;
-
 	public MjolnirItem(IItemTier tierIn, int attackDamageIn, float attackSpeedIn, Properties builder) {
 		super(tierIn, builder);
 		ATTACKDAMAGE = (float) attackDamageIn + tierIn.getAttackDamage();
@@ -85,6 +85,10 @@ public class MjolnirItem extends TieredItem {
 						}
 						// flight stuff
 						
+						if(!playerEntity.isElytraFlying() && !playerEntity.isInWaterOrBubbleColumn()) {
+							Minecraft.getInstance().getSoundHandler().play(new ElytraSound(playerEntity));
+						}
+							
 						playerEntity.limbSwingAmount = 0;
 						float yaw = playerEntity.rotationYaw;
 						float pitch = playerEntity.rotationPitch;
@@ -102,7 +106,7 @@ public class MjolnirItem extends TieredItem {
 						f3 = f3 * (f5 / f4);
 						
 						playerEntity.setVelocity((double) f1, (double) f2, (double) f3);
-
+						
 					}
 				}
 			}
