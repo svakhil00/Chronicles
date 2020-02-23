@@ -44,6 +44,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -81,14 +82,10 @@ public class MjolnirItem extends TieredItem {
 					if (tag2.getBoolean("flight")) {
 						if (playerEntity.onGround) {
 							tag2.putBoolean("flight", false);
+							Minecraft.getInstance().getSoundHandler().stop();;
 							return;
 						}
 						// flight stuff
-						
-						if(!playerEntity.isElytraFlying() && !playerEntity.isInWaterOrBubbleColumn()) {
-							Minecraft.getInstance().getSoundHandler().play(new ElytraSound(playerEntity));
-						}
-							
 						playerEntity.limbSwingAmount = 0;
 						float yaw = playerEntity.rotationYaw;
 						float pitch = playerEntity.rotationPitch;
@@ -166,7 +163,6 @@ public class MjolnirItem extends TieredItem {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		CustomPlayerEntity playerTest = new CustomPlayerEntity(playerIn.world, playerIn.getGameProfile());
 		ItemStack itemStack = playerIn.getHeldItem(handIn);
 		CompoundNBT tag = itemStack.getOrCreateTag();
 		Mode mode = Mode.byName(tag.getString("mode"));
@@ -198,12 +194,12 @@ public class MjolnirItem extends TieredItem {
 			f2 = f2 * (f5 / f4);
 			f3 = f3 * (f5 / f4);
 			playerIn.setVelocity((double) f1, (double) f2, (double) f3);
-			/*
-			if (!playerIn.isInWaterOrBubbleColumn()) {
-				worldIn.playMovingSound((PlayerEntity) null, playerIn, ModEventSubscriber.ITEM_MJOLNIR_FLIGHT,
-						SoundCategory.PLAYERS, 1.0F, 1.0F);
+			if(playerIn instanceof ClientPlayerEntity) {
+				ClientPlayerEntity playerEntity = (ClientPlayerEntity) playerIn;
+				if(!playerIn.isElytraFlying() && !playerIn.isInWaterOrBubbleColumn()) {
+					Minecraft.getInstance().getSoundHandler().play(new ElytraSound(playerEntity));
+				}
 			}
-			*/
 			playerIn.setActiveHand(handIn);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		} else if (mode == Mode.LIGHTNING) {
