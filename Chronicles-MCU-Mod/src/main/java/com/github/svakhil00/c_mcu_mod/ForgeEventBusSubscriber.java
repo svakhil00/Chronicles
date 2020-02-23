@@ -12,10 +12,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.ItemSmeltedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -32,6 +36,7 @@ public class ForgeEventBusSubscriber {
 
 	}
 
+
 	private static boolean needToPop = false;
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
@@ -44,18 +49,13 @@ public class ForgeEventBusSubscriber {
 					+ (playerEntity.rotationYaw - playerEntity.prevRotationYaw) * partialTicks);
 			MatrixStack matrixStack = event.getMatrixStack();
 			float pitch = playerEntity.rotationPitch;
-			
+
 			playerEntity.limbSwingAmount = 0;
 			matrixStack.push();
 			matrixStack.rotate(new Quaternion(90, 0, (float) interpolatedYaw, true));
 			matrixStack.translate(0, -playerEntity.getHeight() / 2, -playerEntity.getHeight() * 1 / 2);
 			matrixStack.rotate(new Quaternion(pitch, (float) interpolatedYaw, 0, true));
 			needToPop = true;
-			
-			
-			
-
-			
 
 		}
 
@@ -69,8 +69,6 @@ public class ForgeEventBusSubscriber {
 			matrixStack.pop();
 		}
 	}
-
-	
 
 	// ----------------------------------------------------------------------helpers------------------------------------------------------------------------
 

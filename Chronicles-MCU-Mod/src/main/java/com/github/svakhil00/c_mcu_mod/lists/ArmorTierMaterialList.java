@@ -54,7 +54,7 @@ public enum ArmorTierMaterialList implements IArmorMaterial{
 	@Override
 	public SoundEvent getSoundEvent() {
 		// TODO Auto-generated method stub
-		return new SoundEvent(new ResourceLocation(equipSound));
+		return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
 	}
 
 	@Override
