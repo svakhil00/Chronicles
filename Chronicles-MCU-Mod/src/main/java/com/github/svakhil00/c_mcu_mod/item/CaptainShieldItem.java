@@ -1,18 +1,23 @@
 package com.github.svakhil00.c_mcu_mod.item;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.annotation.Nullable;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem.Mode;
+import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -31,7 +36,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CaptainShieldItem extends TieredItem {
 	private final float ATTACKDAMAGE, ATTACKSPEED;
@@ -50,6 +59,14 @@ public class CaptainShieldItem extends TieredItem {
 	}
 
 
+	 @OnlyIn(Dist.CLIENT)
+	   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		 if(KeyboardHelper.isHoldingShift()) {
+			 tooltip.add(new StringTextComponent("Shift right click to change modes"));
+		 }else {
+			 tooltip.add(new StringTextComponent("Hold SHIFT for more information"));
+		 }
+	   }
 
 	public int getUseDuration(ItemStack stack) {
 		return 72000;

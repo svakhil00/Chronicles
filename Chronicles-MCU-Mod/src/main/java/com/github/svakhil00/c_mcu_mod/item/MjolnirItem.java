@@ -1,14 +1,18 @@
 package com.github.svakhil00.c_mcu_mod.item;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.annotation.Nullable;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.github.svakhil00.c_mcu_mod.entity.player.CustomPlayerEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem.Mode;
 import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.BlockState;
@@ -16,6 +20,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ElytraSound;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
@@ -48,9 +53,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class MjolnirItem extends TieredItem {
 	private final float ATTACKDAMAGE, ATTACKSPEED;
@@ -66,6 +75,15 @@ public class MjolnirItem extends TieredItem {
 		});
 	}
 
+	@OnlyIn(Dist.CLIENT)
+	   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		 if(KeyboardHelper.isHoldingShift()) {
+			 tooltip.add(new StringTextComponent("Shift right click to change modes"));
+		 }else {
+			 tooltip.add(new StringTextComponent("Hold SHIFT for more information"));
+		 }
+	   }
+	
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 
@@ -86,6 +104,10 @@ public class MjolnirItem extends TieredItem {
 							return;
 						}
 						// flight stuff
+						playerEntity.applyEntityCollision(playerEntity);
+						if(playerEntity.collided) {
+							playerEntity.attackEntityFrom(new DamageSource("Mjolnir"), 15);
+						}
 						playerEntity.limbSwingAmount = 0;
 						float yaw = playerEntity.rotationYaw;
 						float pitch = playerEntity.rotationPitch;
