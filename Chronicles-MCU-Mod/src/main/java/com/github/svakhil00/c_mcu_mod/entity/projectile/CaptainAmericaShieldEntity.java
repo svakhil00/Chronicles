@@ -112,8 +112,8 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 		Entity entity = result.getEntity();
 		float damage = 12.0F;
 
-		Entity entity1 = this.getShooter();
-		DamageSource damagesource = DamageSource.causeTridentDamage(this, (Entity) (entity1 == null ? this : entity1));
+		PlayerEntity entity1 = (PlayerEntity) this.getShooter();
+		DamageSource damagesource = DamageSource.causePlayerDamage(entity1);
 		this.dealtDamage = true;
 		SoundEvent soundevent = ModEventSubscriber.ITEM_CAPTAIN_AMERICA_SHIELD_HIT;
 		if (entity.attackEntityFrom(damagesource, damage)) {

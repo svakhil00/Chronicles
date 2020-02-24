@@ -11,7 +11,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
@@ -118,8 +117,8 @@ public class MjolnirEntity extends AbstractArrowEntity {
 		Entity entity = result.getEntity();
 		float damage = 15.0F;
 
-		Entity entity1 = this.getShooter();
-		DamageSource damagesource = DamageSource.causeTridentDamage(this, (Entity) (entity1 == null ? this : entity1));
+		PlayerEntity entity1 = (PlayerEntity) this.getShooter();
+		DamageSource damagesource = DamageSource.causePlayerDamage(entity1);
 		this.dealtDamage = true;
 		SoundEvent soundevent = ModEventSubscriber.ITEM_MJOLNIR_HIT;
 		if (entity.attackEntityFrom(damagesource, damage)) {
