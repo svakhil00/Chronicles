@@ -31,11 +31,9 @@ public class ForgeEventSubscriber {
 		if (event.getEntity() instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
 			if(playerEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem() == ModItems.MJOLNIR || playerEntity.getItemStackFromSlot(EquipmentSlotType.OFFHAND).getItem() == ModItems.MJOLNIR) {
-				System.out.println("true");
 				event.setCanceled(true);
 			}
 		}
-
 	}
 	
 	@SubscribeEvent
