@@ -19,7 +19,7 @@ public class PureVibraniumItem extends Item {
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		if (entityIn instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) entityIn;
-			if (!playerEntity.isPotionActive(Effect.get(19))) {
+			if (!playerEntity.isPotionActive(Effects.POISON)) {
 				playerEntity.addPotionEffect(new EffectInstance(Effects.POISON, 40, 2));
 			}
 		}

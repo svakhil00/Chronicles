@@ -1,6 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.init;
 
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
+import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaChestplateItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaSuitItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManSuitItem;
@@ -12,7 +13,6 @@ import com.github.svakhil00.c_mcu_mod.item.VibraniumOreBlockItem;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.Properties;
 
 public class ModItems {
 	//Weapons
@@ -45,7 +45,7 @@ public class ModItems {
 	public static final Item THOR_BOOTS = new ThorSuitItem(ModArmorTierMaterial.thor_suit, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	
 	public static final Item CAPTAIN_AMERICA_HELMET = new CaptainAmericaSuitItem(ModArmorTierMaterial.captain_america_suit, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
-	public static final Item CAPTAIN_AMERICA_CHESTPLATE = new CaptainAmericaSuitItem(ModArmorTierMaterial.captain_america_suit, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
+	public static final Item CAPTAIN_AMERICA_CHESTPLATE = new CaptainAmericaChestplateItem(ModArmorTierMaterial.captain_america_suit, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item CAPTAIN_AMERICA_LEGGINGS = new CaptainAmericaSuitItem(ModArmorTierMaterial.captain_america_suit, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item CAPTAIN_AMERICA_BOOTS = new CaptainAmericaSuitItem(ModArmorTierMaterial.captain_america_suit, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	
