@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer1": "c_mcu_mod:item/captain_america_armor/captain_america_chestplate"
+		"layer0": "c_mcu_mod:item/captain_america_armor/icon_captain_america_chestplate"
 	}
 }
