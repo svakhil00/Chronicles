@@ -31,7 +31,7 @@ public class CaptainAmericaChestplateItem extends CaptainAmericaSuitItem{
 							
 							if (!playerEntity.isPotionActive(Effects.HEALTH_BOOST)) {
 								playerEntity.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 1200, 2));
-								playerEntity.heal(6);
+								playerEntity.heal(12);
 							}
 							if (!playerEntity.isPotionActive(Effects.STRENGTH)) {
 								playerEntity.addPotionEffect(new EffectInstance(Effects.STRENGTH, 400, 0));
