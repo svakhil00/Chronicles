@@ -5,21 +5,19 @@ import com.github.svakhil00.c_mcu_mod.item.MjolnirItem.Mode;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.Quaternion;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.ItemSmeltedEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -27,13 +25,30 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.FORGE)
 
 public class ForgeEventSubscriber {
+	
 	@SubscribeEvent
 	public static void lightning(EntityStruckByLightningEvent event) {
-
 		if (event.getEntity() instanceof PlayerEntity) {
-			// do something
+			PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
+			if(playerEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem() == ModItems.MJOLNIR || playerEntity.getItemStackFromSlot(EquipmentSlotType.OFFHAND).getItem() == ModItems.MJOLNIR) {
+				System.out.println("true");
+				event.setCanceled(true);
+			}
 		}
 
+	}
+	
+	@SubscribeEvent
+	public static void onCraft(ItemCraftedEvent event) {
+		if(event.getCrafting().getItem().getItem() == ModItems.MJOLNIR) {
+			PlayerEntity playerEntity = event.getPlayer();
+			World world = playerEntity.world;
+			LightningBoltEntity lightning = new LightningBoltEntity(world, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), false);
+			lightning.setGlowing(true);
+			if (!world.isRemote) {
+				((ServerWorld) world).addLightningBolt(lightning);
+			}
+		}
 	}
 
 

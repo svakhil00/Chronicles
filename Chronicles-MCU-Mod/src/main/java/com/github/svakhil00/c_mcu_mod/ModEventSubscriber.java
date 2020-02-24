@@ -28,7 +28,7 @@ public class ModEventSubscriber {
 	public static void onRegisterItems(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(setup(ModItems.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"),
 				setup(ModItems.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
-				setup(ModItems.VIBRANIUM_INGOT, "vibranium_ingot"), 
+				setup(ModItems.STABLE_VIBRANIUM, "stable_vibranium"), 
 				setup(ModItems.MJOLNIR, "mjolnir"),
 				setup(ModItems.PURE_VIBRANIUM, "pure_vibranium"), 
 				setup(ModItems.IRON_MAN_HELMET, "iron_man_helmet"),
@@ -47,7 +47,8 @@ public class ModEventSubscriber {
 				setup(ModItems.URU, "uru"),
 				setup(ModItems.HAMMER_HANDLE, "hammer_handle"),
 				setup(ModItems.HAMMER_HEAD, "hammer_head"),
-				setup(ModItems.ASGARDIAN_STEEL, "asgardian_steel")
+				setup(ModItems.ASGARDIAN_STEEL, "asgardian_steel"),
+				setup(ModItems.VIBRANIUM_CAPSULE, "vibranium_capsule")
 				);
 	}
 

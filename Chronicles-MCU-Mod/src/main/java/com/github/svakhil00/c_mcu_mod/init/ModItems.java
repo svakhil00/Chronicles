@@ -21,7 +21,7 @@ public class ModItems {
 	
 	//blocks, ores
 	public static final BlockItem VIBRANIUM_ORE_BLOCKITEM = new VibraniumOreBlockItem(ModBlocks.VIBRANIUM_ORE_BLOCK, new BlockItem.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
-	public static final Item VIBRANIUM_INGOT = new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
+	public static final Item STABLE_VIBRANIUM = new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item PURE_VIBRANIUM = new PureVibraniumItem(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item URU = new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item STEEL =  new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
@@ -30,6 +30,7 @@ public class ModItems {
 	//misc
 	public static final Item HAMMER_HEAD = new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP).maxStackSize(1));
 	public static final Item HAMMER_HANDLE = new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP).maxStackSize(1));
+	public static final Item VIBRANIUM_CAPSULE = new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	
 	
 	//armor
