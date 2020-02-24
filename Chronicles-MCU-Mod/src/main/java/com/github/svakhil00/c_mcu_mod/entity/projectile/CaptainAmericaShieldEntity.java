@@ -1,8 +1,8 @@
 package com.github.svakhil00.c_mcu_mod.entity.projectile;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
-import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.entity.CustomEntitys;
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -25,12 +25,12 @@ import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
-	private ItemStack thrownStack = new ItemStack(ItemList.CAPTAIN_AMERICA_SHIELD);
+	private ItemStack thrownStack = new ItemStack(ModItems.CAPTAIN_AMERICA_SHIELD);
 	private boolean dealtDamage;
 	public int returningTicks;
 
 	public CaptainAmericaShieldEntity(final World WORLDIN) {
-		this(CustomEntityType.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), WORLDIN);
+		this(CustomEntitys.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), WORLDIN);
 	}
 
 	public CaptainAmericaShieldEntity(EntityType<? extends CaptainAmericaShieldEntity> type, World worldIn) {
@@ -38,14 +38,14 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 	}
 
 	public CaptainAmericaShieldEntity(World worldIn, LivingEntity thrower, ItemStack thrownStackIn) {
-		super(CustomEntityType.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), thrower, worldIn);
+		super(CustomEntitys.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), thrower, worldIn);
 		this.thrownStack = thrownStackIn.copy();
 		//this.dataManager.set(field_226571_aq_, thrownStackIn.hasEffect());
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public CaptainAmericaShieldEntity(World worldIn, double x, double y, double z) {
-		super(CustomEntityType.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
+		super(CustomEntitys.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
 	}
 
 	protected void registerData() {

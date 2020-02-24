@@ -10,8 +10,8 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class CustomEntityType {
-	private CustomEntityType() {
+public class CustomEntitys {
+	private CustomEntitys() {
 	}
 
 	public static final DeferredRegister<EntityType<?>> REG = new DeferredRegister<>(ForgeRegistries.ENTITIES,

@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.github.svakhil00.c_mcu_mod.entity.player.CustomPlayerEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem.Mode;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
 import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;
 import com.google.common.collect.Multimap;
 
@@ -90,7 +90,7 @@ public class MjolnirItem extends TieredItem {
 		if (entityIn instanceof ClientPlayerEntity) {
 			ClientPlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
 
-			if (playerEntity.getHeldItemMainhand().getItem() == ItemList.MJOLNIR) {
+			if (playerEntity.getHeldItemMainhand().getItem() == ModItems.MJOLNIR) {
 				CompoundNBT tag = stack.getOrCreateTag();
 				Mode mode = Mode.byName(tag.getString("mode"));
 

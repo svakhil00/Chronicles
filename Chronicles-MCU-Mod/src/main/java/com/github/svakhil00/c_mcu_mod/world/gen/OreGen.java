@@ -1,6 +1,6 @@
 package com.github.svakhil00.c_mcu_mod.world.gen;
 
-import com.github.svakhil00.c_mcu_mod.lists.BlockList;
+import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -24,7 +24,7 @@ public class OreGen {
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 						Feature.ORE
 								.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-										BlockList.VIBRANIUM_ORE_BLOCK.getDefaultState(), 4))
+										ModBlocks.VIBRANIUM_ORE_BLOCK.getDefaultState(), 4))
 								.withPlacement(customConfig));
 
 			}

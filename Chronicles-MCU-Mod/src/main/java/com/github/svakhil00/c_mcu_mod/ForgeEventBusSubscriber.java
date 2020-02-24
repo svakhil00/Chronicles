@@ -1,7 +1,7 @@
 package com.github.svakhil00.c_mcu_mod;
 
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem.Mode;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.Minecraft;
@@ -75,7 +75,7 @@ public class ForgeEventBusSubscriber {
 	private static boolean isFlying(PlayerEntity playerEntityIn) {
 
 		ItemStack itemStack = playerEntityIn.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-		if (itemStack.getItem() == ItemList.MJOLNIR) {
+		if (itemStack.getItem() == ModItems.MJOLNIR) {
 			CompoundNBT tag = itemStack.getOrCreateTag();
 			Mode mode = Mode.byName(tag.getString("mode"));
 			if (mode == Mode.FLIGHT) {

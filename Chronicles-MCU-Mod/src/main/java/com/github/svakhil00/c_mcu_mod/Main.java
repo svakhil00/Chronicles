@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.github.svakhil00.c_mcu_mod.config.Config;
-import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
+import com.github.svakhil00.c_mcu_mod.entity.CustomEntitys;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Main.MODID)
@@ -35,7 +35,7 @@ public class Main
     	Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("c_mcu_mod-client.toml").toString());
     	
     	final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-    	CustomEntityType.REG.register(bus);
+    	CustomEntitys.REG.register(bus);
     	LOGGER.debug("Hello from Chronicle's MCU Mod!");
     }
 }

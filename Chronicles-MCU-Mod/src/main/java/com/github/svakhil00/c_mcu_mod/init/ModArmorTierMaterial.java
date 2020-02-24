@@ -1,4 +1,4 @@
-package com.github.svakhil00.c_mcu_mod.lists;
+package com.github.svakhil00.c_mcu_mod.init;
 
 import com.github.svakhil00.c_mcu_mod.Main;
 
@@ -10,10 +10,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
-public enum ArmorTierMaterialList implements IArmorMaterial{
-	iron_man_suit("iron_man_suit", 400, new int[] {5, 10, 8, 5}, 30, ItemList.STEEL, null, 4.0F),
-	thor_suit("thor_suit", 400, new int[] {5, 10, 8, 5}, 30, ItemList.ASGARDIAN_STEEL, null, 4.0F),
-	captain_america_suit("captain_america_suit", 400, new int[] {5, 10, 8, 5}, 30, ItemList.VIBRANIUM_INGOT, null, 4.0F);
+public enum ModArmorTierMaterial implements IArmorMaterial{
+	iron_man_suit("iron_man_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.STEEL, null, 4.0F),
+	thor_suit("thor_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.ASGARDIAN_STEEL, null, 4.0F),
+	captain_america_suit("captain_america_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.VIBRANIUM_INGOT, null, 4.0F);
 
 	
 	
@@ -23,7 +23,7 @@ public enum ArmorTierMaterialList implements IArmorMaterial{
 	private int[] damageReductionAmounts;
 	private float toughness;
 	
-	private ArmorTierMaterialList(String name, int durability, int[] damageReductionAmounts, int enchantability, Item repairItem, String equipSound, float toughness) {
+	private ModArmorTierMaterial(String name, int durability, int[] damageReductionAmounts, int enchantability, Item repairItem, String equipSound, float toughness) {
 		this.name = name;
 		this.durability = durability;
 		this.damageReductionAmounts = damageReductionAmounts;

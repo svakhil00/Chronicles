@@ -2,9 +2,9 @@ package com.github.svakhil00.c_mcu_mod;
 
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
-import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
-import com.github.svakhil00.c_mcu_mod.lists.BlockList;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.entity.CustomEntitys;
+import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
 
 import net.minecraft.block.Block;
@@ -26,34 +26,34 @@ public class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterItems(RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(setup(ItemList.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"),
-				setup(ItemList.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
-				setup(ItemList.VIBRANIUM_INGOT, "vibranium_ingot"), 
-				setup(ItemList.MJOLNIR, "mjolnir"),
-				setup(ItemList.PURE_VIBRANIUM, "pure_vibranium"), 
-				setup(ItemList.IRON_MAN_HELMET, "iron_man_helmet"),
-				setup(ItemList.IRON_MAN_CHESTPLATE, "iron_man_chestplate"),
-				setup(ItemList.IRON_MAN_LEGGINGS, "iron_man_leggings"),
-				setup(ItemList.IRON_MAN_BOOTS, "iron_man_boots"), 
-				setup(ItemList.THOR_HELMET, "thor_helmet"),
-				setup(ItemList.THOR_CHESTPLATE, "thor_chestplate"), 
-				setup(ItemList.THOR_LEGGINGS, "thor_leggings"),
-				setup(ItemList.THOR_BOOTS, "thor_boots"),
-				setup(ItemList.CAPTAIN_AMERICA_HELMET, "captain_america_helmet"),
-				setup(ItemList.CAPTAIN_AMERICA_CHESTPLATE, "captain_america_chestplate"),
-				setup(ItemList.CAPTAIN_AMERICA_LEGGINGS, "captain_america_leggings"),
-				setup(ItemList.CAPTAIN_AMERICA_BOOTS, "captain_america_boots"),
-				setup(ItemList.STEEL, "steel"),
-				setup(ItemList.URU, "uru"),
-				setup(ItemList.HAMMER_HANDLE, "hammer_handle"),
-				setup(ItemList.HAMMER_HEAD, "hammer_head"),
-				setup(ItemList.ASGARDIAN_STEEL, "asgardian_steel")
+		event.getRegistry().registerAll(setup(ModItems.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"),
+				setup(ModItems.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
+				setup(ModItems.VIBRANIUM_INGOT, "vibranium_ingot"), 
+				setup(ModItems.MJOLNIR, "mjolnir"),
+				setup(ModItems.PURE_VIBRANIUM, "pure_vibranium"), 
+				setup(ModItems.IRON_MAN_HELMET, "iron_man_helmet"),
+				setup(ModItems.IRON_MAN_CHESTPLATE, "iron_man_chestplate"),
+				setup(ModItems.IRON_MAN_LEGGINGS, "iron_man_leggings"),
+				setup(ModItems.IRON_MAN_BOOTS, "iron_man_boots"), 
+				setup(ModItems.THOR_HELMET, "thor_helmet"),
+				setup(ModItems.THOR_CHESTPLATE, "thor_chestplate"), 
+				setup(ModItems.THOR_LEGGINGS, "thor_leggings"),
+				setup(ModItems.THOR_BOOTS, "thor_boots"),
+				setup(ModItems.CAPTAIN_AMERICA_HELMET, "captain_america_helmet"),
+				setup(ModItems.CAPTAIN_AMERICA_CHESTPLATE, "captain_america_chestplate"),
+				setup(ModItems.CAPTAIN_AMERICA_LEGGINGS, "captain_america_leggings"),
+				setup(ModItems.CAPTAIN_AMERICA_BOOTS, "captain_america_boots"),
+				setup(ModItems.STEEL, "steel"),
+				setup(ModItems.URU, "uru"),
+				setup(ModItems.HAMMER_HANDLE, "hammer_handle"),
+				setup(ModItems.HAMMER_HEAD, "hammer_head"),
+				setup(ModItems.ASGARDIAN_STEEL, "asgardian_steel")
 				);
 	}
 
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(setup(BlockList.VIBRANIUM_ORE_BLOCK, "vibranium_ore"));
+		event.getRegistry().registerAll(setup(ModBlocks.VIBRANIUM_ORE_BLOCK, "vibranium_ore"));
 	}
 
 	@SubscribeEvent
@@ -63,9 +63,9 @@ public class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void registerModels(FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(CustomEntityType.MJOLNIR.get(),
+		RenderingRegistry.registerEntityRenderingHandler(CustomEntitys.MJOLNIR.get(),
 				manager -> new MjolnirRenderer(manager, Minecraft.getInstance().getItemRenderer()));
-		RenderingRegistry.registerEntityRenderingHandler(CustomEntityType.CAPTAIN_AMERICA_SHIELD.get(),
+		RenderingRegistry.registerEntityRenderingHandler(CustomEntitys.CAPTAIN_AMERICA_SHIELD.get(),
 				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
 
 	}

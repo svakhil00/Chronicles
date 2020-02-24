@@ -1,7 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -47,7 +47,7 @@ public class MjolnirRenderer<T extends Entity & IRendersAsItem> extends EntityRe
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F));
 		matrixStackIn.rotate(Vector3f.ZN.rotationDegrees(90.0F));
 		matrixStackIn.rotate(Vector3f.XN.rotationDegrees(270.0F));
-		this.itemRenderer.renderItem(new ItemStack(ItemList.MJOLNIR), ItemCameraTransforms.TransformType.GROUND,
+		this.itemRenderer.renderItem(new ItemStack(ModItems.MJOLNIR), ItemCameraTransforms.TransformType.GROUND,
 				packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
 		matrixStackIn.pop();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);

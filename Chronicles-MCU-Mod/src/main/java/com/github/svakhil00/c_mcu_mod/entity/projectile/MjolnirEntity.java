@@ -1,8 +1,8 @@
 package com.github.svakhil00.c_mcu_mod.entity.projectile;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
-import com.github.svakhil00.c_mcu_mod.entity.CustomEntityType;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.entity.CustomEntitys;
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -31,12 +31,12 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class MjolnirEntity extends AbstractArrowEntity {
 	private static final DataParameter<Boolean> field_226571_aq_ = EntityDataManager.createKey(MjolnirEntity.class,
 			DataSerializers.BOOLEAN);
-	private ItemStack thrownStack = new ItemStack(ItemList.MJOLNIR);
+	private ItemStack thrownStack = new ItemStack(ModItems.MJOLNIR);
 	private boolean dealtDamage;
 	public int returningTicks;
 
 	public MjolnirEntity(final World WORLDIN) {
-		this(CustomEntityType.MJOLNIR.orElseThrow(IllegalStateException::new), WORLDIN);
+		this(CustomEntitys.MJOLNIR.orElseThrow(IllegalStateException::new), WORLDIN);
 	}
 
 	public MjolnirEntity(EntityType<? extends MjolnirEntity> type, World worldIn) {
@@ -44,14 +44,14 @@ public class MjolnirEntity extends AbstractArrowEntity {
 	}
 
 	public MjolnirEntity(World worldIn, LivingEntity thrower, ItemStack thrownStackIn) {
-		super(CustomEntityType.MJOLNIR.orElseThrow(IllegalStateException::new), thrower, worldIn);
+		super(CustomEntitys.MJOLNIR.orElseThrow(IllegalStateException::new), thrower, worldIn);
 		this.thrownStack = thrownStackIn.copy();
 		this.dataManager.set(field_226571_aq_, thrownStackIn.hasEffect());
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public MjolnirEntity(World worldIn, double x, double y, double z) {
-		super(CustomEntityType.MJOLNIR.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
+		super(CustomEntitys.MJOLNIR.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
 	}
 
 	protected void registerData() {

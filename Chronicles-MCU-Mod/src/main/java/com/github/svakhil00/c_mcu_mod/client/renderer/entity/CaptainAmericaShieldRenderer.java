@@ -1,7 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
-import com.github.svakhil00.c_mcu_mod.lists.ItemList;
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -45,7 +45,7 @@ public class CaptainAmericaShieldRenderer<T extends Entity & IRendersAsItem> ext
 		matrixStackIn.rotate(this.renderManager.getCameraOrientation());
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F));
 		matrixStackIn.rotate(Vector3f.ZN.rotationDegrees(30));
-		this.itemRenderer.renderItem(new ItemStack(ItemList.CAPTAIN_AMERICA_SHIELD), ItemCameraTransforms.TransformType.GROUND,
+		this.itemRenderer.renderItem(new ItemStack(ModItems.CAPTAIN_AMERICA_SHIELD), ItemCameraTransforms.TransformType.GROUND,
 				packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
 		matrixStackIn.pop();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);

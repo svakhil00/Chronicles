@@ -3,6 +3,7 @@ package com.github.svakhil00.c_mcu_mod.init;
 import java.util.function.Supplier;
 
 import com.github.svakhil00.c_mcu_mod.Main;
+import com.github.svakhil00.c_mcu_mod.init.ModItems;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
