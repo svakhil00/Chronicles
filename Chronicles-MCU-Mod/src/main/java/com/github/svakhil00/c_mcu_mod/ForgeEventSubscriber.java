@@ -88,6 +88,7 @@ public class ForgeEventSubscriber {
 	private static boolean isFlying(PlayerEntity playerEntityIn) {
 
 		ItemStack itemStack = playerEntityIn.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+		ItemStack bootsItemStack = playerEntityIn.getItemStackFromSlot(EquipmentSlotType.FEET);
 		if (itemStack.getItem() == ModItems.MJOLNIR) {
 			CompoundNBT tag = itemStack.getOrCreateTag();
 			Mode mode = Mode.byName(tag.getString("mode"));
@@ -104,7 +105,18 @@ public class ForgeEventSubscriber {
 				}
 
 			}
+		}else if(bootsItemStack.getItem() == ModItems.IRON_MAN_BOOTS) {
+				if (playerEntityIn.isElytraFlying()) {
+					return false;
+				}
+				if (playerEntityIn.isSwimming()) {
+					return false;
+				}
+				CompoundNBT tag = bootsItemStack.getOrCreateTag();
+				return tag.getBoolean("flight");
+			
 		}
+		
 		return false;
 	}
 

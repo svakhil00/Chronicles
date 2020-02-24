@@ -4,6 +4,7 @@ import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
 import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaChestplateItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaSuitItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem;
+import com.github.svakhil00.c_mcu_mod.item.IronManBootsItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManSuitItem;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem;
 import com.github.svakhil00.c_mcu_mod.item.PureVibraniumItem;
@@ -37,7 +38,7 @@ public class ModItems {
 	public static final Item IRON_MAN_HELMET = new IronManSuitItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item IRON_MAN_CHESTPLATE = new IronManSuitItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item IRON_MAN_LEGGINGS= new IronManSuitItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
-	public static final Item IRON_MAN_BOOTS= new IronManSuitItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
+	public static final Item IRON_MAN_BOOTS= new IronManBootsItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	
 	public static final Item THOR_HELMET = new ThorSuitItem(ModArmorTierMaterial.thor_suit, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
 	public static final Item THOR_CHESTPLATE = new ThorSuitItem(ModArmorTierMaterial.thor_suit, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP));
