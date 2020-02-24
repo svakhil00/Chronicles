@@ -18,4 +18,12 @@ public class KeyboardHelper {
 	public static boolean isHoldingCtrl() {
 		return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
 	}
+	@OnlyIn(Dist.CLIENT)
+	public static boolean isHoldingSpace() {
+		return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_SPACE);
+	}
+	@OnlyIn(Dist.CLIENT)
+	public static boolean isHoldingW() {
+		return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_W);
+	}
 }
