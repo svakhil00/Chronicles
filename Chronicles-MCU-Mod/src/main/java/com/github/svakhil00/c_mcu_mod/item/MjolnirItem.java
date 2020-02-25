@@ -228,9 +228,7 @@ public class MjolnirItem extends TieredItem {
 			double range = 100.0D;
 			boolean block = false;
 			if (!playerIn.pick(range, 1.0F, false).getType().equals(Type.MISS)) {
-				// worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(),
-				// playerIn.getPosZ(),ModEventSubscriber.ITEM_MJOLNIR_LIGHTNING,
-				// SoundCategory.PLAYERS, 2.0F, 1.0F);
+				
 				look = playerIn.pick(range, 1.0F, false).getHitVec();
 				block = true;
 			}
@@ -239,11 +237,8 @@ public class MjolnirItem extends TieredItem {
 				lightning.setGlowing(true);
 				if (!worldIn.isRemote) {
 					((ServerWorld) worldIn).addLightningBolt(lightning);
-					playerIn.getCooldownTracker().setCooldown(this, 20);
 				}
 			}
-			playerIn.setActiveHand(handIn);
-
 			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, itemStack);
 		} else if (mode == Mode.PROJECTILE) {
 			playerIn.setActiveHand(handIn);
