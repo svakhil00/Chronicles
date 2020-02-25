@@ -32,8 +32,7 @@ public class IronManBootsItem extends IronManSuitItem {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		if (KeyboardHelper.isHoldingShift()) {
-			tooltip.add(new StringTextComponent(
-					"If powered, allows you to fly"));
+			tooltip.add(new StringTextComponent("If powered, allows you to fly\nEquipping the entire suit gives you resistance to the elements"));
 		} else {
 			tooltip.add(new StringTextComponent("Hold SHIFT for more information"));
 		}
@@ -48,7 +47,6 @@ public class IronManBootsItem extends IronManSuitItem {
 			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE) {
 				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS) {
 					CompoundNBT tag = stack.getOrCreateTag();
-					System.out.println(playerEntity.getMotion());
 					
 					if (KeyboardHelper.isHoldingCtrl() && !playerEntity.onGround) {
 						tag.putBoolean("flight", true);

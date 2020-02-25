@@ -27,7 +27,7 @@ public class IronManSuitItem extends ArmorItem{
 	@OnlyIn(Dist.CLIENT)
 	   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		 if(KeyboardHelper.isHoldingShift()) {
-			 tooltip.add(new StringTextComponent("Suit must be charged to use abilities"));
+			 tooltip.add(new StringTextComponent("Suit must be charged to use abilities\nEquipping the entire suit gives you resistance to the elements"));
 		 }else {
 			 tooltip.add(new StringTextComponent("Hold SHIFT for more information"));
 		 }

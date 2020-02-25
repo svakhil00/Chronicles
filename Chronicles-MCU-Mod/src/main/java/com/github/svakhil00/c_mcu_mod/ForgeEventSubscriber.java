@@ -25,23 +25,25 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.FORGE)
 
 public class ForgeEventSubscriber {
-	
+
 	@SubscribeEvent
 	public static void lightning(EntityStruckByLightningEvent event) {
 		if (event.getEntity() instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
-			if(playerEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem() == ModItems.MJOLNIR || playerEntity.getItemStackFromSlot(EquipmentSlotType.OFFHAND).getItem() == ModItems.MJOLNIR) {
+			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem() == ModItems.MJOLNIR
+					|| playerEntity.getItemStackFromSlot(EquipmentSlotType.OFFHAND).getItem() == ModItems.MJOLNIR) {
 				event.setCanceled(true);
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onCraft(ItemCraftedEvent event) {
-		if(event.getCrafting().getItem().getItem() == ModItems.MJOLNIR) {
+		if (event.getCrafting().getItem().getItem() == ModItems.MJOLNIR) {
 			PlayerEntity playerEntity = event.getPlayer();
 			World world = playerEntity.world;
-			LightningBoltEntity lightning = new LightningBoltEntity(world, playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), false);
+			LightningBoltEntity lightning = new LightningBoltEntity(world, playerEntity.getPosX(),
+					playerEntity.getPosY(), playerEntity.getPosZ(), false);
 			lightning.setGlowing(true);
 			if (!world.isRemote) {
 				((ServerWorld) world).addLightningBolt(lightning);
@@ -49,27 +51,26 @@ public class ForgeEventSubscriber {
 		}
 	}
 
-
 	private static boolean needToPop = false;
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onRenderPlayer(RenderPlayerEvent.Pre event) {
 		if (isFlying(event.getPlayer())) {
+			if (event.getPlayer().world.isRemote) {
+				ClientPlayerEntity playerEntity = (ClientPlayerEntity) event.getPlayer();
+				float partialTicks = Minecraft.getInstance().getRenderPartialTicks();
+				double interpolatedYaw = (playerEntity.prevRotationYaw
+						+ (playerEntity.rotationYaw - playerEntity.prevRotationYaw) * partialTicks);
+				MatrixStack matrixStack = event.getMatrixStack();
+				float pitch = playerEntity.rotationPitch;
 
-			ClientPlayerEntity playerEntity = (ClientPlayerEntity) event.getPlayer();
-			float partialTicks = Minecraft.getInstance().getRenderPartialTicks();
-			double interpolatedYaw = (playerEntity.prevRotationYaw
-					+ (playerEntity.rotationYaw - playerEntity.prevRotationYaw) * partialTicks);
-			MatrixStack matrixStack = event.getMatrixStack();
-			float pitch = playerEntity.rotationPitch;
-
-			playerEntity.limbSwingAmount = 0;
-			matrixStack.push();
-			matrixStack.rotate(new Quaternion(90, 0, (float) interpolatedYaw, true));
-			matrixStack.translate(0, -playerEntity.getHeight() / 2, -playerEntity.getHeight() * 1 / 2);
-			matrixStack.rotate(new Quaternion(pitch, (float) interpolatedYaw, 0, true));
-			needToPop = true;
-
+				playerEntity.limbSwingAmount = 0;
+				matrixStack.push();
+				matrixStack.rotate(new Quaternion(90, 0, (float) interpolatedYaw, true));
+				matrixStack.translate(0, -playerEntity.getHeight() / 2, -playerEntity.getHeight() * 1 / 2);
+				matrixStack.rotate(new Quaternion(pitch, (float) interpolatedYaw, 0, true));
+				needToPop = true;
+			}
 		}
 
 	}
@@ -105,18 +106,18 @@ public class ForgeEventSubscriber {
 				}
 
 			}
-		}else if(bootsItemStack.getItem() == ModItems.IRON_MAN_BOOTS) {
-				if (playerEntityIn.isElytraFlying()) {
-					return false;
-				}
-				if (playerEntityIn.isSwimming()) {
-					return false;
-				}
-				CompoundNBT tag = bootsItemStack.getOrCreateTag();
-				return tag.getBoolean("flight");
-			
+		} else if (bootsItemStack.getItem() == ModItems.IRON_MAN_BOOTS) {
+			if (playerEntityIn.isElytraFlying()) {
+				return false;
+			}
+			if (playerEntityIn.isSwimming()) {
+				return false;
+			}
+			CompoundNBT tag = bootsItemStack.getOrCreateTag();
+			return tag.getBoolean("flight");
+
 		}
-		
+
 		return false;
 	}
 
