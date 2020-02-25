@@ -25,19 +25,21 @@ public class CaptainAmericaChestplateItem extends CaptainAmericaSuitItem{
 				if(playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.CAPTAIN_AMERICA_HELMET) {
 					if(playerEntity.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ModItems.CAPTAIN_AMERICA_LEGGINGS) {
 						if(playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.CAPTAIN_AMERICA_BOOTS) {
-							if (!playerEntity.isPotionActive(Effects.SPEED)) {
-								playerEntity.addPotionEffect(new EffectInstance(Effects.SPEED, 400, 2));
-							}
-							
-							if (!playerEntity.isPotionActive(Effects.HEALTH_BOOST)) {
-								playerEntity.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 1200, 2));
-								playerEntity.heal(12);
-							}
-							if (!playerEntity.isPotionActive(Effects.STRENGTH)) {
-								playerEntity.addPotionEffect(new EffectInstance(Effects.STRENGTH, 400, 0));
-							}
-							if (!playerEntity.isPotionActive(Effects.JUMP_BOOST)) {
-								playerEntity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 400, 1));
+							if(!worldIn.isRemote) {
+								if (!playerEntity.isPotionActive(Effects.SPEED)) {
+									playerEntity.addPotionEffect(new EffectInstance(Effects.SPEED, 400, 2));
+								}
+								
+								if (!playerEntity.isPotionActive(Effects.HEALTH_BOOST)) {
+									playerEntity.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 1200, 2));
+									playerEntity.heal(12);
+								}
+								if (!playerEntity.isPotionActive(Effects.STRENGTH)) {
+									playerEntity.addPotionEffect(new EffectInstance(Effects.STRENGTH, 400, 0));
+								}
+								if (!playerEntity.isPotionActive(Effects.JUMP_BOOST)) {
+									playerEntity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 400, 1));
+								}
 							}
 						}
 					}
