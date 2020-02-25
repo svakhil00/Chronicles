@@ -30,9 +30,14 @@ public class ForgeEventSubscriber {
 	public static void lightning(EntityStruckByLightningEvent event) {
 		if (event.getEntity() instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
-			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem() == ModItems.MJOLNIR
-					|| playerEntity.getItemStackFromSlot(EquipmentSlotType.OFFHAND).getItem() == ModItems.MJOLNIR) {
-				event.setCanceled(true);
+			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET) {
+				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.THOR_CHESTPLATE) {
+					if (playerEntity.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ModItems.THOR_LEGGINGS) {
+						if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.THOR_BOOTS) {
+							event.setCanceled(true);
+						}
+					}
+				}
 			}
 		}
 	}
