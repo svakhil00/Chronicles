@@ -10,6 +10,7 @@ import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
@@ -32,7 +33,8 @@ public class IronManBootsItem extends IronManSuitItem {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		if (KeyboardHelper.isHoldingShift()) {
-			tooltip.add(new StringTextComponent("If powered, allows you to fly\nEquipping the entire suit gives you resistance to the elements"));
+			tooltip.add(new StringTextComponent(
+					"If powered, allows you to fly\nEquipping the entire suit gives you resistance to the elements"));
 		} else {
 			tooltip.add(new StringTextComponent("Hold SHIFT for more information"));
 		}
@@ -40,25 +42,26 @@ public class IronManBootsItem extends IronManSuitItem {
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		
+
 		if (entityIn instanceof ClientPlayerEntity) {
-			ClientPlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
-			
+			PlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
+			ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entityIn;
+
 			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE) {
 				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS) {
 					CompoundNBT tag = stack.getOrCreateTag();
-					
+
 					if (KeyboardHelper.isHoldingCtrl() && !playerEntity.onGround) {
 						tag.putBoolean("flight", true);
 					}
 					if (tag.getBoolean("flight")) {
-						if (playerEntity.movementInput.forwardKeyDown && !playerEntity.onGround) {
+						if (clientPlayerEntity.movementInput.forwardKeyDown && !playerEntity.onGround) {
 							// flight
 							playerEntity.limbSwingAmount = 0;
 							float yaw = playerEntity.rotationYaw;
 							float pitch = playerEntity.rotationPitch;
 							float speed = 1;
-							
+
 							float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
 									* MathHelper.cos(pitch * ((float) Math.PI / 180F));
 							float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
@@ -77,10 +80,11 @@ public class IronManBootsItem extends IronManSuitItem {
 							tag.putBoolean("flight", false);
 						}
 
-					} else if (playerEntity.movementInput.jump) {
+					} else if (clientPlayerEntity.movementInput.jump) {
 						playerEntity.limbSwingAmount = 0;
-						playerEntity.addVelocity(0, .05 * (2 - playerEntity.getMotion().y), 0);
-
+						if (playerEntity.getMotion().y < 2) {
+							playerEntity.addVelocity(0, .15, 0);
+						}
 					}
 				}
 			}
