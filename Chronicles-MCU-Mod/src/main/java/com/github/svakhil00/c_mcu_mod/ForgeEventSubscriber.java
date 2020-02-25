@@ -12,10 +12,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,6 +44,27 @@ public class ForgeEventSubscriber {
 		}
 	}
 
+	@SubscribeEvent
+	public static void onHurt(LivingHurtEvent event) {
+		if(event.getSource().equals(DamageSource.FALL)) {
+			if(event.getEntity() instanceof PlayerEntity) {
+				PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
+				if(playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS) {
+					event.setCanceled(true);
+				}
+				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET) {
+					if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.THOR_CHESTPLATE) {
+						if (playerEntity.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ModItems.THOR_LEGGINGS) {
+							if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.THOR_BOOTS) {
+								event.setCanceled(true);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	@SubscribeEvent
 	public static void onCraft(ItemCraftedEvent event) {
 		if (event.getCrafting().getItem().getItem() == ModItems.MJOLNIR) {
