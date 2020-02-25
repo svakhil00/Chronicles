@@ -33,7 +33,7 @@ public class IronManBootsItem extends IronManSuitItem {
 			ITooltipFlag flagIn) {
 		if (KeyboardHelper.isHoldingShift()) {
 			tooltip.add(new StringTextComponent(
-					"While wearing the Captain America Suit, you will gain bonus speed, health, strength, and jump boost."));
+					"If powered, allows you to fly"));
 		} else {
 			tooltip.add(new StringTextComponent("Hold SHIFT for more information"));
 		}
@@ -41,44 +41,49 @@ public class IronManBootsItem extends IronManSuitItem {
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		
 		if (entityIn instanceof ClientPlayerEntity) {
 			ClientPlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
-			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS) {
-				CompoundNBT tag = stack.getOrCreateTag();
-				System.out.println(playerEntity.getMotion());
-				if (KeyboardHelper.isHoldingCtrl() && !playerEntity.onGround) {
-					tag.putBoolean("flight", true);
-				}
-				if (tag.getBoolean("flight")) {
-					if (playerEntity.movementInput.forwardKeyDown && !playerEntity.onGround) {
-						// flight
-						playerEntity.limbSwingAmount = 0;
-						float yaw = playerEntity.rotationYaw;
-						float pitch = playerEntity.rotationPitch;
-						float speed = 1;
-						float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
-								* MathHelper.cos(pitch * ((float) Math.PI / 180F));
-						float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
-						float f3 = MathHelper.cos(yaw * ((float) Math.PI / 180F))
-								* MathHelper.cos(pitch * ((float) Math.PI / 180F));
-						float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
-						float f5 = 3.0F * ((1.0F + speed) / 4.0F);
-
-						f1 = f1 * (f5 / f4);
-						f2 = f2 * (f5 / f4);
-						f3 = f3 * (f5 / f4);
-
-						playerEntity.setVelocity((double) f1, (double) f2, (double) f3);
-
-					} else {
-						tag.putBoolean("flight", false);
+			
+			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE) {
+				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS) {
+					CompoundNBT tag = stack.getOrCreateTag();
+					System.out.println(playerEntity.getMotion());
+					
+					if (KeyboardHelper.isHoldingCtrl() && !playerEntity.onGround) {
+						tag.putBoolean("flight", true);
 					}
+					if (tag.getBoolean("flight")) {
+						if (playerEntity.movementInput.forwardKeyDown && !playerEntity.onGround) {
+							// flight
+							playerEntity.limbSwingAmount = 0;
+							float yaw = playerEntity.rotationYaw;
+							float pitch = playerEntity.rotationPitch;
+							float speed = 1;
+							
+							float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
+									* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+							float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
+							float f3 = MathHelper.cos(yaw * ((float) Math.PI / 180F))
+									* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+							float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+							float f5 = 3.0F * ((1.0F + speed) / 4.0F);
 
-				} else if (playerEntity.movementInput.jump) {
-					playerEntity.limbSwing = 0;
-					playerEntity.limbSwingAmount = 0;
-					playerEntity.addVelocity(0, .05 * (2 - playerEntity.getMotion().y), 0);
+							f1 = f1 * (f5 / f4);
+							f2 = f2 * (f5 / f4);
+							f3 = f3 * (f5 / f4);
 
+							playerEntity.setVelocity((double) f1, (double) f2, (double) f3);
+
+						} else {
+							tag.putBoolean("flight", false);
+						}
+
+					} else if (playerEntity.movementInput.jump) {
+						playerEntity.limbSwingAmount = 0;
+						playerEntity.addVelocity(0, .05 * (2 - playerEntity.getMotion().y), 0);
+
+					}
 				}
 			}
 		}
