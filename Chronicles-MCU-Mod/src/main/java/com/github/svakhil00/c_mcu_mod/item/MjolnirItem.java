@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
-import com.github.svakhil00.c_mcu_mod.entity.MjolnirEntity;
+import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem.Mode;
 import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;

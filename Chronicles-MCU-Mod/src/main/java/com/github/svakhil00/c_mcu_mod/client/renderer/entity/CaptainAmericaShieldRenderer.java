@@ -1,6 +1,6 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
-import com.github.svakhil00.c_mcu_mod.entity.CaptainAmericaShieldEntity;
+import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

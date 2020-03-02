@@ -1,4 +1,4 @@
-package com.github.svakhil00.c_mcu_mod.entity;
+package com.github.svakhil00.c_mcu_mod.entity.projectile;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
 import com.github.svakhil00.c_mcu_mod.init.ModEntities;
