@@ -37,7 +37,7 @@ public class Main
     	
     	ModBlocks.BLOCKS.register(modEventBus);
     	ModItems.ITEMS.register(modEventBus);
-    	ModEntityTypes.REG.register(modEventBus);
+    	ModEntityTypes.ENTITY_TYPES.register(modEventBus);
     	LOGGER.debug("Hello from Chronicle's MCU Mod!");
     }
 }
