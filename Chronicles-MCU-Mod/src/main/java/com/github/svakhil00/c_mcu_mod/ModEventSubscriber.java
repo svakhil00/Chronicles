@@ -2,23 +2,27 @@ package com.github.svakhil00.c_mcu_mod;
 
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
-import com.github.svakhil00.c_mcu_mod.entity.CustomEntitys;
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
-import com.github.svakhil00.c_mcu_mod.init.ModItems;
+import com.github.svakhil00.c_mcu_mod.init.ModEntities;
+import com.github.svakhil00.c_mcu_mod.init.ModItemGroups;
 import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -26,36 +30,22 @@ public class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterItems(RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(setup(ModItems.CAPTAIN_AMERICA_SHIELD, "captain_america_shield"),
-				setup(ModItems.VIBRANIUM_ORE_BLOCKITEM, "vibranium_ore"),
-				setup(ModItems.STABLE_VIBRANIUM, "stable_vibranium"), 
-				setup(ModItems.MJOLNIR, "mjolnir"),
-				setup(ModItems.PURE_VIBRANIUM, "pure_vibranium"), 
-				setup(ModItems.IRON_MAN_HELMET, "iron_man_helmet"),
-				setup(ModItems.IRON_MAN_CHESTPLATE, "iron_man_chestplate"),
-				setup(ModItems.IRON_MAN_LEGGINGS, "iron_man_leggings"),
-				setup(ModItems.IRON_MAN_BOOTS, "iron_man_boots"), 
-				setup(ModItems.THOR_HELMET, "thor_helmet"),
-				setup(ModItems.THOR_CHESTPLATE, "thor_chestplate"), 
-				setup(ModItems.THOR_LEGGINGS, "thor_leggings"),
-				setup(ModItems.THOR_BOOTS, "thor_boots"),
-				setup(ModItems.CAPTAIN_AMERICA_HELMET, "captain_america_helmet"),
-				setup(ModItems.CAPTAIN_AMERICA_CHESTPLATE, "captain_america_chestplate"),
-				setup(ModItems.CAPTAIN_AMERICA_LEGGINGS, "captain_america_leggings"),
-				setup(ModItems.CAPTAIN_AMERICA_BOOTS, "captain_america_boots"),
-				setup(ModItems.STEEL, "steel"),
-				setup(ModItems.URU, "uru"),
-				setup(ModItems.HAMMER_HANDLE, "hammer_handle"),
-				setup(ModItems.HAMMER_HEAD, "hammer_head"),
-				setup(ModItems.ASGARDIAN_STEEL, "asgardian_steel"),
-				setup(ModItems.VIBRANIUM_CAPSULE, "vibranium_capsule")
-				);
+		final IForgeRegistry<Item> registry = event.getRegistry();	
+		
+		ModBlocks.BLOCKS.getEntries().stream()
+						.map(RegistryObject::get)
+						//block item exceptions
+						//.filter(block -> needsItemBlock(block))
+						.forEach(block -> {
+							final Item.Properties properties = new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP);
+							final BlockItem blockItem = new BlockItem(block, properties);
+							
+							blockItem.setRegistryName(block.getRegistryName());
+							registry.register(blockItem);
+						});
+		Main.LOGGER.debug("Registered BlockItems");
 	}
 
-	@SubscribeEvent
-	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(setup(ModBlocks.VIBRANIUM_ORE_BLOCK, "vibranium_ore"));
-	}
 
 	@SubscribeEvent
 	public static void loadCompleteEvent(FMLLoadCompleteEvent event) {
@@ -64,9 +54,9 @@ public class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void registerModels(FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(CustomEntitys.MJOLNIR.get(),
+		RenderingRegistry.registerEntityRenderingHandler(ModEntities.MJOLNIR.get(),
 				manager -> new MjolnirRenderer(manager, Minecraft.getInstance().getItemRenderer()));
-		RenderingRegistry.registerEntityRenderingHandler(CustomEntitys.CAPTAIN_AMERICA_SHIELD.get(),
+		RenderingRegistry.registerEntityRenderingHandler(ModEntities.CAPTAIN_AMERICA_SHIELD.get(),
 				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
 
 	}

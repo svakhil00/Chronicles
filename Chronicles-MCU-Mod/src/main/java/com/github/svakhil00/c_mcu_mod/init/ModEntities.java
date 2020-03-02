@@ -1,4 +1,4 @@
-package com.github.svakhil00.c_mcu_mod.entity;
+package com.github.svakhil00.c_mcu_mod.init;
 
 import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
@@ -10,12 +10,11 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class CustomEntitys {
-	private CustomEntitys() {
+public class ModEntities {
+	private ModEntities() {
 	}
 
-	public static final DeferredRegister<EntityType<?>> REG = new DeferredRegister<>(ForgeRegistries.ENTITIES,
-			Main.MODID);
+	public static final DeferredRegister<EntityType<?>> REG = new DeferredRegister<>(ForgeRegistries.ENTITIES, Main.MODID);
 
 	public static final RegistryObject<EntityType<MjolnirEntity>> MJOLNIR = REG.register("mjolnir", () ->
 		EntityType.Builder.<MjolnirEntity>create(MjolnirEntity::new, EntityClassification.MISC)

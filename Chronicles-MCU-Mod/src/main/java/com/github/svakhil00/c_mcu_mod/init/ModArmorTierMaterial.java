@@ -11,9 +11,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
 public enum ModArmorTierMaterial implements IArmorMaterial{
-	iron_man_suit("iron_man_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.STEEL, null, 4.0F),
-	thor_suit("thor_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.ASGARDIAN_STEEL, null, 4.0F),
-	captain_america_suit("captain_america_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.STABLE_VIBRANIUM, null, 4.0F);
+	iron_man_suit("iron_man_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.STEEL.get(), null, 4.0F),
+	thor_suit("thor_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.ASGARDIAN_STEEL.get(), null, 4.0F),
+	captain_america_suit("captain_america_suit", 400, new int[] {5, 10, 8, 5}, 30, ModItems.STABLE_VIBRANIUM.get(), null, 4.0F);
 
 	
 	

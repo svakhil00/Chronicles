@@ -9,7 +9,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 public class ModItemGroups {
-	public static final ItemGroup MOD_ITEM_GROUP = new ModItemGroup(Main.MODID, () -> new ItemStack(ModItems.CAPTAIN_AMERICA_SHIELD));
+	public static final ItemGroup MOD_ITEM_GROUP = new ModItemGroup(Main.MODID, () -> new ItemStack(ModItems.CAPTAIN_AMERICA_SHIELD.get()));
 }
 
 class ModItemGroup extends ItemGroup{

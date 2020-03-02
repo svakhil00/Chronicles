@@ -89,7 +89,7 @@ public class MjolnirItem extends TieredItem {
 		if (entityIn instanceof ClientPlayerEntity) {
 			ClientPlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
 
-			if (playerEntity.getHeldItemMainhand().getItem() == ModItems.MJOLNIR) {
+			if (playerEntity.getHeldItemMainhand().getItem() == ModItems.MJOLNIR.get()) {
 				CompoundNBT tag = stack.getOrCreateTag();
 				Mode mode = Mode.byName(tag.getString("mode"));
 

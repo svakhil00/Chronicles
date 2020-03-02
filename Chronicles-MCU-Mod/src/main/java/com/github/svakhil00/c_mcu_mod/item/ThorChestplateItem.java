@@ -23,11 +23,10 @@ public class ThorChestplateItem extends ThorSuitItem {
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		if (entityIn instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) entityIn;
-			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.THOR_CHESTPLATE) {
-				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET) {
-					if (playerEntity.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ModItems.THOR_LEGGINGS) {
-						if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET)
-								.getItem() == ModItems.THOR_BOOTS) {
+			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.THOR_CHESTPLATE.get()) {
+				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET.get()) {
+					if (playerEntity.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ModItems.THOR_LEGGINGS.get()) {
+						if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.THOR_BOOTS.get()) {
 							if (!worldIn.isRemote) {
 								CompoundNBT tag = new CompoundNBT();
 								tag = stack.getOrCreateTag();

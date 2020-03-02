@@ -23,13 +23,13 @@ public class CaptainAmericaChestplateItem extends CaptainAmericaSuitItem {
 		if (entityIn instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) entityIn;
 			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST)
-					.getItem() == ModItems.CAPTAIN_AMERICA_CHESTPLATE) {
+					.getItem() == ModItems.CAPTAIN_AMERICA_CHESTPLATE.get()) {
 				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD)
-						.getItem() == ModItems.CAPTAIN_AMERICA_HELMET) {
+						.getItem() == ModItems.CAPTAIN_AMERICA_HELMET.get()) {
 					if (playerEntity.getItemStackFromSlot(EquipmentSlotType.LEGS)
-							.getItem() == ModItems.CAPTAIN_AMERICA_LEGGINGS) {
+							.getItem() == ModItems.CAPTAIN_AMERICA_LEGGINGS.get()) {
 						if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET)
-								.getItem() == ModItems.CAPTAIN_AMERICA_BOOTS) {
+								.getItem() == ModItems.CAPTAIN_AMERICA_BOOTS.get()) {
 							if (!worldIn.isRemote) {
 								CompoundNBT tag = new CompoundNBT();
 								tag = stack.getOrCreateTag();

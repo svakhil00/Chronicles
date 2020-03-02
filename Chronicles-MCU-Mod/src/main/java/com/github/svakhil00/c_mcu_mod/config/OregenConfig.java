@@ -15,6 +15,6 @@ public class OregenConfig {
 		
 		generate_overworld = server
 				.comment("Decide if you want MCU ores to spawn in the overworld")
-				.define("oregen.generate_overworld", true);
+				.define("oregen.generate overworld", true);
 	}
 }

@@ -47,8 +47,8 @@ public class IronManBootsItem extends IronManSuitItem {
 			PlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
 			ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entityIn;
 
-			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE) {
-				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS) {
+			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE.get()) {
+				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS.get()) {
 					CompoundNBT tag = stack.getOrCreateTag();
 
 					if (KeyboardHelper.isHoldingCtrl() && !playerEntity.onGround) {

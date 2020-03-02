@@ -1,7 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.entity.projectile;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
-import com.github.svakhil00.c_mcu_mod.entity.CustomEntitys;
+import com.github.svakhil00.c_mcu_mod.init.ModEntities;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -25,12 +25,12 @@ import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
-	private ItemStack thrownStack = new ItemStack(ModItems.CAPTAIN_AMERICA_SHIELD);
+	private ItemStack thrownStack = new ItemStack(ModItems.CAPTAIN_AMERICA_SHIELD.get());
 	private boolean dealtDamage;
 	public int returningTicks;
 
 	public CaptainAmericaShieldEntity(final World WORLDIN) {
-		this(CustomEntitys.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), WORLDIN);
+		this(ModEntities.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), WORLDIN);
 	}
 
 	public CaptainAmericaShieldEntity(EntityType<? extends CaptainAmericaShieldEntity> type, World worldIn) {
@@ -38,14 +38,14 @@ public class CaptainAmericaShieldEntity extends AbstractArrowEntity{
 	}
 
 	public CaptainAmericaShieldEntity(World worldIn, LivingEntity thrower, ItemStack thrownStackIn) {
-		super(CustomEntitys.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), thrower, worldIn);
+		super(ModEntities.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), thrower, worldIn);
 		this.thrownStack = thrownStackIn.copy();
 		//this.dataManager.set(field_226571_aq_, thrownStackIn.hasEffect());
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public CaptainAmericaShieldEntity(World worldIn, double x, double y, double z) {
-		super(CustomEntitys.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
+		super(ModEntities.CAPTAIN_AMERICA_SHIELD.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
 	}
 
 	protected void registerData() {
