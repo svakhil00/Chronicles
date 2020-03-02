@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
-import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
+import com.github.svakhil00.c_mcu_mod.entity.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem.Mode;
 import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;
 import com.google.common.collect.Multimap;

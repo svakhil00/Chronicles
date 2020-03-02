@@ -1,6 +1,6 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
-import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
+import com.github.svakhil00.c_mcu_mod.entity.MjolnirEntity;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.mojang.blaze3d.matrix.MatrixStack;
 

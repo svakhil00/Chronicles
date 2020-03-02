@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
-import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
+import com.github.svakhil00.c_mcu_mod.entity.MjolnirEntity;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem.Mode;
 import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;
@@ -87,9 +87,9 @@ public class MjolnirItem extends TieredItem {
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 
 		if (entityIn instanceof ClientPlayerEntity) {
-			ClientPlayerEntity playerEntity = (ClientPlayerEntity) entityIn;
+			ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entityIn;
 
-			if (playerEntity.getHeldItemMainhand().getItem() == ModItems.MJOLNIR.get()) {
+			if (clientPlayerEntity.getHeldItemMainhand().getItem() == ModItems.MJOLNIR.get()) {
 				CompoundNBT tag = stack.getOrCreateTag();
 				Mode mode = Mode.byName(tag.getString("mode"));
 
@@ -97,19 +97,19 @@ public class MjolnirItem extends TieredItem {
 					CompoundNBT tag2 = stack.getOrCreateTag();
 
 					if (tag2.getBoolean("flight")) {
-						if (playerEntity.onGround) {
+						if (clientPlayerEntity.onGround) {
 							tag2.putBoolean("flight", false);
 							Minecraft.getInstance().getSoundHandler().stop();;
 							return;
 						}
 						// flight stuff
-						playerEntity.applyEntityCollision(playerEntity);
-						if(playerEntity.collided) {
-							playerEntity.attackEntityFrom(new DamageSource("Mjolnir"), 15);
+						clientPlayerEntity.applyEntityCollision(clientPlayerEntity);
+						if(clientPlayerEntity.collided) {
+							clientPlayerEntity.attackEntityFrom(new DamageSource("Mjolnir"), 15);
 						}
-						playerEntity.limbSwingAmount = 0;
-						float yaw = playerEntity.rotationYaw;
-						float pitch = playerEntity.rotationPitch;
+						clientPlayerEntity.limbSwingAmount = 0;
+						float yaw = clientPlayerEntity.rotationYaw;
+						float pitch = clientPlayerEntity.rotationPitch;
 						int launchFactor = 1;
 						float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
 								* MathHelper.cos(pitch * ((float) Math.PI / 180F));
@@ -123,7 +123,8 @@ public class MjolnirItem extends TieredItem {
 						f2 = f2 * (f5 / f4);
 						f3 = f3 * (f5 / f4);
 						
-						playerEntity.setVelocity((double) f1, (double) f2, (double) f3);
+						
+						clientPlayerEntity.setVelocity((double) f1, (double) f2, (double) f3);
 						
 					}
 				}

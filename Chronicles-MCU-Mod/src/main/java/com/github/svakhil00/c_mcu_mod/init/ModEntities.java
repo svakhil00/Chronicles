@@ -1,8 +1,8 @@
 package com.github.svakhil00.c_mcu_mod.init;
 
 import com.github.svakhil00.c_mcu_mod.Main;
-import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
-import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
+import com.github.svakhil00.c_mcu_mod.entity.CaptainAmericaShieldEntity;
+import com.github.svakhil00.c_mcu_mod.entity.MjolnirEntity;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
