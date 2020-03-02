@@ -85,7 +85,7 @@ public class ForgeEventSubscriber {
 	
 	@SubscribeEvent
 	public static void onCraft(ItemCraftedEvent event) {
-		if (event.getCrafting().getItem().getItem() == ModItems.MJOLNIR.get()) {
+		if (event.getCrafting().getItem() == ModItems.MJOLNIR.get()) {
 			PlayerEntity playerEntity = event.getPlayer();
 			World world = playerEntity.world;
 			LightningBoltEntity lightning = new LightningBoltEntity(world, playerEntity.getPosX(),
