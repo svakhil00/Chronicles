@@ -8,6 +8,7 @@ import com.github.svakhil00.c_mcu_mod.item.IronManBootsItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManHelmetItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManSuitItem;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem;
+import com.github.svakhil00.c_mcu_mod.item.ModdedSpawnEggItem;
 import com.github.svakhil00.c_mcu_mod.item.PureVibraniumItem;
 import com.github.svakhil00.c_mcu_mod.item.ThorChestplateItem;
 import com.github.svakhil00.c_mcu_mod.item.ThorSuitItem;
@@ -63,6 +64,6 @@ public class ModItems {
 	public static final RegistryObject<Item> HULK_ITEM = ITEMS.register("hulk", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	
 	//entity eggs
-	
+	public static final RegistryObject<ModdedSpawnEggItem> DESTROYER_SPAWN_EGG = ITEMS.register("destroyer_spawn_egg", () -> new ModdedSpawnEggItem(ModEntityTypes.DESTROYER, 0xAAAAAA, 0xFFFFFF, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 
 }
