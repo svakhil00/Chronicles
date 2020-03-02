@@ -3,7 +3,7 @@ package com.github.svakhil00.c_mcu_mod;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
-import com.github.svakhil00.c_mcu_mod.init.ModEntities;
+import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import com.github.svakhil00.c_mcu_mod.init.ModItemGroups;
 import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
 
@@ -54,9 +54,9 @@ public class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void registerModels(FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(ModEntities.MJOLNIR.get(),
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MJOLNIR.get(),
 				manager -> new MjolnirRenderer(manager, Minecraft.getInstance().getItemRenderer()));
-		RenderingRegistry.registerEntityRenderingHandler(ModEntities.CAPTAIN_AMERICA_SHIELD.get(),
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CAPTAIN_AMERICA_SHIELD.get(),
 				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
 
 	}

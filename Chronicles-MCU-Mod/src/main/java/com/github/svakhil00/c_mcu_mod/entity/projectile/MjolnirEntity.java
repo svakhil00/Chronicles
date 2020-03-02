@@ -1,7 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.entity.projectile;
 
 import com.github.svakhil00.c_mcu_mod.ModEventSubscriber;
-import com.github.svakhil00.c_mcu_mod.init.ModEntities;
+import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -35,7 +35,7 @@ public class MjolnirEntity extends AbstractArrowEntity {
 	public int returningTicks;
 
 	public MjolnirEntity(final World WORLDIN) {
-		this(ModEntities.MJOLNIR.orElseThrow(IllegalStateException::new), WORLDIN);
+		this(ModEntityTypes.MJOLNIR.orElseThrow(IllegalStateException::new), WORLDIN);
 	}
 
 	public MjolnirEntity(EntityType<? extends MjolnirEntity> type, World worldIn) {
@@ -43,14 +43,14 @@ public class MjolnirEntity extends AbstractArrowEntity {
 	}
 
 	public MjolnirEntity(World worldIn, LivingEntity thrower, ItemStack thrownStackIn) {
-		super(ModEntities.MJOLNIR.orElseThrow(IllegalStateException::new), thrower, worldIn);
+		super(ModEntityTypes.MJOLNIR.orElseThrow(IllegalStateException::new), thrower, worldIn);
 		this.thrownStack = thrownStackIn.copy();
 		this.dataManager.set(field_226571_aq_, thrownStackIn.hasEffect());
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public MjolnirEntity(World worldIn, double x, double y, double z) {
-		super(ModEntities.MJOLNIR.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
+		super(ModEntityTypes.MJOLNIR.orElseThrow(IllegalStateException::new), x, y, z, worldIn);
 	}
 
 	protected void registerData() {

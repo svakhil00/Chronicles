@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.github.svakhil00.c_mcu_mod.config.Config;
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
-import com.github.svakhil00.c_mcu_mod.init.ModEntities;
+import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -37,7 +37,7 @@ public class Main
     	
     	ModBlocks.BLOCKS.register(modEventBus);
     	ModItems.ITEMS.register(modEventBus);
-    	ModEntities.REG.register(modEventBus);
+    	ModEntityTypes.REG.register(modEventBus);
     	LOGGER.debug("Hello from Chronicle's MCU Mod!");
     }
 }
