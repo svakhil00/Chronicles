@@ -1,4 +1,4 @@
-package com.github.svakhil00.c_mcu_mod.client.render.entity;
+package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;

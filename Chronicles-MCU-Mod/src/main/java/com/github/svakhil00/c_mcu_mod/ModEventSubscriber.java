@@ -1,7 +1,7 @@
 package com.github.svakhil00.c_mcu_mod;
 
-import com.github.svakhil00.c_mcu_mod.client.render.entity.CaptainAmericaShieldRenderer;
-import com.github.svakhil00.c_mcu_mod.client.render.entity.MjolnirRenderer;
+import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
+import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
 import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import com.github.svakhil00.c_mcu_mod.init.ModItemGroups;
