@@ -17,7 +17,7 @@ public enum ModArmorTierMaterial implements IArmorMaterial{
 
 	
 	
-	private String name, equipSound;
+	private String name;
 	private int durability, enchantability;
 	private Item repairItem;
 	private int[] damageReductionAmounts;
@@ -29,7 +29,6 @@ public enum ModArmorTierMaterial implements IArmorMaterial{
 		this.damageReductionAmounts = damageReductionAmounts;
 		this.enchantability = enchantability;
 		this.repairItem = repairItem;
-		this.equipSound = equipSound;
 		this.toughness = toughness;
 	}
 
