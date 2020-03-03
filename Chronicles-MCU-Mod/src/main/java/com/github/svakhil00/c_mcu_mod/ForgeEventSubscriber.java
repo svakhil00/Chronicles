@@ -68,7 +68,9 @@ public class ForgeEventSubscriber {
 			if(event.getEntity() instanceof PlayerEntity) {
 				PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
 				if(playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS.get()) {
-					event.setCanceled(true);
+					if(playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE.get()) {
+						event.setCanceled(true);
+					}
 				}
 				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET.get()) {
 					if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.THOR_CHESTPLATE.get()) {
