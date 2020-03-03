@@ -2,6 +2,7 @@ package com.github.svakhil00.c_mcu_mod.init;
 
 import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.entity.monster.DestroyerEntity;
+import com.github.svakhil00.c_mcu_mod.entity.monster.TestEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 
@@ -25,6 +26,11 @@ public class ModEntityTypes {
 			() -> EntityType.Builder.<DestroyerEntity>create(DestroyerEntity::new, EntityClassification.MONSTER)
 					.size(EntityType.IRON_GOLEM.getWidth(), EntityType.IRON_GOLEM.getHeight())
 					.build(new ResourceLocation(Main.MODID, "destroyer").toString()));
+	
+	public static final RegistryObject<EntityType<TestEntity>> TEST = ENTITY_TYPES.register("test",
+			() -> EntityType.Builder.<TestEntity>create(TestEntity::new, EntityClassification.MONSTER)
+					.size(EntityType.IRON_GOLEM.getWidth(), EntityType.IRON_GOLEM.getHeight())
+					.build(new ResourceLocation(Main.MODID, "test").toString()));
 
 	// PROJECTILES
 

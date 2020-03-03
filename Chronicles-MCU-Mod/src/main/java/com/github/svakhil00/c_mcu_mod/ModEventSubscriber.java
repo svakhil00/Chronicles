@@ -5,21 +5,22 @@ import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
 import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import com.github.svakhil00.c_mcu_mod.init.ModItemGroups;
+import com.github.svakhil00.c_mcu_mod.item.ModdedSpawnEggItem;
 import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -61,6 +62,11 @@ public class ModEventSubscriber {
 
 	}
 
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onPostRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
+		ModdedSpawnEggItem.initUnaddedEggs();
+	}
+	
 	private static SoundEvent register(String key) {
 		return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
 	}
@@ -71,12 +77,5 @@ public class ModEventSubscriber {
 	public static final SoundEvent ITEM_CAPTAIN_AMERICA_SHIELD_HIT = register(
 			"c_mcu_mod:item.captain_america_shield.hit");
 
-	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {
-		return setup(entry, new ResourceLocation(Main.MODID, name));
-	}
-
-	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final ResourceLocation registryName) {
-		entry.setRegistryName(registryName);
-		return entry;
-	}
+	
 }
