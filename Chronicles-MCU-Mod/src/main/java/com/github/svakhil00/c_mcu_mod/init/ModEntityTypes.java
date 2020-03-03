@@ -28,13 +28,12 @@ public class ModEntityTypes {
 	public static final String IRON_MONGER_NAME = "iron_monger";
 	public static final String WHIPLASH_NAME = "whiplash";
 	public static final String RED_SKULL_NAME = "red_skull";
-	
-	
+
 	public static final RegistryObject<EntityType<DestroyerEntity>> DESTROYER = ENTITY_TYPES.register(DESTROYER_NAME,
 			() -> EntityType.Builder.<DestroyerEntity>create(DestroyerEntity::new, EntityClassification.MONSTER)
 					.size(EntityType.IRON_GOLEM.getWidth(), EntityType.IRON_GOLEM.getHeight())
 					.build(new ResourceLocation(Main.MODID, DESTROYER_NAME).toString()));
-	
+
 	public static final RegistryObject<EntityType<TestEntity>> TEST = ENTITY_TYPES.register("test",
 			() -> EntityType.Builder.<TestEntity>create(TestEntity::new, EntityClassification.MONSTER)
 					.size(EntityType.IRON_GOLEM.getWidth(), EntityType.IRON_GOLEM.getHeight())
