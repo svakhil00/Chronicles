@@ -27,13 +27,13 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 
 		body = new ModelRenderer(this);
 		body.setRotationPoint(0.0F, 21.0F, -0.5F);
-		//body.cubeList.add(new Model(body, 0, 0, -1.0F, -2.0F, -0.5F, 2, 2, 1, 0.0F, false));
-		//body.cubeList.add(new Model(body, 0, 0, -2.0F, -3.0F, -0.5F, 4, 1, 1, 0.0F, false));
+		body.addBox(0, 0, -1.0F, -2.0F, -0.5F, 2, 2, 1, 0.0F);
+		body.addBox(0, 0, -2.0F, -3.0F, -0.5F, 4, 1, 1, 0.0F);
 
 		head = new ModelRenderer(this);
 		head.setRotationPoint(0.0F, -3.0F, 0.0F);
 		body.addChild(head);
-		//head.cubeList.add(new Model(head, 0, 0, -0.5F, -1.0F, -0.5F, 1, 1, 1, 0.0F, false));
+		head.addBox(0, 0, -0.5F, -1.0F, -0.5F, 1, 1, 1, 0.0F);
 
 		leftarm = new ModelRenderer(this);
 		leftarm.setRotationPoint(0.0F, 3.0F, 0.5F);
@@ -45,31 +45,18 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 
 		leftleg = new ModelRenderer(this);
 		leftleg.setRotationPoint(1.0F, 21.0F, -0.5F);
-		//leftleg.cubeList.add(new Model(leftleg, 0, 0, 0.5F, 0.0F, -0.5F, -1, 3, 1, 0.0F, false));
+		leftleg.addBox(0, 0, 0.5F, 0.0F, -0.5F, -1, 3, 1, 0.0F);
 
 		rightleg = new ModelRenderer(this);
 		rightleg.setRotationPoint(-1.0F, 21.0F, -0.5F);
-		//rightleg.cubeList.add(new Model(rightleg, 0, 0, -0.5F, 0.0F, -0.5F, 1, 3, 1, 0.0F, false));
+		rightleg.addBox(0, 0, -0.5F, 0.0F, -0.5F, 1, 3, 1, 0.0F);
 	}
 
 	/*
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		body.render(f5);
-		leftleg.render(f5);
-		rightleg.render(f5);
-	}
-	*/
-	
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
-	}
-
-	
-	
-	
+	 * @Override public void render(Entity entity, float f, float f1, float f2,
+	 * float f3, float f4, float f5) { body.render(f5); leftleg.render(f5);
+	 * rightleg.render(f5); }
+	 */
 
 	@Override
 	public Iterable<ModelRenderer> getParts() {
@@ -79,7 +66,13 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 	@Override
 	public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		// TODO Auto-generated method stub
-		
+		this.leftleg.rotateAngleX = -1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
+		this.rightleg.rotateAngleX = 1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
+		this.leftleg.rotateAngleY = 0.0F;
+		this.rightleg.rotateAngleY = 0.0F;
+	}
+
+	private float triangleWave(float p_78172_1_, float p_78172_2_) {
+		return (Math.abs(p_78172_1_ % p_78172_2_ - p_78172_2_ * 0.5F) - p_78172_2_ * 0.25F) / (p_78172_2_ * 0.25F);
 	}
 }
