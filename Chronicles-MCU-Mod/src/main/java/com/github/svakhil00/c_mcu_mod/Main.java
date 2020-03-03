@@ -7,6 +7,7 @@ import com.github.svakhil00.c_mcu_mod.config.Config;
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
 import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
+import com.github.svakhil00.c_mcu_mod.init.ModTileEntityTypes;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -36,6 +37,7 @@ public class Main
     	ModBlocks.BLOCKS.register(modEventBus);
     	ModItems.ITEMS.register(modEventBus);
     	ModEntityTypes.ENTITY_TYPES.register(modEventBus);
+    	ModTileEntityTypes.TILE_ENTITY_TYPES.register(modEventBus);
     	LOGGER.debug("Hello from Chronicle's MCU Mod!");
     }
 }
