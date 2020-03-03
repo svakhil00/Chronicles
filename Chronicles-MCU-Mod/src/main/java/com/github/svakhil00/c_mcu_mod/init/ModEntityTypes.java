@@ -22,10 +22,18 @@ public class ModEntityTypes {
 
 	// MOBS
 
-	public static final RegistryObject<EntityType<DestroyerEntity>> DESTROYER = ENTITY_TYPES.register("destroyer",
+	public static final String DESTROYER_NAME = "destroyer";
+	public static final String FROST_GIANT_NAME = "frost_giant";
+	public static final String CHITAURI_NAME = "chitauri";
+	public static final String IRON_MONGER_NAME = "iron_monger";
+	public static final String WHIPLASH_NAME = "whiplash";
+	public static final String RED_SKULL_NAME = "red_skull";
+	
+	
+	public static final RegistryObject<EntityType<DestroyerEntity>> DESTROYER = ENTITY_TYPES.register(DESTROYER_NAME,
 			() -> EntityType.Builder.<DestroyerEntity>create(DestroyerEntity::new, EntityClassification.MONSTER)
 					.size(EntityType.IRON_GOLEM.getWidth(), EntityType.IRON_GOLEM.getHeight())
-					.build(new ResourceLocation(Main.MODID, "destroyer").toString()));
+					.build(new ResourceLocation(Main.MODID, DESTROYER_NAME).toString()));
 	
 	public static final RegistryObject<EntityType<TestEntity>> TEST = ENTITY_TYPES.register("test",
 			() -> EntityType.Builder.<TestEntity>create(TestEntity::new, EntityClassification.MONSTER)
