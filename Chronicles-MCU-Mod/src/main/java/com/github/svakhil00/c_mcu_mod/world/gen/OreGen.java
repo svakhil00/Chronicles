@@ -16,7 +16,6 @@ public class OreGen {
 	public static void generateOre() {
 		for (Biome biome : ForgeRegistries.BIOMES) {
 			if (biome == Biomes.JUNGLE || biome == Biomes.JUNGLE_EDGE || biome == Biomes.JUNGLE_HILLS
-					|| biome == Biomes.BAMBOO_JUNGLE || biome == Biomes.BAMBOO_JUNGLE_HILLS
 					|| biome == Biomes.MODIFIED_JUNGLE || biome == Biomes.MODIFIED_JUNGLE_EDGE) {
 
 				ConfiguredPlacement<CountRangeConfig> customConfig = Placement.COUNT_RANGE
