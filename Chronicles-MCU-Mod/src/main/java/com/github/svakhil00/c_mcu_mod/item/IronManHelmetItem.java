@@ -33,31 +33,28 @@ public class IronManHelmetItem extends IronManSuitItem {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		if (KeyboardHelper.isHoldingShift()) {
-			tooltip.add(new StringTextComponent("If powered, gives you night vision and water breathing\nEquipping the entire suit gives you resistance to the elements"));
+			tooltip.add(new StringTextComponent(
+					"If powered, gives you night vision and water breathing\nEquipping the entire suit gives you resistance to the elements"));
 		} else {
 			tooltip.add(new StringTextComponent("Hold SHIFT for more information"));
 		}
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+		if (player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE.get()) {
 
-		if (entityIn instanceof PlayerEntity) {
-			PlayerEntity playerEntity = (PlayerEntity) entityIn;
-
-			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE.get()) {
-				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.IRON_MAN_HELMET.get()) {
-
-					if (!worldIn.isRemote) {
-						if(playerEntity.isInWaterOrBubbleColumn()) {
-							playerEntity.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING));
-						}
-						if(worldIn.isNightTime()) {
-							playerEntity.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 400));
-						}
-					}
+			if (!world.isRemote) {
+				if (player.isInWaterOrBubbleColumn()) {
+					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING));
+				}
+				if (world.getLight(player.getPosition()) < 8) {
+					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 400));
 				}
 			}
+
 		}
 	}
+
+	
 }

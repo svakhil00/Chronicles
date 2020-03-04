@@ -20,33 +20,30 @@ public class ThorChestplateItem extends ThorSuitItem {
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		if (entityIn instanceof PlayerEntity) {
-			PlayerEntity playerEntity = (PlayerEntity) entityIn;
-			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.THOR_CHESTPLATE.get()) {
-				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET.get()) {
-					if (playerEntity.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ModItems.THOR_LEGGINGS.get()) {
-						if (playerEntity.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.THOR_BOOTS.get()) {
-							if (!worldIn.isRemote) {
-								CompoundNBT tag = new CompoundNBT();
-								tag = stack.getOrCreateTag();
-								playerEntity.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 400, 1));
-								playerEntity.addPotionEffect(new EffectInstance(Effects.STRENGTH, 400, 1));
-								if (!playerEntity.isPotionActive(Effects.HEALTH_BOOST)) {
-									playerEntity.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 400, 3));
-									float health = tag.getFloat("heal");
-									if (health == 0) {
-										playerEntity.heal(16);
-									} else {
-										playerEntity.setHealth(health);
-									}
-								}
-								tag.putFloat("heal", playerEntity.getHealth());
+	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+		if (player.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET.get()) {
+			if (player.getItemStackFromSlot(EquipmentSlotType.LEGS).getItem() == ModItems.THOR_LEGGINGS.get()) {
+				if (player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.THOR_BOOTS.get()) {
+					if (!world.isRemote) {
+						CompoundNBT tag = new CompoundNBT();
+						tag = stack.getOrCreateTag();
+						player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 400, 1));
+						player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 400, 1));
+						if (!player.isPotionActive(Effects.HEALTH_BOOST)) {
+							player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 400, 3));
+							float health = tag.getFloat("heal");
+							if (health == 0) {
+								player.heal(16);
+							} else {
+								player.setHealth(health);
 							}
 						}
+						tag.putFloat("heal", player.getHealth());
 					}
 				}
 			}
+
 		}
 	}
+
 }

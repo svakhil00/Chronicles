@@ -5,6 +5,7 @@ import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaChestplateItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaSuitItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManBootsItem;
+import com.github.svakhil00.c_mcu_mod.item.IronManChestplateItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManHelmetItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManSuitItem;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem;
@@ -49,7 +50,7 @@ public class ModItems {
 	
 	//armor
 	public static final RegistryObject<IronManHelmetItem> IRON_MAN_HELMET = ITEMS.register("iron_man_helmet", () -> new IronManHelmetItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
-	public static final RegistryObject<IronManSuitItem> IRON_MAN_CHESTPLATE = ITEMS.register("iron_man_chestplate", () -> new IronManSuitItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+	public static final RegistryObject<IronManChestplateItem> IRON_MAN_CHESTPLATE = ITEMS.register("iron_man_chestplate", () -> new IronManChestplateItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<IronManSuitItem> IRON_MAN_LEGGINGS = ITEMS.register("iron_man_leggings", () -> new IronManSuitItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<IronManBootsItem> IRON_MAN_BOOTS = ITEMS.register("iron_man_boots", () -> new IronManBootsItem(ModArmorTierMaterial.iron_man_suit, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	
