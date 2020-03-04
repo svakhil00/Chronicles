@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":[
+		"ttt",
+		"tct",
+		"t t"
+	],
+	"key":{
+		"t":{
+			"item": "c_mcu_mod:titanium"
+		},
+		"c":{
+			"item": "c_mcu_mod:computer_chip"
+		}
+	},
+	"result": {
+		"item": "c_mcu_mod:iron_man_leggings",
+		"count": 1
+	}
+}
