@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "c_mcu_mod:item/steel"
+        "layer0": "c_mcu_mod:item/titanium"
     }
 }

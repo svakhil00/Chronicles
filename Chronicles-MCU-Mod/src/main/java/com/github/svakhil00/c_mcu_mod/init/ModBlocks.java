@@ -17,4 +17,7 @@ public class ModBlocks {
 			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(30.0F).lightValue(6)
 					.sound(SoundType.STONE).harvestLevel(3).harvestTool(ToolType.PICKAXE)));
 
+	public static final RegistryObject<Block> TITANIUM_ORE_BLOCK = BLOCKS.register("titanium_ore",
+			() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.5F)
+					.sound(SoundType.STONE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
 }

@@ -29,7 +29,7 @@ public class ModItems {
 	public static final RegistryObject<Item> STABLE_VIBRANIUM = ITEMS.register("stable_vibranium", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<PureVibraniumItem> PURE_VIBRANIUM = ITEMS.register("pure_vibranium", () -> new PureVibraniumItem(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<Item> URU = ITEMS.register("uru", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
-	public static final RegistryObject<Item> STEEL = ITEMS.register("steel", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+	public static final RegistryObject<Item> TITANIUM = ITEMS.register("titanium", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<Item> ASGARDIAN_STEEL = ITEMS.register("asgardian_steel", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	
 	
