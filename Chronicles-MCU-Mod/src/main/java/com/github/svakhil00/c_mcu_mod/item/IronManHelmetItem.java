@@ -49,9 +49,12 @@ public class IronManHelmetItem extends IronManSuitItem {
 				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.IRON_MAN_HELMET.get()) {
 
 					if (!worldIn.isRemote) {
+						if(playerEntity.isInWaterOrBubbleColumn()) {
 							playerEntity.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING));
-						
+						}
+						if(worldIn.isNightTime()) {
 							playerEntity.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 400));
+						}
 					}
 				}
 			}
