@@ -42,7 +42,6 @@ public class ModItems {
 
 
 	
-	
 	//Weapons
 	public static final RegistryObject<CaptainShieldItem> CAPTAIN_AMERICA_SHIELD = ITEMS.register("captain_america_shield", () -> new CaptainShieldItem(ModItemTierMaterial.shield, 11, -2.5f, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP).maxStackSize(1)));
 	public static final RegistryObject<MjolnirItem> MJOLNIR = ITEMS.register("mjolnir", () -> new MjolnirItem(ModItemTierMaterial.mjolnir, -1, -3.0f,new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP).maxStackSize(1)));
