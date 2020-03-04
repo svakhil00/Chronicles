@@ -37,6 +37,10 @@ public class ModItems {
 	public static final RegistryObject<Item> HAMMER_HEAD = ITEMS.register("hammer_head", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<Item> HAMMER_HANDLE = ITEMS.register("hammer_handle", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<Item> VIBRANIUM_CAPSULE = ITEMS.register("vibranium_capsule", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+	public static final RegistryObject<Item> COMPUTER_CHIP = ITEMS.register("computer_chip", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+	public static final RegistryObject<Item> ARC_REACTOR = ITEMS.register("arc_reactor", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+
+
 	
 	
 	//Weapons
