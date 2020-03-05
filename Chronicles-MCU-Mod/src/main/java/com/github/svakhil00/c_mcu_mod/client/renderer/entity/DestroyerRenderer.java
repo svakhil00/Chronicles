@@ -1,5 +1,6 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity;
 
+import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.model.DestroyerModel;
 import com.github.svakhil00.c_mcu_mod.entity.monster.DestroyerEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -13,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class DestroyerRenderer extends MobRenderer<DestroyerEntity, DestroyerModel<DestroyerEntity>>{
 
-	private static final ResourceLocation DESTROYER_TEXTURES = new ResourceLocation("textures/entity/iron_golem/iron_golem.png");
+	private static final ResourceLocation DESTROYER_TEXTURES = new ResourceLocation(Main.MODID, "textures/entity/destroyer.png");
 	
 	public DestroyerRenderer(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new DestroyerModel<>(), .7F);
