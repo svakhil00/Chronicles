@@ -45,8 +45,10 @@ public class IronManBootsItem extends IronManSuitItem {
 		if (entityIn instanceof ClientPlayerEntity) {
 			ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entityIn;
 			PlayerEntity player = (PlayerEntity) entityIn;
-			if (player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE.get()) {
-				CompoundNBT tag = stack.getOrCreateTag();
+			if (player.getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == ModItems.IRON_MAN_BOOTS.get()) {
+				if (player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE
+						.get()) {
+					CompoundNBT tag = stack.getOrCreateTag();
 					if (KeyboardHelper.isHoldingCtrl() && !player.onGround) {
 						tag.putBoolean("flight", true);
 					}
@@ -82,7 +84,7 @@ public class IronManBootsItem extends IronManSuitItem {
 							player.addVelocity(0, .15, 0);
 						}
 					}
-				
+				}
 			}
 		}
 	}
