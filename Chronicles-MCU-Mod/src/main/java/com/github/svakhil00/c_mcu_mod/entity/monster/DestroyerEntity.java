@@ -22,7 +22,7 @@ public class DestroyerEntity extends MonsterEntity {
 		final double baseHealth = this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue();
 		
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(baseSpeed * 1.5D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(baseHealth * 2.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
 	}
 	
 	@Override
