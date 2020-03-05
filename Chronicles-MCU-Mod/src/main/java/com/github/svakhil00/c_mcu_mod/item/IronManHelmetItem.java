@@ -7,13 +7,12 @@ import javax.annotation.Nullable;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.github.svakhil00.c_mcu_mod.util.helpers.KeyboardHelper;
 
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.text.ITextComponent;
@@ -43,18 +42,16 @@ public class IronManHelmetItem extends IronManSuitItem {
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 		if (player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE.get()) {
-
 			if (!world.isRemote) {
 				if (player.isInWaterOrBubbleColumn()) {
-					player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING));
+						player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING));
 				}
-				if (world.getLight(player.getPosition()) < 8) {
-					player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 400));
+				if (world.getLight(player.getPosition()) < 5) {
+						player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 400));
 				}
 			}
 
 		}
 	}
 
-	
 }
