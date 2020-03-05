@@ -33,7 +33,7 @@ public class OreGen {
 		for (Biome biome : ForgeRegistries.BIOMES) {
 
 				ConfiguredPlacement<CountRangeConfig> customConfig = Placement.COUNT_RANGE
-						.configure(new CountRangeConfig(15, 0, 0, 64));
+						.configure(new CountRangeConfig(10, 0, 0, 64));
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
 						Feature.ORE
 								.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
