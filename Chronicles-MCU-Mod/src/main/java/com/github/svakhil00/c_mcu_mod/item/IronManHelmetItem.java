@@ -46,7 +46,7 @@ public class IronManHelmetItem extends IronManSuitItem {
 				if (player.isInWaterOrBubbleColumn()) {
 						player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING));
 				}
-				if (world.getLight(player.getPosition()) < 5) {
+				if (world.getLight(player.getPosition()) < 8) {
 						player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 400));
 				}
 			}

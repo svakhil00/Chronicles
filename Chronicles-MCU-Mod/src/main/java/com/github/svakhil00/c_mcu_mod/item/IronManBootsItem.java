@@ -41,45 +41,50 @@ public class IronManBootsItem extends IronManSuitItem {
 	}
 
 	@Override
-	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-		ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) player;
-		CompoundNBT tag = stack.getOrCreateTag();
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		if (entityIn instanceof ClientPlayerEntity) {
+			ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity) entityIn;
+			PlayerEntity player = (PlayerEntity) entityIn;
+			if (player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.IRON_MAN_CHESTPLATE.get()) {
+				CompoundNBT tag = stack.getOrCreateTag();
+					if (KeyboardHelper.isHoldingCtrl() && !player.onGround) {
+						tag.putBoolean("flight", true);
+					}
+					if (tag.getBoolean("flight")) {
+						if (clientPlayerEntity.movementInput.forwardKeyDown && !player.onGround) {
+							// flight
+							player.limbSwingAmount = 0;
+							float yaw = player.rotationYaw;
+							float pitch = player.rotationPitch;
+							float speed = 1;
 
-		if (KeyboardHelper.isHoldingCtrl() && !player.onGround) {
-			tag.putBoolean("flight", true);
-		}
-		if (tag.getBoolean("flight")) {
-			if (clientPlayerEntity.movementInput.forwardKeyDown && !player.onGround) {
-				// flight
-				player.limbSwingAmount = 0;
-				float yaw = player.rotationYaw;
-				float pitch = player.rotationPitch;
-				float speed = 1;
+							float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
+									* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+							float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
+							float f3 = MathHelper.cos(yaw * ((float) Math.PI / 180F))
+									* MathHelper.cos(pitch * ((float) Math.PI / 180F));
+							float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+							float f5 = 3.0F * ((1.0F + speed) / 4.0F);
 
-				float f1 = -MathHelper.sin(yaw * ((float) Math.PI / 180F))
-						* MathHelper.cos(pitch * ((float) Math.PI / 180F));
-				float f2 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
-				float f3 = MathHelper.cos(yaw * ((float) Math.PI / 180F))
-						* MathHelper.cos(pitch * ((float) Math.PI / 180F));
-				float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
-				float f5 = 3.0F * ((1.0F + speed) / 4.0F);
+							f1 = f1 * (f5 / f4);
+							f2 = f2 * (f5 / f4);
+							f3 = f3 * (f5 / f4);
 
-				f1 = f1 * (f5 / f4);
-				f2 = f2 * (f5 / f4);
-				f3 = f3 * (f5 / f4);
+							player.setVelocity((double) f1, (double) f2, (double) f3);
 
-				player.setVelocity((double) f1, (double) f2, (double) f3);
+						} else {
+							tag.putBoolean("flight", false);
+						}
 
-			} else {
-				tag.putBoolean("flight", false);
-			}
-
-		} else if (clientPlayerEntity.movementInput.jump) {
-			player.limbSwingAmount = 0;
-			if (player.getMotion().y < 2) {
-				player.addVelocity(0, .15, 0);
+					} else if (clientPlayerEntity.movementInput.jump) {
+						player.limbSwingAmount = 0;
+						if (player.getMotion().y < 2) {
+							player.addVelocity(0, .15, 0);
+						}
+					}
+				
 			}
 		}
 	}
-	
+
 }
