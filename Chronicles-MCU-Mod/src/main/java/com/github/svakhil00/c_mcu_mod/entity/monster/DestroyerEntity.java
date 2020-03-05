@@ -19,7 +19,6 @@ public class DestroyerEntity extends MonsterEntity {
 		super.registerAttributes();
 		
 		final double baseSpeed = this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue();
-		final double baseHealth = this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue();
 		
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(baseSpeed * 1.5D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
