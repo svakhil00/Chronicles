@@ -32,11 +32,10 @@ public class ThorChestplateItem extends ThorSuitItem {
 						if (!player.isPotionActive(Effects.HEALTH_BOOST)) {
 							player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 400, 3));
 							float health = tag.getFloat("heal");
-							if (health == 0) {
-								player.heal(16);
-							} else {
-								player.setHealth(health);
+							if (player.getHealth() > health) {
+								health = player.getHealth();
 							}
+							player.setHealth(health);
 						}
 						tag.putFloat("heal", player.getHealth());
 					}

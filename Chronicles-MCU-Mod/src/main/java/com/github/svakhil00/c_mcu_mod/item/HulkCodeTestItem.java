@@ -28,17 +28,16 @@ public class HulkCodeTestItem extends Item {
 				playerEntity.addPotionEffect(new EffectInstance(Effects.STRENGTH, 400, 7));
 				playerEntity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 400, 3));
 				playerEntity.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 400, 3));
-				if(playerEntity.getHealth() < 8) {
+				if (playerEntity.getHealth() < 8) {
 					playerEntity.addPotionEffect(new EffectInstance(Effects.REGENERATION, 400, 0));
 				}
 				if (!playerEntity.isPotionActive(Effects.HEALTH_BOOST)) {
 					playerEntity.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 400, 4));
 					float health = tag.getFloat("heal");
-					if (health == 0) {
-						playerEntity.heal(20);
-					} else {
-						playerEntity.setHealth(health);
+					if (playerEntity.getHealth() > health) {
+						health = playerEntity.getHealth();
 					}
+					playerEntity.setHealth(health);
 				}
 				tag.putFloat("heal", playerEntity.getHealth());
 			}

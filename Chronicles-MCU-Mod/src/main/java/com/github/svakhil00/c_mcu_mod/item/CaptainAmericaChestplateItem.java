@@ -34,11 +34,10 @@ public class CaptainAmericaChestplateItem extends CaptainAmericaSuitItem {
 						if (!player.isPotionActive(Effects.HEALTH_BOOST)) {
 							player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 400, 2));
 							float health = tag.getFloat("heal");
-							if (health == 0) {
-								player.heal(12);
-							} else {
-								player.setHealth(health);
+							if (player.getHealth() > health) {
+								health = player.getHealth();
 							}
+							player.setHealth(health);
 						}
 						tag.putFloat("heal", player.getHealth());
 					}
