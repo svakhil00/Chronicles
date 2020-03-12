@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.ZombiePigmanEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +21,7 @@ public class DestroyerEntity extends MonsterEntity {
 
 	public DestroyerEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
+		this.getNavigator().setCanSwim(true);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -28,6 +30,8 @@ public class DestroyerEntity extends MonsterEntity {
 		this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TestEntity.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 	}
@@ -55,6 +59,8 @@ public class DestroyerEntity extends MonsterEntity {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	
 
 	@Override
 	public void baseTick() {
@@ -74,9 +80,9 @@ public class DestroyerEntity extends MonsterEntity {
 
 		final double baseSpeed = this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue();
 
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(baseSpeed * .5D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(baseSpeed * .35D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(400);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(15);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).setBaseValue(2);
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(2);

@@ -1,7 +1,5 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity.model;
 
-import javax.swing.Renderer;
-
 import com.github.svakhil00.c_mcu_mod.entity.monster.DestroyerEntity;
 import com.google.common.collect.ImmutableList;
 
