@@ -24,40 +24,40 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 
 		body = (new ModelRenderer(this)).setTextureSize(128, 128);
 		body.setRotationPoint(0.0F, -7.0F, 0.0F);
-		body.addBox(-8.0F, -2.0F, -6.0F, 16, 8, 11, 0.0F);
-		body.addBox(-6.5F, 5.0F, -3.0F, 13, 10, 6, 0.5F);
+		body.addBox(-12.0F, -19.0F, -9.0F, 24, 12, 17, 0.0F);
+		body.addBox(-10.25F, -8.5F, -4.5F, 20, 15, 9, 0.5F);
 
 		head = (new ModelRenderer(this)).setTextureSize(128, 128);
-		head.setTextureOffset(100, 100).setRotationPoint(0.0F, -7.0F, -2.0F);
-		head.setTextureOffset(0, 112).addBox(-2.0F, -10.0F, -3.5F, 4, 8, 8, 0.0F);
-		head.setTextureOffset(94, 114).addBox(2.0F, -12.0F, -6.0F, 5, 2, 12, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-6.0F, -10.0F, 3.0F, 12, 3, 2, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-5.0F, -7.0F, 3.0F, 10, 3, 2, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-4.0F, -4.0F, 3.0F, 8, 2, 2, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-2.0F, -11.0F, -5.0F, 4, 1, 11, 0.0F);
-		head.setTextureOffset(94, 117).addBox(-7.0F, -12.0F, -6.0F, 5, 2, 12, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-6.0F, -10.0F, -5.0F, 5, 3, 8, 0.0F);
-		head.setTextureOffset(0, 0).addBox(1.0F, -10.0F, -5.0F, 5, 3, 8, 0.0F);
-		head.setTextureOffset(0, 0).addBox(1.0F, -4.0F, -5.0F, 3, 2, 8, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-4.0F, -4.0F, -5.0F, 3, 2, 8, 0.0F);
-		head.setTextureOffset(0, 0).addBox(1.0F, -7.0F, -5.0F, 4, 3, 8, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-5.0F, -7.0F, -5.0F, 4, 3, 8, 0.0F);
+		head.setRotationPoint(0.0F, -7.0F, -2.0F);
+		head.setTextureOffset(0, 112).addBox(-3.0F, -31.0F, -5.25F, 6, 12, 12, 0.0F);
+		head.setTextureOffset(94, 114).addBox(2.5F, -34.0F, -9.0F, 8, 3, 18, 0.0F);
+		head.setTextureOffset(0, 0).addBox(-9.0F, -31.5F, 4.5F, 18, 5, 3, 0.0F);
+		head.setTextureOffset(0, 0).addBox(-7.5F, -27.0F, 4.5F, 15, 5, 3, 0.0F);
+		head.setTextureOffset(0, 0).addBox(-6.0F, -22.0F, 4.5F, 12, 3, 3, 0.0F);
+		head.setTextureOffset(0, 0).addBox(-3.0F, -33.0F, -7.5F, 6, 2, 17, 0.0F);
+		head.setTextureOffset(94, 117).addBox(-11.0F, -34.0F, -9.0F, 8, 3, 18, 0.0F);
+		head.setTextureOffset(0, 0).addBox(-9.5F, -31.5F, -7.5F, 8, 5, 12, 0.0F);
+		head.setTextureOffset(0, 0).addBox(1.0F, -31.5F, -7.5F, 8, 5, 12, 0.0F);
+		head.setTextureOffset(0, 0).addBox(1.0F, -22.0F, -7.5F, 5, 3, 12, 0.0F);
+		head.setTextureOffset(0, 0).addBox(-6.5F, -22.0F, -7.5F, 5, 3, 12, 0.0F);
+		head.setTextureOffset(0, 0).addBox(1.0F, -27.0F, -7.5F, 6, 5, 12, 0.0F);
+		head.setTextureOffset(0, 0).addBox(-7.5F, -27.0F, -7.5F, 6, 5, 12, 0.0F);
 
 		leftarm = (new ModelRenderer(this)).setTextureSize(128, 128);
 		leftarm.setRotationPoint(0.0F, -7.0F, 0.0F);
-		leftarm.setTextureOffset(0, 0).addBox(8.0F, -2.5F, -3.0F, 5, 18, 6, 0.0F);
+		leftarm.setTextureOffset(0, 0).addBox(11.5F, -18.25F, -4.5F, 8, 29, 9, 0.0F);
 
 		rightarm = (new ModelRenderer(this)).setTextureSize(128, 128);
 		rightarm.setRotationPoint(0.0F, -7.0F, 0.0F);
-		rightarm.setTextureOffset(0, 0).addBox(-13.0F, -2.5F, -3.0F, 5, 18, 6, 0.0F);
+		rightarm.setTextureOffset(0, 0).addBox(-20.0F, -18.25F, -4.5F, 8, 29, 9, 0.0F);
 
 		leftleg = (new ModelRenderer(this)).setTextureSize(128, 128);
 		leftleg.setRotationPoint(4.0F, 11.0F, 0.0F);
-		leftleg.setTextureOffset(0, 0).addBox(-2.5F, -3.0F, -3.0F, 6, 16, 5, 0.0F);
+		leftleg.setTextureOffset(0, 0).addBox(-2.75F, -11.0F, -4.5F, 9, 24, 8, 0.0F);
 
 		rightleg = (new ModelRenderer(this)).setTextureSize(128, 128);
 		rightleg.setRotationPoint(-5.0F, 11.0F, 0.0F);
-		rightleg.setTextureOffset(0, 0).addBox(-2.5F, -3.0F, -3.0F, 6, 16, 5, 0.0F);
+		rightleg.setTextureOffset(0, 0).addBox(-5.75F, -11.0F, -4.5F, 9, 24, 8, 0.0F);
 	}
 
 	
@@ -76,6 +76,21 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 		this.rightleg.rotateAngleY = 0.0F;
 		
 	}
+	
+	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+	      int i = entityIn.getAttackTimer();
+	      if (i > 0) {
+	         this.rightarm.rotateAngleX = -2.0F + 1.5F * this.triangleWave((float)i - partialTick, 10.0F);
+	         this.leftarm.rotateAngleX = -2.0F + 1.5F * this.triangleWave((float)i - partialTick, 10.0F);
+	      } else {
+	         
+	            this.rightarm.rotateAngleX = (-0.2F + 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+	            this.leftarm.rotateAngleX = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+	         
+	      }
+
+	   }
+	
 	private float triangleWave(float p_78172_1_, float p_78172_2_) {
 		return (Math.abs(p_78172_1_ % p_78172_2_ - p_78172_2_ * 0.5F) - p_78172_2_ * 0.25F) / (p_78172_2_ * 0.25F);
 	}

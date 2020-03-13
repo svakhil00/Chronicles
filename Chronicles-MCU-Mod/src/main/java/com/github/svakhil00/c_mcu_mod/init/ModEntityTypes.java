@@ -31,7 +31,7 @@ public class ModEntityTypes {
 
 	public static final RegistryObject<EntityType<DestroyerEntity>> DESTROYER = ENTITY_TYPES.register(DESTROYER_NAME,
 			() -> EntityType.Builder.<DestroyerEntity>create(DestroyerEntity::new, EntityClassification.MONSTER)
-					.size(EntityType.IRON_GOLEM.getWidth(), EntityType.IRON_GOLEM.getHeight()).immuneToFire()
+					.size(2, 4).immuneToFire()
 					.build(new ResourceLocation(Main.MODID, DESTROYER_NAME).toString()));
 
 	public static final RegistryObject<EntityType<TestEntity>> TEST = ENTITY_TYPES.register("test",
@@ -43,14 +43,14 @@ public class ModEntityTypes {
 
 	public static final RegistryObject<EntityType<MjolnirEntity>> MJOLNIR = ENTITY_TYPES.register("mjolnir",
 			() -> EntityType.Builder.<MjolnirEntity>create(MjolnirEntity::new, EntityClassification.MISC)
-					.size(5.0F, 5.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
+					.size(1.0F, 1.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
 					.immuneToFire().setCustomClientFactory((message, world) -> new MjolnirEntity(world))
 					.build(Main.MODID + ":mjolnir"));
 
 	public static final RegistryObject<EntityType<CaptainAmericaShieldEntity>> CAPTAIN_AMERICA_SHIELD = ENTITY_TYPES
 			.register("captain_america_shield", () -> EntityType.Builder
 					.<CaptainAmericaShieldEntity>create(CaptainAmericaShieldEntity::new, EntityClassification.MISC)
-					.size(5.0F, 5.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
+					.size(1.0F, 1.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
 					.immuneToFire().setCustomClientFactory((message, world) -> new CaptainAmericaShieldEntity(world))
 					.build(Main.MODID + ":captain_america_shield"));
 }

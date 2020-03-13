@@ -1,6 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.entity.monster;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -9,15 +10,21 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.ZombiePigmanEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class DestroyerEntity extends MonsterEntity {
+	
+	private int attackTimer;
 
 	public DestroyerEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -25,6 +32,11 @@ public class DestroyerEntity extends MonsterEntity {
 		// TODO Auto-generated constructor stub
 	}
 
+	 @OnlyIn(Dist.CLIENT)
+	   public int getAttackTimer() {
+	      return this.attackTimer;
+	   }
+	
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
@@ -36,6 +48,27 @@ public class DestroyerEntity extends MonsterEntity {
 		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 	}
 
+	public void livingTick() {
+	      super.livingTick();
+	      if (this.attackTimer > 0) {
+	         --this.attackTimer;
+	      }
+	      this.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1, 10));
+	   }
+	
+	public boolean attackEntityAsMob(Entity entityIn) {
+	      this.attackTimer = 10;
+	      this.world.setEntityState(this, (byte)4);
+	      float f = (float)this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
+	      float f1 = f > 0.0F ? f / 2.0F + (float)this.rand.nextInt((int)f) : 0.0F;
+	      boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f1);
+	      if (flag) {
+	         entityIn.setMotion(entityIn.getMotion().add(0.0D, (double)0.4F, 0.0D));
+	         this.applyEnchantments(this, entityIn);
+	      }
+	      return flag;	      
+	   }
+	
 	@Override
 	public boolean canSwim() {
 		// TODO Auto-generated method stub
@@ -85,7 +118,7 @@ public class DestroyerEntity extends MonsterEntity {
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(15);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).setBaseValue(2);
-		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(2);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20);
 	}
 
