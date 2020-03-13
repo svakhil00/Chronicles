@@ -59,7 +59,7 @@ public class DestroyerEntity extends MonsterEntity {
 	public boolean attackEntityAsMob(Entity entityIn) {
 	      this.attackTimer = 10;
 	      this.world.setEntityState(this, (byte)4);
-	      float f = (float)this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
+	      float f = 20;
 	      float f1 = f > 0.0F ? f / 2.0F + (float)this.rand.nextInt((int)f) : 0.0F;
 	      boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f1);
 	      if (flag) {
