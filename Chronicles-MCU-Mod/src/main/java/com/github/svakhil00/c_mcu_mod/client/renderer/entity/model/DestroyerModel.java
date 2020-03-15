@@ -29,7 +29,7 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 
 		head = (new ModelRenderer(this)).setTextureSize(128, 128);
 		head.setRotationPoint(0.0F, -7.0F, -2.0F);
-		head.setTextureOffset(0, 112).addBox(-3.0F, -31.0F, -5.25F, 6, 12, 12, 0.0F);
+		head.setTextureOffset(0, 104).addBox(-3.0F, -31.0F, -5.25F, 6, 12, 12, 0.0F);
 		head.setTextureOffset(94, 114).addBox(2.5F, -34.0F, -9.0F, 8, 3, 18, 0.0F);
 		head.setTextureOffset(0, 0).addBox(-9.0F, -31.5F, 4.5F, 18, 5, 3, 0.0F);
 		head.setTextureOffset(0, 0).addBox(-7.5F, -27.0F, 4.5F, 15, 5, 3, 0.0F);
@@ -44,20 +44,20 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 		head.setTextureOffset(0, 0).addBox(-7.5F, -27.0F, -7.5F, 6, 5, 12, 0.0F);
 
 		leftarm = (new ModelRenderer(this)).setTextureSize(128, 128);
-		leftarm.setRotationPoint(0.0F, -7.0F, 0.0F);
-		leftarm.setTextureOffset(0, 0).addBox(11.5F, -18.25F, -4.5F, 8, 29, 9, 0.0F);
+		leftarm.setRotationPoint(15.5F, -25.25F, 0.0F);
+		leftarm.setTextureOffset(0, 0).addBox(-4.0F, 0.0F, -4.5F, 8, 29, 9, 0.0F);
 
 		rightarm = (new ModelRenderer(this)).setTextureSize(128, 128);
-		rightarm.setRotationPoint(0.0F, -7.0F, 0.0F);
-		rightarm.setTextureOffset(0, 0).addBox(-20.0F, -18.25F, -4.5F, 8, 29, 9, 0.0F);
+		rightarm.setRotationPoint(-16.0F, -25.25F, 0.0F);
+		rightarm.setTextureOffset(0, 0).addBox(-4.0F, 0.0F, -4.5F, 8, 29, 9, 0.0F);
 
 		leftleg = (new ModelRenderer(this)).setTextureSize(128, 128);
-		leftleg.setRotationPoint(4.0F, 11.0F, 0.0F);
-		leftleg.setTextureOffset(0, 0).addBox(-2.75F, -11.0F, -4.5F, 9, 24, 8, 0.0F);
+		leftleg.setRotationPoint(5.75F, 0.0F, -0.5F);
+		leftleg.setTextureOffset(0, 0).addBox(-4.5F, 0.0F, -4.0F, 9, 24, 8, 0.0F);
 
 		rightleg = (new ModelRenderer(this)).setTextureSize(128, 128);
-		rightleg.setRotationPoint(-5.0F, 11.0F, 0.0F);
-		rightleg.setTextureOffset(0, 0).addBox(-5.75F, -11.0F, -4.5F, 9, 24, 8, 0.0F);
+		rightleg.setRotationPoint(-6.25F, 0.0F, -0.5F);
+		rightleg.setTextureOffset(0, 0).addBox(-4.5F, 0.0F, -4.0F, 9, 24, 8, 0.0F);
 	}
 
 	
@@ -70,8 +70,8 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 	@Override
 	public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {
-		this.leftleg.rotateAngleX = -1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
-		this.rightleg.rotateAngleX = 1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
+		this.leftleg.rotateAngleX = -this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
+		this.rightleg.rotateAngleX = this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
 		this.leftleg.rotateAngleY = 0.0F;
 		this.rightleg.rotateAngleY = 0.0F;
 		
@@ -80,12 +80,12 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
 	      int i = entityIn.getAttackTimer();
 	      if (i > 0) {
-	         this.rightarm.rotateAngleX = -2.0F + 1.5F * this.triangleWave((float)i - partialTick, 10.0F);
-	         this.leftarm.rotateAngleX = -2.0F + 1.5F * this.triangleWave((float)i - partialTick, 10.0F);
+	         this.rightarm.rotateAngleX = -2.0F + this.triangleWave((float)i - partialTick, 10.0F);
+	         this.leftarm.rotateAngleX = -2.0F + this.triangleWave((float)i - partialTick, 10.0F);
 	      } else {
 	         
-	            this.rightarm.rotateAngleX = (-0.2F + 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
-	            this.leftarm.rotateAngleX = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+	            this.rightarm.rotateAngleX = (-0.2F + this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+	            this.leftarm.rotateAngleX = (-0.2F - this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
 	         
 	      }
 
