@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RedSkullRenderer extends MobRenderer<RedSkullEntity, RedSkullModel<RedSkullEntity>>{
 
-private static final ResourceLocation RED_SKULL_TEXTURES = new ResourceLocation(Main.MODID, "textures/entity/destroyer.png");
+private static final ResourceLocation RED_SKULL_TEXTURES = new ResourceLocation(Main.MODID, "textures/entity/red_skull.png");
 	
 	public RedSkullRenderer(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn, new RedSkullModel<>(), .7F);
