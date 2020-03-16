@@ -2,6 +2,7 @@ package com.github.svakhil00.c_mcu_mod.init;
 
 import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.entity.monster.DestroyerEntity;
+import com.github.svakhil00.c_mcu_mod.entity.monster.RedSkullEntity;
 import com.github.svakhil00.c_mcu_mod.entity.monster.TestEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
@@ -31,13 +32,16 @@ public class ModEntityTypes {
 
 	public static final RegistryObject<EntityType<DestroyerEntity>> DESTROYER = ENTITY_TYPES.register(DESTROYER_NAME,
 			() -> EntityType.Builder.<DestroyerEntity>create(DestroyerEntity::new, EntityClassification.MONSTER)
-					.size(2, 4).immuneToFire()
-					.build(new ResourceLocation(Main.MODID, DESTROYER_NAME).toString()));
+					.size(2, 4).immuneToFire().build(new ResourceLocation(Main.MODID, DESTROYER_NAME).toString()));
 
 	public static final RegistryObject<EntityType<TestEntity>> TEST = ENTITY_TYPES.register("test",
 			() -> EntityType.Builder.<TestEntity>create(TestEntity::new, EntityClassification.MONSTER)
 					.size(EntityType.IRON_GOLEM.getWidth(), EntityType.IRON_GOLEM.getHeight())
 					.build(new ResourceLocation(Main.MODID, "test").toString()));
+
+	public static final RegistryObject<EntityType<RedSkullEntity>> RED_SKULL = ENTITY_TYPES.register(RED_SKULL_NAME,
+			() -> EntityType.Builder.<RedSkullEntity>create(RedSkullEntity::new, EntityClassification.MONSTER)
+					.size(1, 2).build(new ResourceLocation(Main.MODID, RED_SKULL_NAME).toString()));
 
 	// PROJECTILES
 

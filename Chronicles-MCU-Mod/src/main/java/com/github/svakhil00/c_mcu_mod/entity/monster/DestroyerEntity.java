@@ -65,7 +65,7 @@ public class DestroyerEntity extends MonsterEntity {
 	      float f1 = f > 0.0F ? f / 2.0F + (float)this.rand.nextInt((int)f) : 0.0F;
 	      boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f1);
 	      if (flag) {
-	         entityIn.setMotion(entityIn.getMotion().add(0.0D, (double)0.4F, 0.0D));
+	         entityIn.setMotion(entityIn.getMotion().add(0.0D, (double).5F, 0.0D));
 	         this.applyEnchantments(this, entityIn);
 	      }
 	      return flag;	      

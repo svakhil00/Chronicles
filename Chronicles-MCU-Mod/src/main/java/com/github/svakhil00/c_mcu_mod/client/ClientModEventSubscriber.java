@@ -2,6 +2,7 @@ package com.github.svakhil00.c_mcu_mod.client;
 
 import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.DestroyerRenderer;
+import com.github.svakhil00.c_mcu_mod.client.renderer.entity.RedSkullRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.TestRenderer;
 import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 
@@ -18,6 +19,7 @@ public class ClientModEventSubscriber {
 	public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.TEST.get(), TestRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.DESTROYER.get(), DestroyerRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.RED_SKULL.get(), RedSkullRenderer::new);
 		Main.LOGGER.debug("Registered Entity Renderers");
 	}
 }
