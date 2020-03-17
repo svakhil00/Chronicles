@@ -60,8 +60,6 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 		rightleg.setTextureOffset(0, 0).addBox(-4.5F, 0.0F, -4.0F, 9, 24, 8, 0.0F);
 	}
 
-	
-
 	@Override
 	public Iterable<ModelRenderer> getParts() {
 		return ImmutableList.of(this.head, this.body, this.leftleg, this.rightleg, this.rightarm, this.leftarm);
@@ -74,23 +72,24 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 		this.rightleg.rotateAngleX = this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
 		this.leftleg.rotateAngleY = 0.0F;
 		this.rightleg.rotateAngleY = 0.0F;
-		
-	}
-	
-	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
-	      int i = entityIn.getAttackTimer();
-	      if (i > 0) {
-	         this.rightarm.rotateAngleX = -2.0F + this.triangleWave((float)i - partialTick, 10.0F);
-	         this.leftarm.rotateAngleX = -2.0F + this.triangleWave((float)i - partialTick, 10.0F);
-	      } else {
-	         
-	            this.rightarm.rotateAngleX = (-0.2F + this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
-	            this.leftarm.rotateAngleX = (-0.2F - this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
-	         
-	      }
 
-	   }
-	
+	}
+
+	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+		int i = entityIn.getAttackTimer();
+		if (i > 0) {
+			this.rightarm.rotateAngleX = -2.0F + this.triangleWave((float) i - partialTick, 10.0F);
+			this.leftarm.rotateAngleX = -2.0F + this.triangleWave((float) i - partialTick, 10.0F);
+
+		} else {
+			this.rightarm.rotateAngleX = (-0.2F + this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+			this.leftarm.rotateAngleX = (-0.2F - this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+
+			
+		}
+
+	}
+
 	private float triangleWave(float p_78172_1_, float p_78172_2_) {
 		return (Math.abs(p_78172_1_ % p_78172_2_ - p_78172_2_ * 0.5F) - p_78172_2_ * 0.25F) / (p_78172_2_ * 0.25F);
 	}

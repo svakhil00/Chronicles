@@ -70,8 +70,8 @@ public class RedSkullModel<T extends RedSkullEntity> extends SegmentedModel<T> {
 	
 	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
 	     
-	         this.rightArm.rotateAngleX = -2.0F + this.triangleWave(partialTick, 10.0F);
-	         this.leftArm.rotateAngleX = -2.0F + this.triangleWave(partialTick, 10.0F);
+		this.rightArm.rotateAngleX = (-0.2F + this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+        this.leftArm.rotateAngleX = (-0.2F - this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
 	     
 
 	   }

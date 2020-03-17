@@ -17,6 +17,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,7 +25,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class DestroyerEntity extends MonsterEntity {
-	
+
 	private int attackTimer;
 
 	public DestroyerEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
@@ -33,15 +34,15 @@ public class DestroyerEntity extends MonsterEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	 @OnlyIn(Dist.CLIENT)
-	   public int getAttackTimer() {
-	      return this.attackTimer;
-	   }
-	
+	@OnlyIn(Dist.CLIENT)
+	public int getAttackTimer() {
+		return this.attackTimer;
+	}
+
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TestEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
@@ -50,27 +51,33 @@ public class DestroyerEntity extends MonsterEntity {
 		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 	}
 
+	@OnlyIn(Dist.CLIENT)
+	public void handleStatusUpdate(byte id) {
+		if (id == 4) {
+			this.attackTimer = 10;
+			this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+		}
+	}
+
 	public void livingTick() {
-	      super.livingTick();
-	      if (this.attackTimer > 0) {
-	         --this.attackTimer;
-	      }
-	      this.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1, 10));
-	   }
-	
+		super.livingTick();
+		if (this.attackTimer > 0) {
+			--this.attackTimer;
+		}
+		this.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1, 10));
+	}
+
 	public boolean attackEntityAsMob(Entity entityIn) {
-	      this.attackTimer = 10;
-	      this.world.setEntityState(this, (byte)4);
-	      float f = 20;
-	      float f1 = f > 0.0F ? f / 2.0F + (float)this.rand.nextInt((int)f) : 0.0F;
-	      boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), f1);
-	      if (flag) {
-	         entityIn.setMotion(entityIn.getMotion().add(0.0D, (double).5F, 0.0D));
-	         this.applyEnchantments(this, entityIn);
-	      }
-	      return flag;	      
-	   }
-	
+		this.attackTimer = 10;
+		this.world.setEntityState(this, (byte) 4);
+		boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 201);
+		if (flag) {
+			entityIn.setMotion(entityIn.getMotion().add(0.0D, (double) .5F, 0.0D));
+			this.applyEnchantments(this, entityIn);
+		}
+		return flag;
+	}
+
 	@Override
 	public boolean canSwim() {
 		// TODO Auto-generated method stub
@@ -94,8 +101,6 @@ public class DestroyerEntity extends MonsterEntity {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	
 
 	@Override
 	public void baseTick() {
@@ -128,4 +133,5 @@ public class DestroyerEntity extends MonsterEntity {
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
+
 }
