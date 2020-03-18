@@ -5,10 +5,10 @@ import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potions;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class DestroyerBeamEntity extends AbstractArrowEntity {
 
@@ -35,5 +35,10 @@ public class DestroyerBeamEntity extends AbstractArrowEntity {
 	protected ItemStack getArrowStack() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public boolean isInRangeToRender3d(double x, double y, double z) {
+		return true;
 	}
 }

@@ -1,14 +1,10 @@
 package com.github.svakhil00.c_mcu_mod;
 
-import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
-import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.init.ModBlocks;
-import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 import com.github.svakhil00.c_mcu_mod.init.ModItemGroups;
 import com.github.svakhil00.c_mcu_mod.item.ModdedSpawnEggItem;
 import com.github.svakhil00.c_mcu_mod.world.gen.OreGen;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -19,12 +15,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 @EventBusSubscriber(modid = Main.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEventSubscriber {
@@ -53,14 +46,7 @@ public class ModEventSubscriber {
 		OreGen.generateOre();
 	}
 
-	@SubscribeEvent
-	public static void registerModels(FMLClientSetupEvent event) {
-		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MJOLNIR.get(),
-				manager -> new MjolnirRenderer(manager, Minecraft.getInstance().getItemRenderer()));
-		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CAPTAIN_AMERICA_SHIELD.get(),
-				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
-
-	}
+	
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPostRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
