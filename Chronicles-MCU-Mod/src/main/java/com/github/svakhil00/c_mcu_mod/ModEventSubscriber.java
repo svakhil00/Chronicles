@@ -24,35 +24,31 @@ public class ModEventSubscriber {
 
 	@SubscribeEvent
 	public static void onRegisterItems(RegistryEvent.Register<Item> event) {
-		final IForgeRegistry<Item> registry = event.getRegistry();	
-		
-		ModBlocks.BLOCKS.getEntries().stream()
-						.map(RegistryObject::get)
-						//block item exceptions
-						//.filter(block -> needsItemBlock(block))
-						.forEach(block -> {
-							final Item.Properties properties = new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP);
-							final BlockItem blockItem = new BlockItem(block, properties);
-							
-							blockItem.setRegistryName(block.getRegistryName());
-							registry.register(blockItem);
-						});
+		final IForgeRegistry<Item> registry = event.getRegistry();
+
+		ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
+				// block item exceptions
+				// .filter(block -> needsItemBlock(block))
+				.forEach(block -> {
+					final Item.Properties properties = new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP);
+					final BlockItem blockItem = new BlockItem(block, properties);
+
+					blockItem.setRegistryName(block.getRegistryName());
+					registry.register(blockItem);
+				});
 		Main.LOGGER.debug("Registered BlockItems");
 	}
-
 
 	@SubscribeEvent
 	public static void loadCompleteEvent(FMLLoadCompleteEvent event) {
 		OreGen.generateOre();
 	}
 
-	
-
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPostRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
 		ModdedSpawnEggItem.initUnaddedEggs();
 	}
-	
+
 	private static SoundEvent register(String key) {
 		return Registry.register(Registry.SOUND_EVENT, key, new SoundEvent(new ResourceLocation(key)));
 	}
@@ -63,5 +59,4 @@ public class ModEventSubscriber {
 	public static final SoundEvent ITEM_CAPTAIN_AMERICA_SHIELD_HIT = register(
 			"c_mcu_mod:item.captain_america_shield.hit");
 
-	
 }

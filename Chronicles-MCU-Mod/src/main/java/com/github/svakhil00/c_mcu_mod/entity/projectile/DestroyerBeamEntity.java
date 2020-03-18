@@ -33,10 +33,14 @@ public class DestroyerBeamEntity extends AbstractArrowEntity {
 
 	@Override
 	protected ItemStack getArrowStack() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public boolean hasNoGravity() {
+		return true;
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	public boolean isInRangeToRender3d(double x, double y, double z) {
 		return true;

@@ -28,6 +28,9 @@ public class ClientModEventSubscriber {
 				manager -> new MjolnirRenderer(manager, Minecraft.getInstance().getItemRenderer()));
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CAPTAIN_AMERICA_SHIELD.get(),
 				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.DESTROYER_BEAM.get(),
+				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
+		
 		Main.LOGGER.debug("Registered Entity Renderers");
 	}
 }
