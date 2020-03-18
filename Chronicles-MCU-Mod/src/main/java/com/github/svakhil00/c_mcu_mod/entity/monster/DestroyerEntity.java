@@ -31,7 +31,6 @@ public class DestroyerEntity extends MonsterEntity {
 	public DestroyerEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.getNavigator().setCanSwim(true);
-		// TODO Auto-generated constructor stub
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -70,7 +69,7 @@ public class DestroyerEntity extends MonsterEntity {
 	public boolean attackEntityAsMob(Entity entityIn) {
 		this.attackTimer = 10;
 		this.world.setEntityState(this, (byte) 4);
-		boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 201);
+		boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 20);
 		if (flag) {
 			entityIn.setMotion(entityIn.getMotion().add(0.0D, (double) .5F, 0.0D));
 			this.applyEnchantments(this, entityIn);
@@ -133,5 +132,4 @@ public class DestroyerEntity extends MonsterEntity {
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
-
 }
