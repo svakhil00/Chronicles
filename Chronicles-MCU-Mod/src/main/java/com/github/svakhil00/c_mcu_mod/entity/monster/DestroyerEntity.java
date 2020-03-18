@@ -28,7 +28,7 @@ public class DestroyerEntity extends MonsterEntity {
 
 	private int attackTimer;
 
-	public DestroyerEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+	public DestroyerEntity(EntityType<? extends DestroyerEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.getNavigator().setCanSwim(true);
 	}
