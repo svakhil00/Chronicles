@@ -5,8 +5,11 @@
 	"item.c_mcu_mod.mjolnir": "Mjolnir",
 	"item.c_mcu_mod.hammer_head": "Hammer Head",
 	"item.c_mcu_mod.hammer_handle": "Hammer Handle",
+	"item.c_mcu_mod.computer_chip": "Computer Chip",
+	"item.c_mcu_mod.arc_reactor": "Arc Reactor",
 	
 	"block.c_mcu_mod.vibranium_ore": "Vibranium Ore",
+	"block.c_mcu_mod.titanium_ore": "Titanium Ore",
 	"item.c_mcu_mod.stable_vibranium": "Stable Vibranium",
 	"item.c_mcu_mod.pure_vibranium": "Pure Vibranium",
 	"item.c_mcu_mod.titanium_ore": "Titanium Ore",
@@ -28,6 +31,11 @@
 	"item.c_mcu_mod.captain_america_helmet": "Captain America Helmet",
 	"item.c_mcu_mod.captain_america_chestplate": "Captain America Chestplate",
 	"item.c_mcu_mod.captain_america_leggings": "Captain America Leggings",
-	"item.c_mcu_mod.captain_america_boots": "Captain America Boots"
+	"item.c_mcu_mod.captain_america_boots": "Captain America Boots",
+	
+	"entity.c_mcu_mod.destroyer": "Destroyer",
+	
+	"item.c_mcu_mod.destroyer_spawn_egg": "Destroyer Spawn Egg",
+	"item.c_mcu_mod.red_skull_spawn_egg": "Red Skull Spawn Egg"
 	
 }
