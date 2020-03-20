@@ -1,5 +1,6 @@
 package com.github.svakhil00.c_mcu_mod;
 
+import com.github.svakhil00.c_mcu_mod.entity.monster.DestroyerEntity;
 import com.github.svakhil00.c_mcu_mod.init.ModItems;
 import com.github.svakhil00.c_mcu_mod.item.MjolnirItem.Mode;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -48,7 +49,10 @@ public class ForgeEventSubscriber {
 	
 	@SubscribeEvent
 	public static void lightning(EntityStruckByLightningEvent event) {
-		if (event.getEntity() instanceof PlayerEntity) {
+		if(event.getEntity() instanceof DestroyerEntity) {
+			event.setCanceled(true);
+		}
+		else if (event.getEntity() instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
 			if (playerEntity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == ModItems.THOR_HELMET.get()) {
 				if (playerEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() == ModItems.THOR_CHESTPLATE.get()) {
