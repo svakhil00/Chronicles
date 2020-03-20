@@ -2,6 +2,7 @@ package com.github.svakhil00.c_mcu_mod.init;
 
 import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.entity.monster.DestroyerEntity;
+import com.github.svakhil00.c_mcu_mod.entity.monster.FrostGiantEntity;
 import com.github.svakhil00.c_mcu_mod.entity.monster.RedSkullEntity;
 import com.github.svakhil00.c_mcu_mod.entity.monster.TestEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
@@ -44,6 +45,10 @@ public class ModEntityTypes {
 			() -> EntityType.Builder.<RedSkullEntity>create(RedSkullEntity::new, EntityClassification.MONSTER)
 					.size(1, 2).build(new ResourceLocation(Main.MODID, RED_SKULL_NAME).toString()));
 
+	public static final RegistryObject<EntityType<FrostGiantEntity>> FROST_GIANT = ENTITY_TYPES.register(FROST_GIANT_NAME,
+			() -> EntityType.Builder.<FrostGiantEntity>create(FrostGiantEntity::new, EntityClassification.MONSTER)
+					.size(1, 2).build(new ResourceLocation(Main.MODID, FROST_GIANT_NAME).toString()));
+	
 	// PROJECTILES
 
 	public static final RegistryObject<EntityType<MjolnirEntity>> MJOLNIR = ENTITY_TYPES.register("mjolnir",

@@ -4,6 +4,7 @@ import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShieldRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.DestroyerBeamRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.DestroyerRenderer;
+import com.github.svakhil00.c_mcu_mod.client.renderer.entity.FrostGiantRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.RedSkullRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.TestRenderer;
@@ -24,7 +25,8 @@ public class ClientModEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.TEST.get(), TestRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.DESTROYER.get(), DestroyerRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.RED_SKULL.get(), RedSkullRenderer::new);
-		
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FROST_GIANT.get(), FrostGiantRenderer::new);
+
 		
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MJOLNIR.get(),
 				manager -> new MjolnirRenderer(manager, Minecraft.getInstance().getItemRenderer()));

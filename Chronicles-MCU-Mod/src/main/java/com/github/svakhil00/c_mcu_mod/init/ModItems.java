@@ -72,6 +72,7 @@ public class ModItems {
 	public static final RegistryObject<ModdedSpawnEggItem> DESTROYER_SPAWN_EGG = ITEMS.register("destroyer_spawn_egg", () -> new ModdedSpawnEggItem(ModEntityTypes.DESTROYER, 0xAAAAAA, 0xFFFFFF, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<ModdedSpawnEggItem> TEST_SPAWN_EGG = ITEMS.register("test_spawn_egg", () -> new ModdedSpawnEggItem(ModEntityTypes.TEST, 0xAAAAAA, 0xFFFFFF, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<ModdedSpawnEggItem> RED_SKULL_EGG = ITEMS.register("red_skull_spawn_egg", () -> new ModdedSpawnEggItem(ModEntityTypes.RED_SKULL, 0xFF0000, 0x000000, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+	public static final RegistryObject<ModdedSpawnEggItem> FROST_GIANT_EGG = ITEMS.register("frost_giant_spawn_egg", () -> new ModdedSpawnEggItem(ModEntityTypes.FROST_GIANT, 0x0000AA, 0x55FFFF, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 
 	
 }
