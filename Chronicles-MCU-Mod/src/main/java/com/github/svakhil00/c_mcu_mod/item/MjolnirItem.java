@@ -226,7 +226,7 @@ public class MjolnirItem extends TieredItem {
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemStack);
 		} else if (mode == Mode.LIGHTNING) {
 			Vec3d look = new Vec3d(0, 0, 0);
-			double range = 50.0D;
+			double range = 100.0D;
 			boolean block = false;
 			if (!playerIn.pick(range, 1.0F, false).getType().equals(Type.MISS)) {
 				
