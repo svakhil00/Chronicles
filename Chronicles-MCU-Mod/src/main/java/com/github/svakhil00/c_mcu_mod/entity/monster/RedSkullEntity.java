@@ -1,5 +1,7 @@
 package com.github.svakhil00.c_mcu_mod.entity.monster;
 
+import com.github.svakhil00.c_mcu_mod.entity.projectile.DestroyerBeamEntity;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.LivingEntity;
@@ -53,6 +55,7 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
+		System.out.println("test");
 		this.launchWitherSkullToEntity(0, target);
 	}
 	
@@ -68,13 +71,13 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 	      double d3 = x - d0;
 	      double d4 = y - d1;
 	      double d5 = z - d2;
-	      WitherSkullEntity witherskullentity = new WitherSkullEntity(this.world, this, d3, d4, d5);
+	      DestroyerBeamEntity destroyerbeamentity = new DestroyerBeamEntity(this.world, this, d3, d4, d5);
 	      if (invulnerable) {
-	         witherskullentity.setSkullInvulnerable(true);
+	    	  destroyerbeamentity.setInvulnerable(true);
 	      }
 
-	      witherskullentity.setRawPosition(d0, d1, d2);
-	      this.world.addEntity(witherskullentity);
+	      destroyerbeamentity.setRawPosition(d0, d1, d2);
+	      this.world.addEntity(destroyerbeamentity);
 	   }
 	
 }

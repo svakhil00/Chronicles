@@ -6,6 +6,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -19,6 +20,17 @@ public class DestroyerBeamRenderer extends EntityRenderer<DestroyerBeamEntity> {
 
 	public DestroyerBeamRenderer(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn);
+	}
+
+	public DestroyerBeamRenderer(EntityRendererManager renderManager, net.minecraft.client.renderer.ItemRenderer itemRenderer,
+			float scale, boolean blockLight) {
+		super(renderManager);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public DestroyerBeamRenderer(EntityRendererManager renderManagerIn,
+			net.minecraft.client.renderer.ItemRenderer itemRendererIn) {
+		this(renderManagerIn, itemRendererIn, 2.0F, false);
 	}
 
 	public void render(DestroyerBeamEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn,
