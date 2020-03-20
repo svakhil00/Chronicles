@@ -49,7 +49,7 @@ public class DestroyerEntity extends MonsterEntity implements IRangedAttackMob {
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
 		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 2.0D, 1, 50.0F));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 50.0F));
-		this.goalSelector.addGoal(6, new SwimGoal(this));
+		//this.goalSelector.addGoal(6, new SwimGoal(this));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
