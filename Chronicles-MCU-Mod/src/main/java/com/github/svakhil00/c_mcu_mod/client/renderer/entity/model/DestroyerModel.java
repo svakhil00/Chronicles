@@ -74,7 +74,8 @@ public class DestroyerModel<T extends DestroyerEntity> extends SegmentedModel<T>
 		this.rightleg.rotateAngleY = 0.0F;
 
 	}
-
+	
+	@Override
 	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
 		int i = entityIn.getAttackTimer();
 		if (i > 0) {

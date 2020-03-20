@@ -2,17 +2,21 @@ package com.github.svakhil00.c_mcu_mod.entity.projectile;
 
 import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class DestroyerBeamEntity extends DamagingProjectileEntity {
 
@@ -38,22 +42,62 @@ public class DestroyerBeamEntity extends DamagingProjectileEntity {
 		super(ModEntityTypes.DESTROYER_BEAM.get(), x, y, z, accelX, accelY, accelZ, worldIn);
 	}
 
-	public boolean isBurning() {
-		return false;
-	}
-	
 	@Override
 	protected void onImpact(RayTraceResult result) {
 		super.onImpact(result);
-		if(!this.world.isRemote) {
-			if(result.getType() == RayTraceResult.Type.ENTITY) {
-				System.out.println("hit entity");
-				Entity entity = ((EntityRayTraceResult)result).getEntity();
-				if(this.shootingEntity != null) {
-					entity.attackEntityFrom(DamageSource.causeMobDamage(this.shootingEntity), 20);
+		if (!this.world.isRemote) {
+			if (result.getType() == RayTraceResult.Type.ENTITY) {
+				Entity entity = ((EntityRayTraceResult) result).getEntity();
+				if (this.shootingEntity != null) {
+					if (entity.attackEntityFrom(DamageSource.causeMobDamage(this.shootingEntity), 10)) {
+						if(entity.isAlive()) {
+							entity.setFire(5);
+							this.applyEnchantments(this.shootingEntity, entity);
+						}else {
+							this.shootingEntity.heal(5.0F);
+						}
+					}
 				}
+			} else if (result.getType() == RayTraceResult.Type.BLOCK) {
+				Explosion.Mode explosion$mode = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(
+						this.world, this.shootingEntity) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
+				this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 1.0F, false,
+						explosion$mode);
 			}
+			this.remove();
 		}
 	}
 
+	@Override
+	public boolean isInvulnerable() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isBurning() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public boolean canBeCollidedWith() {
+		return false;
+	}
+
+	@Override
+	public boolean canBeAttackedWithItem() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canBePushed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
 }

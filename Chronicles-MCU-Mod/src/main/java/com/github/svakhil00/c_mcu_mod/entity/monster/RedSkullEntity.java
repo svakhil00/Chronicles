@@ -34,7 +34,7 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TestEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 20.0F));
+		//this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 1, 50.0F));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
@@ -55,7 +55,7 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
-		System.out.println("test");
+		System.out.println("shooting");
 		this.launchWitherSkullToEntity(0, target);
 	}
 	
@@ -64,7 +64,7 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 	   }
 	
 	private void launchWitherSkullToCoords(int p_82209_1_, double x, double y, double z, boolean invulnerable) {
-	      this.world.playEvent((PlayerEntity)null, 1024, new BlockPos(this), 0);
+	      //this.world.playEvent((PlayerEntity)null, 1024, new BlockPos(this), 0);
 	      double d0 = this.getPosX();
 	      double d1 = this.getPosY();
 	      double d2 = this.getPosZ();

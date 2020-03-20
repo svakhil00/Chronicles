@@ -13,14 +13,12 @@ public class HulkCodeTestItem extends Item {
 
 	public HulkCodeTestItem(Properties properties) {
 		super(properties);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		if (entityIn instanceof PlayerEntity) {
 			PlayerEntity playerEntity = (PlayerEntity) entityIn;
-
 			if (!worldIn.isRemote) {
 				CompoundNBT tag = new CompoundNBT();
 				tag = stack.getOrCreateTag();
@@ -28,7 +26,7 @@ public class HulkCodeTestItem extends Item {
 				playerEntity.addPotionEffect(new EffectInstance(Effects.STRENGTH, 400, 7));
 				playerEntity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 400, 3));
 				playerEntity.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 400, 3));
-				if (playerEntity.getHealth() < 8) {
+				if (playerEntity.getHealth() < 4) {
 					playerEntity.addPotionEffect(new EffectInstance(Effects.REGENERATION, 400, 0));
 				}
 				if (!playerEntity.isPotionActive(Effects.HEALTH_BOOST)) {

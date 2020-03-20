@@ -1,5 +1,6 @@
 package com.github.svakhil00.c_mcu_mod.client.renderer.entity.model;
 
+import com.github.svakhil00.c_mcu_mod.Main;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -9,25 +10,24 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 
 public class DestroyerBeamModel extends Model {
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/entity/trident.png");
-	private final ModelRenderer modelRenderer = new ModelRenderer(32, 32, 0, 6);
+	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation(Main.MODID, "textures/entity/beam.png");
+	private final ModelRenderer modelRenderer;
 
 	public DestroyerBeamModel() {
-		super(RenderType::getEntitySolid);
-		this.modelRenderer.addBox(-0.5F, 2.0F, -0.5F, 1.0F, 25.0F, 1.0F, 0.0F);
-		ModelRenderer modelrenderer = new ModelRenderer(32, 32, 4, 0);
-		modelrenderer.addBox(-1.5F, 0.0F, -0.5F, 3.0F, 2.0F, 1.0F);
-		this.modelRenderer.addChild(modelrenderer);
-		ModelRenderer modelrenderer1 = new ModelRenderer(32, 32, 4, 3);
-		modelrenderer1.addBox(-2.5F, -3.0F, -0.5F, 1.0F, 4.0F, 1.0F);
-		this.modelRenderer.addChild(modelrenderer1);
-		ModelRenderer modelrenderer2 = new ModelRenderer(32, 32, 0, 0);
-		modelrenderer2.addBox(-0.5F, -4.0F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F);
-		this.modelRenderer.addChild(modelrenderer2);
-		ModelRenderer modelrenderer3 = new ModelRenderer(32, 32, 4, 3);
-		modelrenderer3.mirror = true;
-		modelrenderer3.addBox(1.5F, -3.0F, -0.5F, 1.0F, 4.0F, 1.0F);
-		this.modelRenderer.addChild(modelrenderer3);
+		super(RenderType::getEntityTranslucent);
+		textureWidth = 128;
+		textureHeight = 128;
+
+
+		modelRenderer = new ModelRenderer(this);
+		modelRenderer.addBox(-1.0F, -6.0F, -3.0F, 2, 2, 1, 0.0F);
+		modelRenderer.addBox(-1.0F, -6.0F, 2.0F, 2, 2, 1, 0.0F);
+		modelRenderer.addBox(-2.0F, -7.0F, -2.0F, 4, 4, 4, 0.0F);
+		modelRenderer.addBox(-1.0F, -3.0F, -1.0F, 2, 1, 2, 0.0F);
+		modelRenderer.addBox(-1.0F, -8.0F, -1.0F, 2, 1, 2, 0.0F);
+		modelRenderer.addBox(2.0F, -6.0F, -1.0F, 1, 2, 2, 0.0F);
+		modelRenderer.addBox(-3.0F, -6.0F, -1.0F, 1, 2, 2, 0.0F);
+		modelRenderer.addBox(-2.0F, -7.0F, 1.0F, 5, 0, 0, 0.0F);
 	}
 
 	@Override
@@ -35,5 +35,5 @@ public class DestroyerBeamModel extends Model {
 			float red, float green, float blue, float alpha) {
 		this.modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
-
+	
 }

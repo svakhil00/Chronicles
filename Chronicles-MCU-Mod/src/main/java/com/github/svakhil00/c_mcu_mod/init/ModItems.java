@@ -4,6 +4,7 @@ import com.github.svakhil00.c_mcu_mod.Main;
 import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaChestplateItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainAmericaSuitItem;
 import com.github.svakhil00.c_mcu_mod.item.CaptainShieldItem;
+import com.github.svakhil00.c_mcu_mod.item.HulkCodeTestItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManBootsItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManChestplateItem;
 import com.github.svakhil00.c_mcu_mod.item.IronManHelmetItem;
@@ -65,7 +66,7 @@ public class ModItems {
 	public static final RegistryObject<CaptainAmericaSuitItem> CAPTAIN_AMERICA_BOOTS = ITEMS.register("captain_america_boots", () -> new CaptainAmericaSuitItem(ModArmorTierMaterial.captain_america_suit, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	
 	
-	public static final RegistryObject<Item> HULK_ITEM = ITEMS.register("hulk", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+	public static final RegistryObject<HulkCodeTestItem> HULK_ITEM = ITEMS.register("hulk", () -> new HulkCodeTestItem(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	
 	//entity eggs
 	public static final RegistryObject<ModdedSpawnEggItem> DESTROYER_SPAWN_EGG = ITEMS.register("destroyer_spawn_egg", () -> new ModdedSpawnEggItem(ModEntityTypes.DESTROYER, 0xAAAAAA, 0xFFFFFF, new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));

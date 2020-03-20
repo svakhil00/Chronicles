@@ -58,10 +58,10 @@ public class ModEntityTypes {
 					.size(1.0F, 1.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
 					.immuneToFire().setCustomClientFactory((message, world) -> new CaptainAmericaShieldEntity(world))
 					.build(Main.MODID + ":captain_america_shield"));
-	
-	public static final RegistryObject<EntityType<DestroyerBeamEntity>> DESTROYER_BEAM = ENTITY_TYPES
-			.register("destroyer_beam", () -> EntityType.Builder
-					.<DestroyerBeamEntity>create(DestroyerBeamEntity::new, EntityClassification.MISC)
+
+	public static final RegistryObject<EntityType<DestroyerBeamEntity>> DESTROYER_BEAM = ENTITY_TYPES.register(
+			"destroyer_beam",
+			() -> EntityType.Builder.<DestroyerBeamEntity>create(DestroyerBeamEntity::new, EntityClassification.MISC)
 					.size(1.0F, 1.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
 					.immuneToFire().setCustomClientFactory((message, world) -> new DestroyerBeamEntity(world))
 					.build(Main.MODID + ":destroyerbeam"));

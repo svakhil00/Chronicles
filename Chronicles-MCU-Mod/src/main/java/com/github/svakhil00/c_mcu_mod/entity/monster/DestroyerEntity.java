@@ -1,13 +1,19 @@
 package com.github.svakhil00.c_mcu_mod.entity.monster;
 
+import com.github.svakhil00.c_mcu_mod.entity.projectile.DestroyerBeamEntity;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
@@ -24,7 +30,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class DestroyerEntity extends MonsterEntity {
+public class DestroyerEntity extends MonsterEntity implements IRangedAttackMob {
 
 	private int attackTimer;
 
@@ -41,11 +47,13 @@ public class DestroyerEntity extends MonsterEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
+		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 2.0D, 1, 50.0F));
+		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 50.0F));
 		this.goalSelector.addGoal(6, new SwimGoal(this));
 		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TestEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 	}
@@ -131,5 +139,29 @@ public class DestroyerEntity extends MonsterEntity {
 	@Override
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+
+	@Override
+	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
+		this.launchBeamToEntity(distanceFactor, target);
+	}
+
+	private void launchBeamToEntity(float distanceFactor, LivingEntity entityIn) {
+		this.launchBeamToCoords(distanceFactor, entityIn.getPosX(),
+				entityIn.getPosY() + (double) entityIn.getEyeHeight() * 0.5D, entityIn.getPosZ());
+	}
+
+	private void launchBeamToCoords(float p_82209_1_, double x, double y, double z) {
+		// this.world.playEvent((PlayerEntity)null, 1024, new BlockPos(this), 0);
+		double d0 = this.getPosX();
+		double d1 = this.getPosYEye();
+		double d2 = this.getPosZ();
+		double d3 = x - d0;
+		double d4 = y - d1;
+		double d5 = z - d2;
+		DestroyerBeamEntity destroyerbeamentity = new DestroyerBeamEntity(this.world, this, d3, d4, d5);
+		destroyerbeamentity.setInvulnerable(true);
+		destroyerbeamentity.setRawPosition(d0, d1, d2);
+		this.world.addEntity(destroyerbeamentity);
 	}
 }
