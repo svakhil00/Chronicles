@@ -20,14 +20,14 @@ public class DestroyerBeamModel extends Model {
 
 
 		modelRenderer = new ModelRenderer(this);
-		modelRenderer.addBox(-1.0F, -6.0F, -3.0F, 2, 2, 1, 0.0F);
-		modelRenderer.addBox(-1.0F, -6.0F, 2.0F, 2, 2, 1, 0.0F);
-		modelRenderer.addBox(-2.0F, -7.0F, -2.0F, 4, 4, 4, 0.0F);
-		modelRenderer.addBox(-1.0F, -3.0F, -1.0F, 2, 1, 2, 0.0F);
+		modelRenderer.addBox(-1.0F, -11.0F, -3.0F, 2, 2, 1, 0.0F);
+		modelRenderer.addBox(-1.0F, -11.0F, 2.0F, 2, 2, 1, 0.0F);
+		modelRenderer.addBox(-2.0F, -12.0F, -2.0F, 4, 4, 4, 0.0F);
 		modelRenderer.addBox(-1.0F, -8.0F, -1.0F, 2, 1, 2, 0.0F);
-		modelRenderer.addBox(2.0F, -6.0F, -1.0F, 1, 2, 2, 0.0F);
-		modelRenderer.addBox(-3.0F, -6.0F, -1.0F, 1, 2, 2, 0.0F);
-		modelRenderer.addBox(-2.0F, -7.0F, 1.0F, 5, 0, 0, 0.0F);
+		modelRenderer.addBox(-1.0F, -13.0F, -1.0F, 2, 1, 2, 0.0F);
+		modelRenderer.addBox(2.0F, -11.0F, -1.0F, 1, 2, 2, 0.0F);
+		modelRenderer.addBox(-3.0F, -11.0F, -1.0F, 1, 2, 2, 0.0F);
+		modelRenderer.addBox(-2.0F, -12.0F, 1.0F, 5, 0, 0, 0.0F);
 	}
 
 	@Override
