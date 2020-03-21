@@ -60,8 +60,8 @@ public class DestroyerBeamEntity extends DamagingProjectileEntity {
 				}
 			} else if (result.getType() == RayTraceResult.Type.BLOCK) {
 				Explosion.Mode explosion$mode = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(
-						this.world, this.shootingEntity) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
-				this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 1.0F, false,
+						this.world, this.shootingEntity) ? Explosion.Mode.BREAK : Explosion.Mode.NONE;
+				this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 1.0F, true,
 						explosion$mode);
 			}
 			this.remove();
