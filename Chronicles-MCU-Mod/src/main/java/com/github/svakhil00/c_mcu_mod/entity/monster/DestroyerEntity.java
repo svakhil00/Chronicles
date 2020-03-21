@@ -180,7 +180,8 @@ public class DestroyerEntity extends MonsterEntity implements IRangedAttackMob {
 				double x = Math.abs(target.getPosX() - super.attacker.getPosX());
 				double y = Math.abs(target.getPosY() - super.attacker.getPosY());
 				double z = Math.abs(target.getPosZ() - super.attacker.getPosZ());
-				if(x < 3 && y < 3 && z < 3) {
+				int distance = 3;
+				if(x < distance && y < distance && z < distance) {
 					return super.shouldExecute();
 				}
 			}
