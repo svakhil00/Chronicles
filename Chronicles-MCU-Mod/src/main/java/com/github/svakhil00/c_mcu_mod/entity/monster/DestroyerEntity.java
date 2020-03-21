@@ -3,6 +3,7 @@ package com.github.svakhil00.c_mcu_mod.entity.monster;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.DestroyerBeamEntity;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRangedAttackMob;
@@ -46,7 +47,7 @@ public class DestroyerEntity extends MonsterEntity implements IRangedAttackMob {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
+		this.goalSelector.addGoal(1, new DestroyerEntity.DestroyerAttackGoal(this, 1.0D, false));
 		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 2.0D, 1, 50.0F));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 50.0F));
 		//this.goalSelector.addGoal(6, new SwimGoal(this));
@@ -163,5 +164,29 @@ public class DestroyerEntity extends MonsterEntity implements IRangedAttackMob {
 		destroyerbeamentity.setInvulnerable(true);
 		destroyerbeamentity.setRawPosition(d0, d1, d2);
 		this.world.addEntity(destroyerbeamentity);
+	}
+	
+	class DestroyerAttackGoal extends MeleeAttackGoal{
+		
+		
+		public DestroyerAttackGoal(CreatureEntity creature, double speedIn, boolean useLongMemory) {
+			super(creature, speedIn, useLongMemory);
+		}
+		
+		@Override
+		public boolean shouldExecute() {
+			LivingEntity target = super.attacker.getAttackTarget();
+			if(target != null) {
+				double x = Math.abs(target.getPosX() - super.attacker.getPosX());
+				double y = Math.abs(target.getPosY() - super.attacker.getPosY());
+				double z = Math.abs(target.getPosZ() - super.attacker.getPosZ());
+				if(x < 3 && y < 3 && z < 3) {
+					return super.shouldExecute();
+				}
+			}
+			return false;
+		}
+		
+		
 	}
 }
