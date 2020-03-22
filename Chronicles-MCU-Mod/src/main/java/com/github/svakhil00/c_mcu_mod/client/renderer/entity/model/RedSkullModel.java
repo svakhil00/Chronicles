@@ -36,6 +36,8 @@ public class RedSkullModel<T extends RedSkullEntity> extends SegmentedModel<T> {
 		body.addChild(rightArm);
 		rightArm.setTextureOffset(40, 16).addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);
 		rightArm.setTextureOffset(48, 48).addBox(-1.0F, -2.0F, -2.0F, 4, 11, 4, 0.5F);
+		rightArm.setTextureOffset(114, 0).addBox(-12.0F, 9.0F, -3.0F, 2, 2, 5, 0.0F);
+		rightArm.setTextureOffset(0, 120).addBox(-12.5F, 9.0F, -3.75F, 3, 7, 1, 0.0F);
 
 		leftArm = new ModelRenderer(this);
 		leftArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
