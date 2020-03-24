@@ -41,6 +41,7 @@ public class ModItems {
 	public static final RegistryObject<Item> VIBRANIUM_CAPSULE = ITEMS.register("vibranium_capsule", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<Item> COMPUTER_CHIP = ITEMS.register("computer_chip", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
 	public static final RegistryObject<Item> ARC_REACTOR = ITEMS.register("arc_reactor", () -> new Item(new Item.Properties().group(ModItemGroups.MOD_ITEM_GROUP)));
+	public static final RegistryObject<Item> LASER = ITEMS.register("laser", () -> new Item(new Item.Properties()));
 
 
 	

@@ -80,6 +80,7 @@ public class DestroyerBeamEntity extends DamagingProjectileEntity {
 		return true;
 	}
 
+	@Override
 	public boolean canBeCollidedWith() {
 		return false;
 	}

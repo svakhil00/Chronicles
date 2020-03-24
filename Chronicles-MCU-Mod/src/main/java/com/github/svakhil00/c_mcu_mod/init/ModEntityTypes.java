@@ -7,6 +7,7 @@ import com.github.svakhil00.c_mcu_mod.entity.monster.RedSkullEntity;
 import com.github.svakhil00.c_mcu_mod.entity.monster.TestEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.CaptainAmericaShieldEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.DestroyerBeamEntity;
+import com.github.svakhil00.c_mcu_mod.entity.projectile.LaserEntity;
 import com.github.svakhil00.c_mcu_mod.entity.projectile.MjolnirEntity;
 
 import net.minecraft.entity.EntityClassification;
@@ -70,4 +71,11 @@ public class ModEntityTypes {
 					.size(1.0F, 1.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
 					.immuneToFire().setCustomClientFactory((message, world) -> new DestroyerBeamEntity(world))
 					.build(Main.MODID + ":destroyerbeam"));
+	
+	public static final RegistryObject<EntityType<LaserEntity>> LASER = ENTITY_TYPES.register(
+			"laser",
+			() -> EntityType.Builder.<LaserEntity>create(LaserEntity::new, EntityClassification.MISC)
+					.size(1.0F, 1.0F).setTrackingRange(10).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
+					.immuneToFire().setCustomClientFactory((message, world) -> new LaserEntity(world))
+					.build(Main.MODID + ":laser"));
 }

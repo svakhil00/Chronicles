@@ -1,6 +1,6 @@
 package com.github.svakhil00.c_mcu_mod.entity.monster;
 
-import com.github.svakhil00.c_mcu_mod.entity.projectile.DestroyerBeamEntity;
+import com.github.svakhil00.c_mcu_mod.entity.projectile.LaserEntity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRangedAttackMob;
@@ -15,9 +15,7 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.network.IPacket;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -34,7 +32,7 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TestEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-		//this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 1, 50.0F));
+		this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 40, 20.0F));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
@@ -56,28 +54,24 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 		System.out.println("shooting");
-		this.launchWitherSkullToEntity(0, target);
+		this.shootLaserToEntity(0, target);
 	}
 	
-	private void launchWitherSkullToEntity(int p_82216_1_, LivingEntity p_82216_2_) {
-	      this.launchWitherSkullToCoords(p_82216_1_, p_82216_2_.getPosX(), p_82216_2_.getPosY() + (double)p_82216_2_.getEyeHeight() * 0.5D, p_82216_2_.getPosZ(), p_82216_1_ == 0 && this.rand.nextFloat() < 0.001F);
+	private void shootLaserToEntity(int distanceFactor, LivingEntity target) {
+	      this.shootLaserToCoords(distanceFactor, target.getPosX(), target.getPosY() + (double)target.getEyeHeight() * 0.5D, target.getPosZ());
 	   }
 	
-	private void launchWitherSkullToCoords(int p_82209_1_, double x, double y, double z, boolean invulnerable) {
-	      //this.world.playEvent((PlayerEntity)null, 1024, new BlockPos(this), 0);
+	private void shootLaserToCoords(int distanceFactor, double x, double y, double z) {
 	      double d0 = this.getPosX();
 	      double d1 = this.getPosY();
 	      double d2 = this.getPosZ();
 	      double d3 = x - d0;
 	      double d4 = y - d1;
 	      double d5 = z - d2;
-	      DestroyerBeamEntity destroyerbeamentity = new DestroyerBeamEntity(this.world, this, d3, d4, d5);
-	      if (invulnerable) {
-	    	  destroyerbeamentity.setInvulnerable(true);
-	      }
-
-	      destroyerbeamentity.setRawPosition(d0, d1, d2);
-	      this.world.addEntity(destroyerbeamentity);
+	      LaserEntity laserentity = new LaserEntity(this.world, this, d3, d4, d5);
+	      laserentity.setInvulnerable(true);
+	      laserentity.setRawPosition(d0, d1, d2);
+	      this.world.addEntity(laserentity);
 	   }
 	
 }

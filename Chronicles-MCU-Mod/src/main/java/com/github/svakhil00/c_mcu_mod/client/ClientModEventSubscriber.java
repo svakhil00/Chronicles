@@ -5,6 +5,7 @@ import com.github.svakhil00.c_mcu_mod.client.renderer.entity.CaptainAmericaShiel
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.DestroyerBeamRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.DestroyerRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.FrostGiantRenderer;
+import com.github.svakhil00.c_mcu_mod.client.renderer.entity.LaserRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.MjolnirRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.RedSkullRenderer;
 import com.github.svakhil00.c_mcu_mod.client.renderer.entity.TestRenderer;
@@ -34,6 +35,8 @@ public class ClientModEventSubscriber {
 				manager -> new CaptainAmericaShieldRenderer(manager, Minecraft.getInstance().getItemRenderer()));
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.DESTROYER_BEAM.get(),
 				manager -> new DestroyerBeamRenderer(manager, Minecraft.getInstance().getItemRenderer()));
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.LASER.get(),
+				manager -> new LaserRenderer(manager, Minecraft.getInstance().getItemRenderer()));
 		
 		Main.LOGGER.debug("Registered Entity Renderers");
 	}
