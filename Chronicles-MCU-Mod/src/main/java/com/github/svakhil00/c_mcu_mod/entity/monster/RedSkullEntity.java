@@ -40,7 +40,7 @@ public class RedSkullEntity extends MonsterEntity implements IRangedAttackMob {
 	
 	protected void registerAttributes() {
 	      super.registerAttributes();
-	      this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60D);
+	      this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100D);
 	      this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.35F);
 	      this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
 	      this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
