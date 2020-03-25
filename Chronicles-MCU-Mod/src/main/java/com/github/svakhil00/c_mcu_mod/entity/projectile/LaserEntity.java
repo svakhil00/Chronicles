@@ -51,6 +51,13 @@ public class LaserEntity extends DamagingProjectileEntity {
 			}
 		}
 	}
+	
+	@Override
+	public void checkDespawn() {
+		if(this.shootingEntity == null) {
+			this.remove();
+		}
+	}
 
 	@Override
 	public boolean isInvulnerable() {

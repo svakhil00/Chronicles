@@ -96,6 +96,13 @@ public class DestroyerBeamEntity extends DamagingProjectileEntity {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public void checkDespawn() {
+		if(this.shootingEntity == null) {
+			this.remove();
+		}
+	}
 
 	@Override
 	public IPacket<?> createSpawnPacket() {
