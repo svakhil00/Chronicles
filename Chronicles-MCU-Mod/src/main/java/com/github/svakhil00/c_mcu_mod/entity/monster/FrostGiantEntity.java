@@ -96,7 +96,7 @@ public class FrostGiantEntity extends MonsterEntity{
 		boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), 8);
 		if(flag) {
 			if(entityIn instanceof LivingEntity) {
-				LivingEntity livingEntity = (PlayerEntity) entityIn;
+				LivingEntity livingEntity = (LivingEntity) entityIn;
 				livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 2, 200));
 			}
 			this.applyEnchantments(this, entityIn);
