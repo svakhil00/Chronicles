@@ -53,11 +53,11 @@ public class FrostGiantModel<T extends FrostGiantEntity> extends SegmentedModel<
 
 		rightArm = new ModelRenderer(this);
 		rightArm.setRotationPoint(9.625F, -2.275F, 0.0F);
-		rightArm.setTextureOffset(92, 30).addBox(-2.05F, 0.0F, -2.0F, 4, 14, 4, 0.0F);
-		rightArm.setTextureOffset(111, 50).addBox(-1.7F, -0.299F, -1.85F, 4, 4, 4, 0.0F);
-		rightArm.setTextureOffset(111, 50).addBox(-1.701F, -0.298F, -2.1F, 4, 4, 4, 0.0F);
-		rightArm.setTextureOffset(40, 16).addBox(-2.2F, 8.725F, -2.075F, 4, 1, 4, 0.0F);
-		rightArm.setTextureOffset(40, 16).addBox(-2.19F, 8.725F, -1.625F, 4, 1, 4, 0.0F);
+		rightArm.setTextureOffset(92, 30).addBox(-2.3F, 0.0F, -2.0F, 4, 14, 4, 0.0F);
+		rightArm.setTextureOffset(111, 50).addBox(-1.95F, -0.299F, -1.85F, 4, 4, 4, 0.0F);
+		rightArm.setTextureOffset(111, 50).addBox(-1.951F, -0.298F, -2.1F, 4, 4, 4, 0.0F);
+		rightArm.setTextureOffset(40, 16).addBox(-2.45F, 8.725F, -2.075F, 4, 1, 4, 0.0F);
+		rightArm.setTextureOffset(40, 16).addBox(-2.44F, 8.725F, -1.625F, 4, 1, 4, 0.0F);
 
 		leftLeg = new ModelRenderer(this);
 		leftLeg.setRotationPoint(-3.625F, 12.325F, 0.0F);
