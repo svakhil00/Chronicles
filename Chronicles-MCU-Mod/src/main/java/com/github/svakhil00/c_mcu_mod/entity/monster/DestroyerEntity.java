@@ -72,7 +72,7 @@ public class DestroyerEntity extends MonsterEntity implements IRangedAttackMob {
 		if (this.attackTimer > 0) {
 			--this.attackTimer;
 		}
-		this.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1, 10));
+		this.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1, 200));
 	}
 
 	public boolean attackEntityAsMob(Entity entityIn) {
@@ -134,7 +134,7 @@ public class DestroyerEntity extends MonsterEntity implements IRangedAttackMob {
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_KNOCKBACK).setBaseValue(2);
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10);
-		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(50);
 	}
 
 	@Override
