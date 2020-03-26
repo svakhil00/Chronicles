@@ -27,6 +27,7 @@ public class FrostGiantRenderer extends MobRenderer<FrostGiantEntity, FrostGiant
 	
 	protected void applyRotations(FrostGiantEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 	      super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+	      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180));
 	      if (!((double)entityLiving.limbSwingAmount < 0.01D)) {
 	         float f = 13.0F;
 	         float f1 = entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - partialTicks) + 6.0F;
