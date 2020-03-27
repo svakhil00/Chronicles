@@ -89,6 +89,18 @@ public class FrostGiantModel<T extends FrostGiantEntity> extends SegmentedModel<
 		this.rightLeg.rotateAngleY = 0.0F;
 	}
 	
+	@Override
+	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
+		int i = entityIn.getAttackTimer();
+		if (i > 0) {
+			this.rightArm.rotateAngleX = -2.0F + this.triangleWave((float) i - partialTick, 10.0F);
+			this.leftArm.rotateAngleX = -2.0F + this.triangleWave((float) i - partialTick, 10.0F);
+		} else {
+			this.rightArm.rotateAngleX = (-0.2F + this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+			this.leftArm.rotateAngleX = (-0.2F - this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+		}
+	}
+	
 	private float triangleWave(float p_78172_1_, float p_78172_2_) {
 		return (Math.abs(p_78172_1_ % p_78172_2_ - p_78172_2_ * 0.5F) - p_78172_2_ * 0.25F) / (p_78172_2_ * 0.25F);
 	}
