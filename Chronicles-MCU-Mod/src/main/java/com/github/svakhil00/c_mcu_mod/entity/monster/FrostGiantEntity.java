@@ -1,15 +1,16 @@
 package com.github.svakhil00.c_mcu_mod.entity.monster;
 
+import java.util.UUID;
+
 import com.github.svakhil00.c_mcu_mod.init.ModEntityTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
@@ -20,13 +21,13 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -35,6 +36,9 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class FrostGiantEntity extends MonsterEntity {
 
 	private int attackTimer;
+	private int angerLevel;
+	private int randomSoundDelay;
+	private UUID angerTargetUUID;
 
 	public FrostGiantEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -47,7 +51,10 @@ public class FrostGiantEntity extends MonsterEntity {
 		this.goalSelector.addGoal(5, new SwimGoal(this));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 50.0F));
 		this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(2, (new HurtByTargetGoal(this)));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));//.setCallsForHelp(FrostGiantEntity.class));
+		//this.targetSelector.addGoal(1, new FrostGiantEntity.HurtByAggressorGoal(this));
+		//this.targetSelector.addGoal(2, new FrostGiantEntity.TargetAggressorGoal(this));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TestEntity.class, true));
 	}
@@ -66,7 +73,44 @@ public class FrostGiantEntity extends MonsterEntity {
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(4);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20);
 	}
+	
+	@Override
+	protected void updateAITasks() {
+	      LivingEntity livingentity = this.getRevengeTarget();
+	      if (this.isAngry()) {
+	         --this.angerLevel;
+	         LivingEntity livingentity1 = livingentity != null ? livingentity : this.getAttackTarget();
+	         if (!this.isAngry() && livingentity1 != null) {
+	            if (!this.canEntityBeSeen(livingentity1)) {
+	               this.setRevengeTarget((LivingEntity)null);
+	               this.setAttackTarget((LivingEntity)null);
+	            } else {
+	               this.angerLevel = 1200;
+	            }
+	         }
+	      }
 
+	      if (this.randomSoundDelay > 0 && --this.randomSoundDelay == 0) {
+	         //this.playSound(SoundEvents.ENTITY_ZOMBIE_PIGMAN_ANGRY, this.getSoundVolume() * 2.0F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 1.8F);
+	      }
+
+	      if (this.isAngry() && this.angerTargetUUID != null && livingentity == null) {
+	         PlayerEntity playerentity = this.world.getPlayerByUuid(this.angerTargetUUID);
+	         this.setRevengeTarget(playerentity);
+	         this.attackingPlayer = playerentity;
+	         this.recentlyHit = this.getRevengeTimer();
+	      }
+		super.updateAITasks();
+	}
+
+	@Override
+	public void setRevengeTarget(LivingEntity livingBase) {
+		super.setRevengeTarget(livingBase);
+		if (livingBase != null) {
+	         this.angerTargetUUID = livingBase.getUniqueID();
+	      }
+	}
+	
 	@OnlyIn(Dist.CLIENT)
 	public int getAttackTimer() {
 		return this.attackTimer;
@@ -80,12 +124,40 @@ public class FrostGiantEntity extends MonsterEntity {
 		}
 	}
 
+	public void writeAdditional(CompoundNBT compound) {
+	      super.writeAdditional(compound);
+	      compound.putShort("Anger", (short)this.angerLevel);
+	      if (this.angerTargetUUID != null) {
+	         compound.putString("HurtBy", this.angerTargetUUID.toString());
+	      } else {
+	         compound.putString("HurtBy", "");
+	      }
+
+	   }
+	
+	public void readAdditional(CompoundNBT compound) {
+	      super.readAdditional(compound);
+	      this.angerLevel = compound.getShort("Anger");
+	      String s = compound.getString("HurtBy");
+	      if (!s.isEmpty()) {
+	         this.angerTargetUUID = UUID.fromString(s);
+	         PlayerEntity playerentity = this.world.getPlayerByUuid(this.angerTargetUUID);
+	         this.setRevengeTarget(playerentity);
+	         if (playerentity != null) {
+	            this.attackingPlayer = playerentity;
+	            this.recentlyHit = this.getRevengeTimer();
+	         }
+	      }
+
+	   }
+	
 	@Override
 	public void livingTick() {
 		super.livingTick();
 		if (this.attackTimer > 0) {
 			--this.attackTimer;
 		}
+		
 
 		FrostWalkerEnchantment.freezeNearby(this, this.world, this.getPosition(), 2);
 		if (!this.world.isRemote) {
@@ -112,44 +184,8 @@ public class FrostGiantEntity extends MonsterEntity {
 		}
 	}
 
-	public static void freezeNearby(LivingEntity living, World worldIn, BlockPos pos, int level) {
-		if (living.onGround) {
-			BlockState blockstate = Blocks.FROSTED_ICE.getDefaultState();
-			float f = (float) Math.min(16, 2 + level);
-			BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+	
 
-			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add((double) (-f), -1.0D, (double) (-f)),
-					pos.add((double) f, -1.0D, (double) f))) {
-				if (blockpos.withinDistance(living.getPositionVec(), (double) f)) {
-					blockpos$mutable.setPos(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
-					BlockState blockstate1 = worldIn.getBlockState(blockpos$mutable);
-					if (blockstate1.isAir(worldIn, blockpos$mutable)) {
-						BlockState blockstate2 = worldIn.getBlockState(blockpos);
-						boolean isFull = blockstate2.getBlock() == Blocks.WATER
-								&& blockstate2.get(FlowingFluidBlock.LEVEL) == 0; // TODO: Forge, modded waters?
-						if (blockstate2.getMaterial() == Material.WATER && isFull
-								&& blockstate.isValidPosition(worldIn, blockpos)
-								&& worldIn.func_226663_a_(blockstate, blockpos, ISelectionContext.dummy())
-								&& !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(living,
-										new net.minecraftforge.common.util.BlockSnapshot(worldIn, blockpos,
-												blockstate2),
-										net.minecraft.util.Direction.UP)) {
-							worldIn.setBlockState(blockpos, blockstate);
-							worldIn.getPendingBlockTicks().scheduleTick(blockpos, Blocks.FROSTED_ICE,
-									MathHelper.nextInt(living.getRNG(), 60, 120));
-						}
-					}
-				}
-			}
-
-		}
-	}
-
-	@Override
-	public void tick() {
-		super.tick();
-		FrostWalkerEnchantment.freezeNearby(this, this.world, this.getPosition(), 2);
-	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity entityIn) {
@@ -159,11 +195,23 @@ public class FrostGiantEntity extends MonsterEntity {
 		if (flag) {
 			if (entityIn instanceof LivingEntity) {
 				LivingEntity livingEntity = (LivingEntity) entityIn;
-				livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 2, 200));
+				System.out.println("test");
+				livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 200, 2));
 			}
 			this.applyEnchantments(this, entityIn);
 		}
 		return flag;
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		Entity entity = source.getTrueSource();
+        if (entity instanceof PlayerEntity && !((PlayerEntity)entity).isCreative() && this.canEntityBeSeen(entity)) {
+        	this.angerLevel = 400 + this.rand.nextInt(400);
+            this.randomSoundDelay = this.rand.nextInt(40);
+            this.setRevengeTarget((LivingEntity) entity);
+        }
+		return super.attackEntityFrom(source, amount);
 	}
 
 	@Override
@@ -187,8 +235,52 @@ public class FrostGiantEntity extends MonsterEntity {
 	}
 
 	@Override
+	public boolean isPreventingPlayerRest(PlayerEntity playerIn) {
+		return this.isAngry();
+	}
+
+	private boolean isAngry() {
+		return this.angerLevel > 0;
+	}
+/*
+	private boolean setAngry(LivingEntity p_226547_1_) {
+		this.angerLevel = 1200;
+		this.randomSoundDelay = this.rand.nextInt(40);
+		this.setRevengeTarget(p_226547_1_);
+		return true;
+	}
+	*/
+
+	@Override
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
+	/*
+	static class HurtByAggressorGoal extends HurtByTargetGoal {
+		public HurtByAggressorGoal(FrostGiantEntity entity) {
+			super(entity);
+			this.setCallsForHelp(new Class[] { FrostGiantEntity.class });
+		}
 
+		protected void setAttackTarget(MobEntity mobIn, LivingEntity targetIn) {
+			if (mobIn instanceof FrostGiantEntity && this.goalOwner.canEntityBeSeen(targetIn)
+					&& ((FrostGiantEntity) mobIn).setAngry(targetIn)) {
+				mobIn.setAttackTarget(targetIn);
+			}
+
+		}
+	}
+
+	
+	static class TargetAggressorGoal extends NearestAttackableTargetGoal<PlayerEntity> {
+		public TargetAggressorGoal(FrostGiantEntity entity) {
+			super(entity, PlayerEntity.class, true);
+		}
+
+		
+		public boolean shouldExecute() {
+			return ((FrostGiantEntity) this.goalOwner).isAngry() && super.shouldExecute();
+		}
+	}
+*/
 }
