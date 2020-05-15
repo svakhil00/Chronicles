@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":[
+		"lil",
+		"tct",
+		"lil"
+	],
+	"key":{
+		"c":{
+			"item": "minecraft:diamond_helmet"
+		},
+		"l":{
+			"item": "minecraft:leather"
+		},
+		"t":{
+			"item": "c_mcu_mod:titanium"
+		},
+		"i":{
+			"item": "minecraft:iron_ingot"
+		}
+	},
+	"result": {
+		"item": "c_mcu_mod:captain_america_helmet",
+		"count": 1
+	}
+}
