@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "c_mcu_mod:item/iron_man_armor/icon_iron_man_chestplate"
-	}
-}

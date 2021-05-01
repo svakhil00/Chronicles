@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":[
+		"xxx",
+		"xxx",
+		"xxx"
+	],
+	"key":{
+		"x":{
+			"item": "c_mcu_mod:stable_vibranium"
+		}
+	},
+	"result": {
+		"item": "c_mcu_mod:captain_america_shield",
+		"count": 1
+	}
+}

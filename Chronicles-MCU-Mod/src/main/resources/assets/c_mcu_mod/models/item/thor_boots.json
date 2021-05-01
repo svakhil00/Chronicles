@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "c_mcu_mod:item/thor_armor/icon_thor_boots"
-	}
-}

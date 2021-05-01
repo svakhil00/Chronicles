@@ -1,0 +1,23 @@
+{
+	"item.mjolnir.flight":{
+		"category": "item",
+		"subtitle": "item.mjolnir.flight",
+		"sounds":[{"name":"c_mcu_mod:item/mjolnir/item_mjolnir_flight", "stream": true}]
+	},
+	"item.mjolnir.hit":{
+		"category": "item",
+		"subtitle": "item.mjolnir.hit",
+		"sounds":[{"name":"c_mcu_mod:item/mjolnir/item_mjolnir_hit", "stream": true}]
+	},
+	"item.mjolnir.throw":{
+		"category": "item",
+		"subtitle": "item.mjolnir.throw",
+		"sounds":[{"name":"c_mcu_mod:item/mjolnir/item_mjolnir_throw", "stream": true}]
+	},
+	"item.captain_america_shield.hit":{
+		"category": "item",
+		"subtitle": "item.captain_america_shield.throw",
+		"sounds": [{"name":"c_mcu_mod:item/captain_america_shield/captain_america_shield_hit"}]
+		
+	}
+}

@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "c_mcu_mod:item/captain_america_armor/icon_captain_america_leggings"
-	}
-}

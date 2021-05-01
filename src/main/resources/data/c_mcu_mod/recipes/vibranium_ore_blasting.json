@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "c_mcu_mod:vibranium_ore"
+  },
+  "result": "c_mcu_mod:pure_vibranium",
+  "experience": 1,
+  "cookingtime": 800
+}

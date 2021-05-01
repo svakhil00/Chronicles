@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "c_mcu_mod:block/titanium_ore"
-    }
-}
