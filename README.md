@@ -1,2 +1,2 @@
 # Chronicles
-Minecraft Modding
+Minecraft Mod
